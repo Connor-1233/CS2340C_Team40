@@ -6,4 +6,8 @@
     <string name="intro_message">Click Start to begin</string>
     <string name="start_game">Start Game</string>
     <string name="exit_game">Exit Game</string>
+    <string name="end_game">End Game</string>
+    <string name="health_display">Health:</string>
+    <string name="sprite_image_description">Sprite</string>
+    <string name="display_name">Name</string>
 </resources>
