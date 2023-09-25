@@ -28,6 +28,9 @@
         <activity android:name=".MapStartScreen">
             <!-- Intent-filter or other configuration as needed -->
         </activity>
+        <activity android:name=".EndingScreen">
+            <!-- Intent-filter or other configuration as needed -->
+        </activity>
 
     </application>
 
