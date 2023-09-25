@@ -82,7 +82,7 @@ public class ConfigScreen extends Activity {
             username = characterName.getText().toString();
 
             if (difficulty != -1.0 && spriteChoice != -1
-                    && (username != null || username.isBlank() != true)) {
+                    && username != null && !username.isBlank()) {
                 proceedToGame();
             }
 
