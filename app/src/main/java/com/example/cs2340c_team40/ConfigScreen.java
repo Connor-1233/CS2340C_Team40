@@ -7,7 +7,7 @@ import android.widget.Button;
 import android.widget.RadioGroup;
 import android.widget.EditText;
 
-public class ConfigScreen {
+public class ConfigScreen extends Activity {
   protected double difficulty = -1.0;
     protected String username = null;
     protected int spriteChoice = -1;

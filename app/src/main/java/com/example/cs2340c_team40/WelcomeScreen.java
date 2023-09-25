@@ -13,7 +13,7 @@ public class WelcomeScreen extends Activity {
         Button startButton = findViewById(R.id.startButton);
         Button exitButton = findViewById(R.id.exitButton);
 
-        startButton.setOnClickListener(v -> startGame()); //this method must change });
+        startButton.setOnClickListener(v -> startGame()); //this method must change
         exitButton.setOnClickListener( v -> finish());
     }
 
