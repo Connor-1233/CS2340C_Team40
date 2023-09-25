@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.RadioGroup;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class ConfigScreen extends Activity {
   protected double difficulty = -1.0;
