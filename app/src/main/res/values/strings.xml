@@ -10,4 +10,12 @@
     <string name="health_display">Health:</string>
     <string name="sprite_image_description">Sprite</string>
     <string name="display_name">Name</string>
+    <string name="proceed_to_game">Proceed to Game</string>
+    <string name="enter_your_username">Enter your username</string>
+    <string name="Hard">Hard</string>
+    <string name="medium">Medium</string>
+    <string name="easy">Easy</string>
+    <string name="sprite_1">Sprite 1</string>
+    <string name="sprite_2">Sprite 2</string>
+    <string name="sprite_3">Sprite 3</string>
 </resources>
