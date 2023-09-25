@@ -3,6 +3,7 @@ package com.example.cs2340c_team40;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.RadioGroup;
 import android.widget.EditText;
@@ -19,9 +20,12 @@ public class ConfigScreen extends Activity {
         setContentView(R.layout.configscreen);
 
         Button proceedButton = findViewById(R.id.proceedButton);
+        Button exitButton = findViewById(R.id.exitButton);
         RadioGroup difficultyRadioGroup = findViewById(R.id.RadioGroupDifficulty);
         RadioGroup characterChoice = findViewById(R.id.CostumeChoice);
         EditText characterName = findViewById(R.id.username);
+
+        exitButton.setOnClickListener( v -> finish());
 
         proceedButton.setOnClickListener(v -> {
             if (difficultyRadioGroup.getCheckedRadioButtonId() == R.id.radio_easy) {
@@ -56,6 +60,10 @@ public class ConfigScreen extends Activity {
         });
 
 
+    }
+
+    //TODO: implement the above proceedButton.setOnClickListener in this method!
+    public void onRadioButtonClicked(View view) {
     }
     private void proceedToGame() {
         // if all the methods return true, then proceed to Game Screen
