@@ -25,6 +25,36 @@ public class ConfigScreen extends Activity {
         RadioGroup characterChoice = findViewById(R.id.CostumeChoice);
         EditText characterName = findViewById(R.id.username);
 
+      difficultyRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                if (i == R.id.radio_easy) {
+                    Toast.makeText(ConfigScreen.this, "Difficulty: easy", Toast.LENGTH_SHORT).show();
+                } else if (i == R.id.radio_medium) {
+                    Toast.makeText(ConfigScreen.this, "Difficulty: medium", Toast.LENGTH_SHORT).show();
+                } else if (i == R.id.radio_hard) {
+                    Toast.makeText(ConfigScreen.this, "Difficulty: hard", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(ConfigScreen.this, "Difficulty: easy", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        characterChoice.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                if (i == R.id.radio_costume_1) {
+                    Toast.makeText(ConfigScreen.this, "You chose Sprite 1", Toast.LENGTH_SHORT).show();
+                } else if (i == R.id.radio_costume_2) {
+                    Toast.makeText(ConfigScreen.this, "You chose Sprite 2", Toast.LENGTH_SHORT).show();
+                } else if (i == R.id.radio_costume_3) {
+                    Toast.makeText(ConfigScreen.this, "You chose Sprite 3", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(ConfigScreen.this, "You chose Sprite 1", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
         exitButton.setOnClickListener( v -> finish());
 
         proceedButton.setOnClickListener(v -> {
