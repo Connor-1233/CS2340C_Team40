@@ -10,7 +10,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class ConfigScreen extends Activity {
-  protected double difficulty = -1.0;
+    protected double difficulty = -1.0;
     protected String username = null;
     protected int spriteChoice = -1;
 
@@ -26,17 +26,21 @@ public class ConfigScreen extends Activity {
         RadioGroup characterChoice = findViewById(R.id.CostumeChoice);
         EditText characterName = findViewById(R.id.username);
 
-      difficultyRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        difficultyRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 if (i == R.id.radio_easy) {
-                    Toast.makeText(ConfigScreen.this, "Difficulty: easy", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ConfigScreen.this, "Difficulty: easy",
+                            Toast.LENGTH_SHORT).show();
                 } else if (i == R.id.radio_medium) {
-                    Toast.makeText(ConfigScreen.this, "Difficulty: medium", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ConfigScreen.this, "Difficulty: medium",
+                            Toast.LENGTH_SHORT).show();
                 } else if (i == R.id.radio_hard) {
-                    Toast.makeText(ConfigScreen.this, "Difficulty: hard", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ConfigScreen.this, "Difficulty: hard",
+                            Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(ConfigScreen.this, "Difficulty: easy", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ConfigScreen.this, "Difficulty: easy",
+                            Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -45,18 +49,22 @@ public class ConfigScreen extends Activity {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 if (i == R.id.radio_costume_1) {
-                    Toast.makeText(ConfigScreen.this, "You chose Sprite 1", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ConfigScreen.this, "You chose Sprite 1",
+                            Toast.LENGTH_SHORT).show();
                 } else if (i == R.id.radio_costume_2) {
-                    Toast.makeText(ConfigScreen.this, "You chose Sprite 2", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ConfigScreen.this, "You chose Sprite 2",
+                            Toast.LENGTH_SHORT).show();
                 } else if (i == R.id.radio_costume_3) {
-                    Toast.makeText(ConfigScreen.this, "You chose Sprite 3", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ConfigScreen.this, "You chose Sprite 3",
+                            Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(ConfigScreen.this, "You chose Sprite 1", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ConfigScreen.this, "You chose Sprite 1",
+                            Toast.LENGTH_SHORT).show();
                 }
             }
         });
 
-        exitButton.setOnClickListener( v -> finish());
+        exitButton.setOnClickListener(v -> finish());
 
         proceedButton.setOnClickListener(v -> {
             if (difficultyRadioGroup.getCheckedRadioButtonId() == R.id.radio_easy) {
@@ -82,7 +90,7 @@ public class ConfigScreen extends Activity {
             username = characterName.getText().toString();
 
             if (difficulty != -1.0 && spriteChoice != -1
-                    && (username != null || username.isBlank() != true)) {
+                    && (username != null || !username.isBlank())) {
                 proceedToGame();
             }
 
@@ -93,7 +101,7 @@ public class ConfigScreen extends Activity {
 
     }
 
-    //TODO: implement the above proceedButton.setOnClickListener in this method!
+    //TODO Implement the above proceedButton.setOnClickListener in this method!
     public void onRadioButtonClicked(View view) {
     }
     private void proceedToGame() {
