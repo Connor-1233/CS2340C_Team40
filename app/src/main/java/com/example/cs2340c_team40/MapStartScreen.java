@@ -35,11 +35,11 @@ public class MapStartScreen extends AppCompatActivity {
         ImageView spriteImageView = findViewById(R.id.spriteImageView);
 
         if (spriteChoice == 1) {
-            spriteImageView.setImageResource(R.drawable.bluePiskel);
+            spriteImageView.setImageResource(R.drawable.bluepiskel);
         } else if (spriteChoice == 2) {
-            spriteImageView.setImageResource(R.drawable.greenPiskel);
+            spriteImageView.setImageResource(R.drawable.greenpiskel);
         } else {
-            spriteImageView.setImageResource(R.drawable.redPiskel);
+            spriteImageView.setImageResource(R.drawable.redpiskel);
         }
 
         Button endGameBtn = findViewById(R.id.go_end_screen_button);

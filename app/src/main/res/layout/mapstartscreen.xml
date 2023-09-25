@@ -59,6 +59,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/display_health_text"
-        app:srcCompat="@drawable/bluePiskel" />
+        app:srcCompat="@drawable/bluepiskel" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
