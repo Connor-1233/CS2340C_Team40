@@ -1,9 +1,12 @@
-package com.example.cs2340c_team40;
+package com.example.cs2340c_team40.ViewModels;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+
+import com.example.cs2340c_team40.R;
+
 public class WelcomeScreen extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {

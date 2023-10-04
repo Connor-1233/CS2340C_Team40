@@ -1,4 +1,4 @@
-package com.example.cs2340c_team40;
+package com.example.cs2340c_team40.ViewModels;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -8,6 +8,8 @@ import android.widget.Button;
 import android.widget.RadioGroup;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.example.cs2340c_team40.R;
 
 public class ConfigScreen extends Activity {
     protected double difficulty = -1.0;
