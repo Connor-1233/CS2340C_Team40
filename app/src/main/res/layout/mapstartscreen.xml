@@ -8,6 +8,16 @@
     android:gravity="center"
     tools:context=".ViewModels.MapStartScreen">
 
+    <EditText
+        android:id="@+id/score_text"
+        android:layout_width="261dp"
+        android:layout_height="66dp"
+        android:ems="10"
+        android:inputType="text"
+        android:text="@string/score_display"
+        tools:layout_editor_absoluteX="101dp"
+        tools:layout_editor_absoluteY="248dp" />
+
     <Button
         android:id="@+id/go_end_screen_button"
         android:layout_width="wrap_content"
@@ -31,6 +41,7 @@
         android:inputType="text"
         app:layout_constraintBottom_toTopOf="@+id/display_health_text"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/go_end_screen_button"
         tools:text="(name)" />

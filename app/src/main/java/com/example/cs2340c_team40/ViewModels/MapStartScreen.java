@@ -1,16 +1,19 @@
 package com.example.cs2340c_team40.ViewModels;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import androidx.appcompat.app.AppCompatActivity;
+import android.widget.TextView;
 
 import com.example.cs2340c_team40.R;
 
-public class MapStartScreen extends AppCompatActivity {
+public class MapStartScreen extends Activity {
     protected int health;
+    protected int counter;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mapstartscreen);
@@ -49,5 +52,17 @@ public class MapStartScreen extends AppCompatActivity {
             Intent goEndScreen = new Intent(this, EndingScreen.class);
             startActivity(goEndScreen);
         });
+
+        TextView scoreTimerText = findViewById(R.id.score_text);
+        counter = 30;
+        new CountDownTimer(30000, 1000) {
+            public void onTick(long millisUntilFinished) {
+                scoreTimerText.setText(String.valueOf(counter));
+                counter--;
+            }
+            public  void onFinish() {
+                scoreTimerText.setText(R.string.timerFinish);
+            }
+        }.start();
     }
 }
