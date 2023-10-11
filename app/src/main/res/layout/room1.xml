@@ -28,7 +28,6 @@
         android:layout_gravity="end"
         android:text="@string/next" />
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
@@ -39,8 +38,8 @@
 
         <EditText
             android:id="@+id/display_player_name_text"
-            android:layout_width="204dp"
-            android:layout_height="0dp"
+            android:layout_width="224dp"
+            android:layout_height="61dp"
             android:autofillHints="name"
             android:ems="10"
             android:hint="@string/display_name"
@@ -62,6 +61,32 @@
             app:layout_constraintBottom_toBottomOf="parent"
             tools:ignore="MissingConstraints"
             />
+
+        <EditText
+            android:id="@+id/score_text"
+            android:layout_width="203dp"
+            android:layout_height="78dp"
+            android:layout_marginRight="148dp"
+            android:layout_marginBottom="100dp"
+            android:ems="10"
+            android:inputType="text"
+            android:text="@string/score_display"
+            android:textColor="#FFFFFF"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <EditText
+            android:id="@+id/score_text_word"
+            android:layout_width="203dp"
+            android:layout_height="78dp"
+            android:layout_marginRight="208dp"
+            android:layout_marginBottom="100dp"
+            android:ems="10"
+            android:inputType="text"
+            android:text="Score:"
+            android:textColor="#FFFFFF"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
 
         <ImageView
             android:id="@+id/spriteImageView"
