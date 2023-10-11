@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.cs2340c_team40.R;
+import com.example.cs2340c_team40.ViewModel.ConfigScreenViewModel;
 
 public class ConfigScreen extends Activity {
     protected double difficulty = -1.0;
@@ -92,12 +93,10 @@ public class ConfigScreen extends Activity {
             username = characterName.getText().toString();
 
             if (difficulty != -1.0 && spriteChoice != -1
-                    && username != null && !username.isBlank()) {
+                    && ConfigScreenViewModel.isValidName(username)) {
                 proceedToGame();
             }
         });
-
-
     }
 
     //TODO Implement the above proceedButton.setOnClickListener in this method!
