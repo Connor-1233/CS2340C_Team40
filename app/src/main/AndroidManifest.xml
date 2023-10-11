@@ -31,6 +31,9 @@
         <activity android:name=".View.EndingScreen">
             <!-- Intent-filter or other configuration as needed -->
         </activity>
+        <activity android:name=".View.Room1">
+            <!-- Intent-filter or other configuration as needed -->
+        </activity>
         <activity android:name=".View.Room2">
             <!-- Intent-filter or other configuration as needed -->
         </activity>
