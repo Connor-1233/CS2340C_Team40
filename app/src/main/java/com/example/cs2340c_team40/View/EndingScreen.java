@@ -1,7 +1,9 @@
 package com.example.cs2340c_team40.View;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -16,7 +18,14 @@ public class EndingScreen extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.endingscreen);
+        Button restartGameBtn = findViewById(R.id.restart_game_btn);
+        restartGameBtn.setOnClickListener(v -> restartGame());
 //        configureLeaderboard();
+    }
+
+    private void restartGame() {
+        Intent restartGame = new Intent(this, WelcomeScreen.class);
+        startActivity(restartGame);
     }
 
 //    protected void configureLeaderboard() {

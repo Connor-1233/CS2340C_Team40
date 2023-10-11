@@ -2,15 +2,19 @@ package com.example.cs2340c_team40.View;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.cs2340c_team40.R;
 
 public class MapStartScreen extends AppCompatActivity {
     protected int health;
+    protected int counter;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.room1);
@@ -44,6 +48,18 @@ public class MapStartScreen extends AppCompatActivity {
             spriteImageView.setImageResource(R.drawable.redpiskel);
         }
 
+        TextView scoreTimerText = findViewById(R.id.score_text);
+        counter = 30;
+        new CountDownTimer(30000, 1000) {
+            public void onTick(long millisUntilFinished) {
+                scoreTimerText.setText(String.valueOf(counter));
+                counter--;
+            }
+            public  void onFinish() {
+                scoreTimerText.setText(R.string.timerFinish);
+            }
+        }.start();
+
         Button endGameBtn = findViewById(R.id.go_end_screen_button);
         endGameBtn.setOnClickListener(v -> {
             Intent goEndScreen = new Intent(this, EndingScreen.class);
@@ -55,5 +71,8 @@ public class MapStartScreen extends AppCompatActivity {
             Intent goRoom2 = new Intent(this, Room2.class);
             startActivity(goRoom2);
         });
+
+
+
     }
 }
