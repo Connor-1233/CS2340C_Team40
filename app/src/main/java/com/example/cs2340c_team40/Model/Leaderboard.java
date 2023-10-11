@@ -46,4 +46,9 @@ public class Leaderboard {
         }
         return gameLeaderBoard;
     }
+
+    //Method to get size
+    public int getSize() {
+        return rankings.size();
+    }
 }
