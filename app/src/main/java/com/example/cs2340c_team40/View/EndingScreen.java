@@ -5,17 +5,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.cs2340c_team40.Model.Leaderboard;
 import com.example.cs2340c_team40.R;
-import com.example.cs2340c_team40.ViewModel.LeaderboardAdapter;
 
 public class EndingScreen extends Activity {
-    LeaderboardAdapter adapter;
-    RecyclerView recyclerView;
-
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.endingscreen);
@@ -23,10 +16,6 @@ public class EndingScreen extends Activity {
         restartGameBtn.setOnClickListener(v -> restartGame());
         Leaderboard leaderboard = Leaderboard.getInstance();
 
-        recyclerView = findViewById(R.id.recyclerview);
-
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new LeaderboardAdapter(getApplicationContext()));
 //        configureLeaderboard();
     }
 
