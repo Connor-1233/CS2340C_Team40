@@ -1,4 +1,4 @@
-package com.example.cs2340c_team40.ViewModels;
+package com.example.cs2340c_team40.View;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,7 +13,7 @@ public class MapStartScreen extends AppCompatActivity {
     protected int health;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.mapstartscreen);
+        setContentView(R.layout.room1);
 
         Intent intent = getIntent();
         String name = intent.getStringExtra("username");
@@ -48,6 +48,12 @@ public class MapStartScreen extends AppCompatActivity {
         endGameBtn.setOnClickListener(v -> {
             Intent goEndScreen = new Intent(this, EndingScreen.class);
             startActivity(goEndScreen);
+        });
+
+        Button nextButton = findViewById(R.id.NextRoom1);
+        nextButton.setOnClickListener(v -> {
+            Intent goRoom2 = new Intent(this, Room2.class);
+            startActivity(goRoom2);
         });
     }
 }

@@ -1,4 +1,4 @@
-package com.example.cs2340c_team40.ViewModels;
+package com.example.cs2340c_team40.View;
 
 import android.app.Activity;
 import android.os.Bundle;

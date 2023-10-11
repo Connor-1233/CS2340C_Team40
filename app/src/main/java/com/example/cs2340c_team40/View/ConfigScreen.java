@@ -1,4 +1,4 @@
-package com.example.cs2340c_team40.ViewModels;
+package com.example.cs2340c_team40.View;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -95,9 +95,6 @@ public class ConfigScreen extends Activity {
                     && username != null && !username.isBlank()) {
                 proceedToGame();
             }
-
-
-
         });
 
 
@@ -113,6 +110,5 @@ public class ConfigScreen extends Activity {
         startGame.putExtra("username", username);
         startGame.putExtra("spriteChoice", spriteChoice);
         startActivity(startGame);
-
     }
 }
