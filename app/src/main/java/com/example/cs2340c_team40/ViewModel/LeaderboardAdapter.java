@@ -1,4 +1,4 @@
-package com.example.cs2340c_team40.ViewModels;
+package com.example.cs2340c_team40.ViewModel;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -22,9 +22,7 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<Score_card_viewHold
 
     @Override
     public Score_card_viewHolder onCreateViewHolder(ViewGroup parent, int viewType)
-    {
-
-        Context context = parent.getContext();
+    {Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
 
         // Inflate the layout

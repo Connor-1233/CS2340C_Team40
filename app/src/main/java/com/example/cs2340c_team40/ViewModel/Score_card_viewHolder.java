@@ -1,4 +1,4 @@
-package com.example.cs2340c_team40.ViewModels;
+package com.example.cs2340c_team40.ViewModel;
 
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
