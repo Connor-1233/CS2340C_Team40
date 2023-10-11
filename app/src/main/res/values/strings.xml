@@ -19,4 +19,6 @@
     <string name="sprite_2">Sprite 2</string>
     <string name="sprite_3">Sprite 3</string>
     <string name="next">Next</string>
+    <string name="timerFinish">Temporary timer 0</string>
+    <string name="score_display">30</string>
 </resources>
