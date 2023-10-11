@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class Leaderboard {
     private static Leaderboard gameLeaderBoard;
-    private static ArrayList<Score> rankings;
+    public static ArrayList<Score> rankings;
     private int lowestRankedScore;
     private Leaderboard() {
         ArrayList<Score> rankings = new ArrayList<Score>();

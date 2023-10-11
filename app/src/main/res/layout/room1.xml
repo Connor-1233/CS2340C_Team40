@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:background = "@drawable/room1"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:weightSum="1.0" >
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="9"
+        android:gravity="center"
+    />
+
+    <Button
+        android:id="@+id/go_end_screen_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/end_game"
+        android:layout_gravity="end"
+        tools:ignore="MissingConstraints" />
+    <Button
+        android:id="@+id/NextRoom1"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:text="@string/next" />
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        tools:context=".View.MapStartScreen"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <EditText
+            android:id="@+id/display_player_name_text"
+            android:layout_width="204dp"
+            android:layout_height="0dp"
+            android:autofillHints="name"
+            android:ems="10"
+            android:hint="@string/display_name"
+            android:inputType="text"
+            android:textColor="#FFFFFF"
+            app:layout_constraintBottom_toTopOf="@id/display_health_text"
+            tools:ignore="MissingConstraints" />
+
+        <EditText
+            android:id="@+id/display_health_text"
+            android:layout_width="204dp"
+            android:layout_height="wrap_content"
+            android:autofillHints="health"
+            android:ems="10"
+            android:hint="@string/health_display"
+            android:inputType="text"
+            android:text="@string/health_display"
+            android:textColor="#FFFFFF"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:ignore="MissingConstraints"
+            />
+
+        <ImageView
+            android:id="@+id/spriteImageView"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:contentDescription="@string/sprite_image_description"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            tools:ignore="MissingConstraints"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
