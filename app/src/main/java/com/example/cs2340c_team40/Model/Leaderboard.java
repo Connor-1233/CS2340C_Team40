@@ -3,10 +3,10 @@ import java.util.ArrayList;
 
 public class Leaderboard {
     private static Leaderboard gameLeaderBoard;
-    public static ArrayList<Score> rankings;
+    private ArrayList<Score> rankings;
     private int lowestRankedScore;
     private Leaderboard() {
-        ArrayList<Score> rankings = new ArrayList<Score>();
+        rankings = new ArrayList<Score>(5);
     }
 
     //Updates and sorts the score list with the new score
@@ -16,8 +16,13 @@ public class Leaderboard {
         }
         Score newScore = new Score(score, name);
         for (int i = 0; i < 5; i++) {
-            Score currScore = rankings.get(i);
-            if (score > currScore.getScore()) {
+            if (i < rankings.size()) {
+                Score currScore = rankings.get(i);
+                if (score > currScore.getScore()) {
+                    rankings.add(i, newScore);
+                    return;
+                }
+            } else {
                 rankings.add(i, newScore);
                 return;
             }
@@ -26,7 +31,12 @@ public class Leaderboard {
 
     //Method to grab a certain score from the list
     public Score getScore(int index) {
-        return rankings.get(index);
+        if (index < rankings.size()) {
+            return rankings.get(index);
+        } else {
+            Score blankScore = new Score(0, null);
+            return blankScore;
+        }
     }
 
     //Singleton method to grab one instance of the leaderboard
