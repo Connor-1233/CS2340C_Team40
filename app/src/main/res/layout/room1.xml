@@ -7,6 +7,12 @@
     android:layout_height="fill_parent"
     android:orientation="vertical"
     android:weightSum="1.0" >
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="9"
+        android:gravity="center"
+    />
 
     <Button
         android:id="@+id/go_end_screen_button"
@@ -15,7 +21,6 @@
         android:text="@string/end_game"
         android:layout_gravity="end"
         tools:ignore="MissingConstraints" />
-
     <Button
         android:id="@+id/NextRoom1"
         android:layout_width="100dp"
@@ -59,26 +64,29 @@
 
         <EditText
             android:id="@+id/score_text"
-            android:layout_width="40dp"
-            android:layout_height="50dp"
+            android:layout_width="203dp"
+            android:layout_height="78dp"
+            android:layout_marginRight="148dp"
+            android:layout_marginBottom="100dp"
             android:ems="10"
             android:inputType="text"
             android:text="@string/score_display"
             android:textColor="#FFFFFF"
-            app:layout_constraintBottom_toTopOf="@+id/display_player_name_text"
-            app:layout_constraintStart_toEndOf="@+id/score_text_word"
-            tools:ignore="MissingConstraints" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
 
         <EditText
             android:id="@+id/score_text_word"
-            android:layout_width="60dp"
-            android:layout_height="50dp"
+            android:layout_width="203dp"
+            android:layout_height="78dp"
+            android:layout_marginRight="208dp"
+            android:layout_marginBottom="100dp"
             android:ems="10"
             android:inputType="text"
-            android:text="@string/score"
+            android:text="Score:"
             android:textColor="#FFFFFF"
-            app:layout_constraintBottom_toTopOf="@+id/display_player_name_text"
-            tools:ignore="MissingConstraints" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
 
         <ImageView
             android:id="@+id/spriteImageView"

@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.widget.Button;
 
 import com.example.cs2340c_team40.R;
-import com.example.cs2340c_team40.ViewModel.WelcomeScreenViewModel;
 
 public class WelcomeScreen extends Activity {
     @Override
@@ -19,9 +18,6 @@ public class WelcomeScreen extends Activity {
 
         startButton.setOnClickListener(v -> startGame()); //this method must change
         exitButton.setOnClickListener(v -> finish());
-//        WelcomeScreenViewModel viewModel = new WelcomeScreenViewModel();
-//        viewModel.getStartButton().setOnClickListener(v -> viewModel.startGame());
-//        viewModel.getExitButton().setOnClickListener(v -> finish());
     }
 
     /** This method "changes activity" to the config screen.
@@ -33,4 +29,3 @@ public class WelcomeScreen extends Activity {
         startActivity(startGame);
     }
 }
-
