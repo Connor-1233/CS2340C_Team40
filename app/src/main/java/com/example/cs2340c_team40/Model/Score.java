@@ -28,11 +28,11 @@ public class Score {
         return time;
     }
 
-    public void updateScore(int scoreChange) {
-        score += scoreChange;
+    public void setScore(int newScore) {
+        score = newScore;
 
         if (score < 0) {
-            score = 0;
+            setScore(0);
         }
     }
 }
