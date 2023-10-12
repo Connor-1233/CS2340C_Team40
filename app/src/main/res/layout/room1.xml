@@ -33,7 +33,7 @@
 
         <EditText
             android:id="@+id/display_player_name_text"
-            android:layout_width="150dp"
+            android:layout_width="224dp"
             android:layout_height="61dp"
             android:autofillHints="name"
             android:ems="10"
@@ -45,7 +45,7 @@
 
         <EditText
             android:id="@+id/display_health_text"
-            android:layout_width="100dp"
+            android:layout_width="204dp"
             android:layout_height="wrap_content"
             android:autofillHints="health"
             android:ems="10"

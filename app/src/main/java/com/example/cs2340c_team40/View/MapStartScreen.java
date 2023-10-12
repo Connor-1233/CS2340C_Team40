@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.cs2340c_team40.Model.Leaderboard;
 import com.example.cs2340c_team40.Model.Player;
 import com.example.cs2340c_team40.R;
 
