@@ -11,10 +11,10 @@ import androidx.annotation.NonNull;
 import com.example.cs2340c_team40.Model.Leaderboard;
 import com.example.cs2340c_team40.R;
 
-public class LeaderboardAdapter extends RecyclerView.Adapter<Score_card_viewHolder> {
-    Leaderboard leaderboard;
+public class LeaderboardAdapter extends RecyclerView.Adapter<ScoreCardViewHolder> {
+    private Leaderboard leaderboard;
 
-    Context context;
+    private Context context;
 
     public LeaderboardAdapter(Context context) {
         this.leaderboard = Leaderboard.getInstance();
@@ -22,9 +22,7 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<Score_card_viewHold
     }
 
     @Override
-    public Score_card_viewHolder onCreateViewHolder(ViewGroup parent, int viewType)
-    {
-
+    public ScoreCardViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
 
@@ -32,20 +30,27 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<Score_card_viewHold
 
         View photoView = inflater.inflate(R.layout.score_card, parent, false);
 
-        Score_card_viewHolder viewHolder = new Score_card_viewHolder(photoView);
+        ScoreCardViewHolder viewHolder = new ScoreCardViewHolder(photoView);
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull Score_card_viewHolder viewHolder, int position) {
-        viewHolder.scoreName.setText(leaderboard.getScore(position).getName());
-        viewHolder.scoreDate.setText(leaderboard.getScore(position).getTime());
-        viewHolder.scoreScore.setText(leaderboard.getScore(position).getScore());
+    public void onBindViewHolder(@NonNull ScoreCardViewHolder viewHolder, int position) {
+        if (position < leaderboard.getSize()) {
+            viewHolder.getScoreName().setText(leaderboard.getScore(position).getName());
+            viewHolder.getScoreDate().setText(leaderboard.getScore(position).getTime());
+            viewHolder.getScoreScore().setText(leaderboard.getScore(position).getScore());
+        }
     }
 
     @Override
     public int getItemCount() {
         return leaderboard.getSize();
+    }
+
+    @Override
+    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+        super.onAttachedToRecyclerView(recyclerView);
     }
 }
 
