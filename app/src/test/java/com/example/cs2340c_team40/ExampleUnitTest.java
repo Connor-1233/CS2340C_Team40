@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+import com.example.cs2340c_team40.Model.Leaderboard;
 import com.example.cs2340c_team40.View.ConfigScreen;
 import com.example.cs2340c_team40.ViewModel.ConfigScreenViewModel;
 
@@ -13,6 +14,21 @@ import com.example.cs2340c_team40.ViewModel.ConfigScreenViewModel;
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 public class ExampleUnitTest {
+
+        @Test
+        public void testLeaderboardInitialization() {
+            Leaderboard leaderboard = new Leaderboard();
+            assertEquals(leaderboard.getSize(), 0);
+        }
+
+        @Test
+        public void testAddScoreToLeaderboard() {
+            Leaderboard leaderboard = new Leaderboard();
+            leaderboard.updateScore(100, "Player1");
+            leaderboard.updateScore(150, "Player2");
+            leaderboard.updateScore(75, "Player3");
+            assertEquals(3, leaderboard.getSize());
+        }
         @Test
         public void testNameValidator_NullName() {
             String name = null;
