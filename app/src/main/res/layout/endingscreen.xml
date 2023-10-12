@@ -6,11 +6,6 @@
     tools:context=".View.EndingScreen"
     android:orientation="vertical">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/recyclerview" />
-
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
