@@ -17,13 +17,15 @@ public class ExampleUnitTest {
 
         @Test
         public void testLeaderboardInitialization() {
-            Leaderboard leaderboard = new Leaderboard();
+            Leaderboard leaderboard = Leaderboard.getInstance();
+            leaderboard.resetLeaderboard();
             assertEquals(leaderboard.getSize(), 0);
         }
 
         @Test
         public void testAddScoreToLeaderboard() {
-            Leaderboard lb = new Leaderboard();
+            Leaderboard lb = Leaderboard.getInstance();
+            lb.resetLeaderboard();
             lb.updateScore(100, "Player1");
             lb.updateScore(150, "Player2");
             lb.updateScore(75, "Player3");

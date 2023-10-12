@@ -47,6 +47,9 @@ public class Leaderboard {
         return gameLeaderBoard;
     }
 
+    public void resetLeaderboard() {
+        rankings = new ArrayList<Score>(5);
+    }
     //Method to get size
     public int getSize() {
         return rankings.size();
