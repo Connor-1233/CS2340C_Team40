@@ -20,6 +20,9 @@ public class Leaderboard {
                 Score currScore = rankings.get(i);
                 if (score > currScore.getScore()) {
                     rankings.add(i, newScore);
+                    if (i == 4) {
+                        lowestRankedScore = newScore.getScore();
+                    }
                     return;
                 }
             } else {
