@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.cs2340c_team40.Model.Player;
 import com.example.cs2340c_team40.R;
 
 public class MapStartScreen extends AppCompatActivity {
@@ -31,6 +32,8 @@ public class MapStartScreen extends AppCompatActivity {
         } else {
             health = 50;
         }
+
+        Player player = Player.getInstance();
 
         EditText displayName = findViewById(R.id.display_player_name_text);
         EditText displayHealth = findViewById(R.id.display_health_text);
@@ -54,6 +57,7 @@ public class MapStartScreen extends AppCompatActivity {
             public void onTick(long millisUntilFinished) {
                 scoreTimerText.setText(String.valueOf(counter));
                 counter--;
+                player.setScore(counter);
             }
             public  void onFinish() {
                 scoreTimerText.setText(R.string.timerFinish);

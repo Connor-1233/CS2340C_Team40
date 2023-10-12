@@ -9,6 +9,7 @@ import android.widget.RadioGroup;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.cs2340c_team40.Model.Player;
 import com.example.cs2340c_team40.R;
 import com.example.cs2340c_team40.ViewModel.ConfigScreenViewModel;
 
@@ -28,7 +29,6 @@ public class ConfigScreen extends Activity {
         RadioGroup difficultyRadioGroup = findViewById(R.id.RadioGroupDifficulty);
         RadioGroup characterChoice = findViewById(R.id.CostumeChoice);
         EditText characterName = findViewById(R.id.username);
-
         difficultyRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
@@ -108,6 +108,8 @@ public class ConfigScreen extends Activity {
         startGame.putExtra("difficulty", difficulty);
         startGame.putExtra("username", username);
         startGame.putExtra("spriteChoice", spriteChoice);
+        Player player = Player.getInstance();
+        player.setName(username);
         startActivity(startGame);
     }
 }
