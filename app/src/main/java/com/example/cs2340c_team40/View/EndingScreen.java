@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
-//import android.widget.EditText;
 //import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -29,11 +28,11 @@ public class EndingScreen extends Activity {
         Player player = Player.getInstance();
         Leaderboard leaderboard = Leaderboard.getInstance();
         gameScore.setText("Final score: " + player.getScore());
-        leaderboard.updateScore(player.getScore(), player.getName());
+        //leaderboard.updateScore(player.getScore(), player.getName());
 
         RecyclerView recyclerView = findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new LeaderboardAdapter(getApplicationContext()));
+        recyclerView.setAdapter(new LeaderboardAdapter());
     }
 
     private void restartGame() {

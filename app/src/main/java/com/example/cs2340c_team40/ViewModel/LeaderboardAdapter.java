@@ -14,11 +14,9 @@ import com.example.cs2340c_team40.R;
 public class LeaderboardAdapter extends RecyclerView.Adapter<ScoreCardViewHolder> {
     private Leaderboard leaderboard;
 
-    private Context context;
 
-    public LeaderboardAdapter(Context context) {
+    public LeaderboardAdapter() {
         this.leaderboard = Leaderboard.getInstance();
-        this.context = context;
     }
 
     @Override
