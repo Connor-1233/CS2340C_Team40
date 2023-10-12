@@ -100,11 +100,11 @@ public class EndingScreen extends Activity {
 //        RecyclerView recyclerView = findViewById(R.id.recyclerview);
 //        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 //        recyclerView.setAdapter(new LeaderboardAdapter(getApplicationContext()));
-=======
-        RecyclerView recyclerView = findViewById(R.id.recyclerview);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new LeaderboardAdapter());
->>>>>>> 0f6a4c5a68620369b14dbdc462df0d4be1ed4750
+//=======
+//        RecyclerView recyclerView = findViewById(R.id.recyclerview);
+//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+//        recyclerView.setAdapter(new LeaderboardAdapter());
+//>>>>>>> 0f6a4c5a68620369b14dbdc462df0d4be1ed4750
     }
 
     private void restartGame() {
