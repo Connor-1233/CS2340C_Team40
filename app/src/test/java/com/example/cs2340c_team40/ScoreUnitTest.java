@@ -15,9 +15,9 @@ public class ScoreUnitTest {
     @Test
     public void testUpdateNegativeScore() {
         Score testScore = new Score(-20, "test2");
-        testScore.updateScore(30);
+        testScore.setScore(30);
         assertEquals(30, testScore.getScore());
-        testScore.updateScore(-45);
+        testScore.setScore(-45);
         assertEquals(0, testScore.getScore());
     }
     @Test
