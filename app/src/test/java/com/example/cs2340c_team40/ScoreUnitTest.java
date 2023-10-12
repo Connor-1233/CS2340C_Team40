@@ -5,8 +5,6 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 import com.example.cs2340c_team40.Model.Score;
-import com.example.cs2340c_team40.ViewModel.ConfigScreenViewModel;
-
 public class ScoreUnitTest {
     @Test
     public void testInitializeNegativeScore() {
