@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:background = "@drawable/room3"
     android:layout_height="fill_parent"
@@ -18,4 +20,72 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end"
         android:text="@string/next" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        tools:context=".View.Room1"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <EditText
+            android:id="@+id/display_player_name_text"
+            android:layout_width="224dp"
+            android:layout_height="61dp"
+            android:autofillHints="name"
+            android:ems="10"
+            android:hint="@string/display_name"
+            android:inputType="text"
+            android:textColor="#FFFFFF"
+            app:layout_constraintBottom_toTopOf="@id/display_health_text"
+            tools:ignore="MissingConstraints" />
+
+        <EditText
+            android:id="@+id/display_health_text"
+            android:layout_width="204dp"
+            android:layout_height="wrap_content"
+            android:autofillHints="health"
+            android:ems="10"
+            android:hint="@string/health_display"
+            android:inputType="text"
+            android:text="@string/health_display"
+            android:textColor="#FFFFFF"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:ignore="MissingConstraints"
+            />
+
+        <EditText
+            android:id="@+id/score_text"
+            android:layout_width="40dp"
+            android:layout_height="50dp"
+            android:ems="10"
+            android:inputType="text"
+            android:text="@string/score_display"
+            android:textColor="#FFFFFF"
+            app:layout_constraintBottom_toTopOf="@+id/display_player_name_text"
+            app:layout_constraintStart_toEndOf="@+id/score_text_word"
+            tools:ignore="MissingConstraints" />
+
+        <EditText
+            android:id="@+id/score_text_word"
+            android:layout_width="60dp"
+            android:layout_height="50dp"
+            android:ems="10"
+            android:inputType="text"
+            android:text="@string/score"
+            android:textColor="#FFFFFF"
+            app:layout_constraintBottom_toTopOf="@+id/display_player_name_text"
+            tools:ignore="MissingConstraints" />
+
+        <ImageView
+            android:id="@+id/spriteImageView"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:contentDescription="@string/sprite_image_description"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            tools:ignore="MissingConstraints"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>
