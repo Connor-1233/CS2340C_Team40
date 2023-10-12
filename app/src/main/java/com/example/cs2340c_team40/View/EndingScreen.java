@@ -24,9 +24,9 @@ public class EndingScreen extends Activity {
         Button restartGameBtn = findViewById(R.id.restart_game_btn);
         restartGameBtn.setOnClickListener(v -> restartGame());
 
-        Leaderboard leaderboard = Leaderboard.getInstance();
         Player player = Player.getInstance();
-        leaderboard.updateScore(0, "James");
+        Leaderboard leaderboard = Leaderboard.getInstance();
+        leaderboard.updateScore(player.getScore(), player.getName());
 
         RecyclerView recyclerView = findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
