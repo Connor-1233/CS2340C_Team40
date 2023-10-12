@@ -28,7 +28,7 @@ public class EndingScreen extends Activity {
         Player player = Player.getInstance();
         Leaderboard leaderboard = Leaderboard.getInstance();
         gameScore.setText("Final score: " + player.getScore());
-        //leaderboard.updateScore(player.getScore(), player.getName());
+        leaderboard.updateScore(player.getScore(), player.getName());
 
 //<<<<<<< HEAD
         // Leaderboard
