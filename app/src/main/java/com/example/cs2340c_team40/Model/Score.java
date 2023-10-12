@@ -7,11 +7,16 @@ public class Score {
     private String name;
     private String time;
     public Score(int score, String name) {
-        this.score = score;
         this.name = name;
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
         time = dtf.format(now);
+
+        if (score < 0) {
+            this.score = 0;
+        } else {
+            this.score = score;
+        }
     }
     public int getScore() {
         return score;
@@ -21,5 +26,13 @@ public class Score {
     }
     public String getTime() {
         return time;
+    }
+
+    public void updateScore(int scoreChange) {
+        score += scoreChange;
+
+        if (score < 0) {
+            score = 0;
+        }
     }
 }
