@@ -23,11 +23,11 @@ public class ExampleUnitTest {
 
         @Test
         public void testAddScoreToLeaderboard() {
-            Leaderboard leaderboard = new Leaderboard();
-            leaderboard.updateScore(100, "Player1");
-            leaderboard.updateScore(150, "Player2");
-            leaderboard.updateScore(75, "Player3");
-            assertEquals(3, leaderboard.getSize());
+            Leaderboard lb = new Leaderboard();
+            lb.updateScore(100, "Player1");
+            lb.updateScore(150, "Player2");
+            lb.updateScore(75, "Player3");
+            assertEquals(3, lb.getSize());
         }
         @Test
         public void testNameValidator_NullName() {
@@ -46,6 +46,8 @@ public class ExampleUnitTest {
             String name = "    ";
             assertFalse(ConfigScreenViewModel.isValidName(name));
         }
+
+
 
         @Test
         public void testNameValidator_ValidName() {
