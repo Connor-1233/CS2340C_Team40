@@ -26,7 +26,7 @@ public class EndingScreen extends Activity {
 
         Leaderboard leaderboard = Leaderboard.getInstance();
         Player player = Player.getInstance();
-        //leaderboard.updateScore(player.getScore(), player.getName());
+        leaderboard.updateScore(0, "James");
 
         RecyclerView recyclerView = findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
