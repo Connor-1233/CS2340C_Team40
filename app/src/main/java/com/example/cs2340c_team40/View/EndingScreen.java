@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
-//import android.widget.EditText;
 //import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -29,8 +28,9 @@ public class EndingScreen extends Activity {
         Player player = Player.getInstance();
         Leaderboard leaderboard = Leaderboard.getInstance();
         gameScore.setText("Final score: " + player.getScore());
-        leaderboard.updateScore(player.getScore(), player.getName());
+        //leaderboard.updateScore(player.getScore(), player.getName());
 
+<<<<<<< HEAD
         // Leaderboard
         // Rank 1
         TextView score_name_1 = findViewById(R.id.score_name_1);
@@ -100,6 +100,11 @@ public class EndingScreen extends Activity {
 //        RecyclerView recyclerView = findViewById(R.id.recyclerview);
 //        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 //        recyclerView.setAdapter(new LeaderboardAdapter(getApplicationContext()));
+=======
+        RecyclerView recyclerView = findViewById(R.id.recyclerview);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(new LeaderboardAdapter());
+>>>>>>> 0f6a4c5a68620369b14dbdc462df0d4be1ed4750
     }
 
     private void restartGame() {
