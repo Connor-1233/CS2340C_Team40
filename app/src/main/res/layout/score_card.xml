@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/scoreName"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        android:text="Name"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/scoreDate"
+        android:layout_below="@id/scoreName"
+        android:textColor="@color/black"
+        android:text="emial@email.com"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/scoreScore"
+        android:layout_below="@id/scoreName"
+        android:textColor="@color/black"
+        android:text="emial@email.com"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
