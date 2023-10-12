@@ -30,7 +30,7 @@ public class EndingScreen extends Activity {
         gameScore.setText("Final score: " + player.getScore());
         //leaderboard.updateScore(player.getScore(), player.getName());
 
-<<<<<<< HEAD
+//<<<<<<< HEAD
         // Leaderboard
         // Rank 1
         TextView score_name_1 = findViewById(R.id.score_name_1);
