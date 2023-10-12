@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.annotation.NonNull;
 
 import com.example.cs2340c_team40.Model.Leaderboard;
 import com.example.cs2340c_team40.R;
@@ -36,8 +37,7 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<Score_card_viewHold
     }
 
     @Override
-    public void onBindViewHolder(final Score_card_viewHolder viewHolder, final int position) {
-        final int index = viewHolder.getAdapterPosition();
+    public void onBindViewHolder(@NonNull Score_card_viewHolder viewHolder, int position) {
         viewHolder.scoreName.setText(leaderboard.getScore(position).getName());
         viewHolder.scoreDate.setText(leaderboard.getScore(position).getTime());
         viewHolder.scoreScore.setText(leaderboard.getScore(position).getScore());
@@ -46,11 +46,6 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<Score_card_viewHold
     @Override
     public int getItemCount() {
         return leaderboard.getSize();
-    }
-
-    @Override
-    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
-        super.onAttachedToRecyclerView(recyclerView);
     }
 }
 
