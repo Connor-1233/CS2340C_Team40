@@ -13,40 +13,29 @@ import androidx.appcompat.app.AppCompatActivity;
 //import com.example.cs2340c_team40.Model.Leaderboard;
 import com.example.cs2340c_team40.Model.Player;
 import com.example.cs2340c_team40.R;
+import com.example.cs2340c_team40.ViewModel.GameScreenViewModel;
+
 
 public class MapStartScreen extends AppCompatActivity {
-    protected int health;
     protected int counter;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.room1);
 
-        Intent intent = getIntent();
-        String name = intent.getStringExtra("username");
-        double difficultyGame = intent.getDoubleExtra("difficulty", 0.5);
-        int spriteChoice = intent.getIntExtra("spriteChoice", 1);
-
-        if (difficultyGame == .5) {
-            health = 150;
-        } else if (difficultyGame == .75) {
-            health = 100;
-        } else {
-            health = 50;
-        }
-
         Player player = Player.getInstance();
+        GameScreenViewModel.initializePlayer();
 
         EditText displayName = findViewById(R.id.display_player_name_text);
         EditText displayHealth = findViewById(R.id.display_health_text);
-        displayName.setText(name);
-        String displayHealthString = "Health: " + health;
+        displayName.setText(player.getName());
+        String displayHealthString = "Health: " + player.getHealth();
         displayHealth.setText(displayHealthString);
 
         ImageView spriteImageView = findViewById(R.id.spriteImageView);
 
-        if (spriteChoice == 1) {
+        if (player.getSpriteChoice() == 1) {
             spriteImageView.setImageResource(R.drawable.bluepiskel);
-        } else if (spriteChoice == 2) {
+        } else if (player.getSpriteChoice() == 2) {
             spriteImageView.setImageResource(R.drawable.greenpiskel);
         } else {
             spriteImageView.setImageResource(R.drawable.redpiskel);
@@ -60,7 +49,7 @@ public class MapStartScreen extends AppCompatActivity {
                 counter--;
                 player.setScore(counter);
             }
-            public  void onFinish() {
+            public void onFinish() {
                 scoreTimerText.setText(R.string.timerFinish);
             }
         }.start();

@@ -10,8 +10,11 @@ public class Score {
         this.name = name;
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
-        time = dtf.format(now);
-
+        if (score != 0) {
+            time = dtf.format(now);
+        } else {
+            time = "";
+        }
         if (score < 0) {
             this.score = 0;
         } else {

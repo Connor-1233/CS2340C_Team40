@@ -32,5 +32,9 @@ public class WelcomeScreen extends Activity {
         Intent startGame = new Intent(this, ConfigScreen.class);
         startActivity(startGame);
     }
+    //If you play a game, the exit button takes you to blank leaderboard screen
+    public void finish() {
+        System.exit(0);
+    }
 }
 

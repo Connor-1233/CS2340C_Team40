@@ -18,12 +18,14 @@ public class ConfigScreen extends Activity {
     protected String username = null;
     protected int spriteChoice = -1;
 
+    private Player player;
+
 
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.configscreen);
-
+        player = Player.getInstance();
         Button proceedButton = findViewById(R.id.proceedButton);
         Button exitButton = findViewById(R.id.exitButton);
         RadioGroup difficultyRadioGroup = findViewById(R.id.RadioGroupDifficulty);
@@ -71,29 +73,29 @@ public class ConfigScreen extends Activity {
 
         proceedButton.setOnClickListener(v -> {
             if (difficultyRadioGroup.getCheckedRadioButtonId() == R.id.radio_easy) {
-                difficulty = 0.5;
+                player.setDifficulty(0.5);
             } else if (difficultyRadioGroup.getCheckedRadioButtonId() == R.id.radio_medium) {
-                difficulty = 0.75;
+                player.setDifficulty(0.75);
             } else if (difficultyRadioGroup.getCheckedRadioButtonId() == R.id.radio_hard) {
-                difficulty = 1.0;
+                player.setDifficulty(1.0);
             } else {
-                difficulty = 0.5;
+                player.setDifficulty(0.5);
             }
 
             if (characterChoice.getCheckedRadioButtonId() == R.id.radio_costume_1) {
-                spriteChoice = 1;
+                player.setSpriteChoice(1);
             } else if (characterChoice.getCheckedRadioButtonId() == R.id.radio_costume_2) {
-                spriteChoice = 2;
+                player.setSpriteChoice(2);
             } else if (characterChoice.getCheckedRadioButtonId() == R.id.radio_costume_3) {
-                spriteChoice = 3;
+                player.setSpriteChoice(3);
             } else {
-                spriteChoice = 1;
+                player.setSpriteChoice(1);
             }
 
-            username = characterName.getText().toString();
+            player.setName(characterName.getText().toString());
 
-            if (difficulty != -1.0 && spriteChoice != -1
-                    && ConfigScreenViewModel.isValidName(username)) {
+            if (player.getDifficulty() != 0 && player.getSpriteChoice() != 0
+                    && ConfigScreenViewModel.isValidName(player.getName())) {
                 proceedToGame();
             }
         });
@@ -108,8 +110,6 @@ public class ConfigScreen extends Activity {
         startGame.putExtra("difficulty", difficulty);
         startGame.putExtra("username", username);
         startGame.putExtra("spriteChoice", spriteChoice);
-        Player player = Player.getInstance();
-        player.setName(username);
         startActivity(startGame);
     }
 }

@@ -4,11 +4,15 @@ public class Player {
 
     private String name;
     private int score;
+    private int health;
+    private double difficulty;
+    private int spriteChoice;
 
     private static Player player;
 
     private Player() {
-
+        difficulty = 0;
+        spriteChoice = 0;
     }
 
     public static Player getInstance() {
@@ -24,10 +28,28 @@ public class Player {
     public void setScore(int score) {
         this.score = score;
     }
+    public void setHealth(int health) {
+        this.health = health;
+    }
+    public void setDifficulty(double difficulty) {
+        this.difficulty = difficulty;
+    }
+    public void setSpriteChoice(int spriteChoice) {
+        this.spriteChoice = spriteChoice;
+    }
     public int getScore() {
         return score;
     }
     public String getName() {
         return name;
+    }
+    public int getHealth() {
+        return health;
+    }
+    public int getSpriteChoice() {
+        return spriteChoice;
+    }
+    public double getDifficulty() {
+        return difficulty;
     }
 }
