@@ -18,8 +18,6 @@ import com.example.cs2340c_team40.ViewModel.GameScreenViewModel;
 
 public class MapStartScreen extends Activity {
     private int counter;
-    private float previousX;
-    private float previousY;
     private Player player = Player.getInstance();
 
     protected void onCreate(Bundle savedInstanceState) {
