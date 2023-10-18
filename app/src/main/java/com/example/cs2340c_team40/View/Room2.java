@@ -47,7 +47,10 @@ public class Room2 extends Activity {
         });
     }
     @Override
-    public boolean onTouchEvent(MotionEvent event){
-        return GameScreenViewModel.touchEventHandler(event);
+    public boolean onTouchEvent(MotionEvent e){
+        if (e.getAction() == MotionEvent.ACTION_MOVE) {
+            GameScreenViewModel.updateTouch(e.getX(), e.getY());
+        }
+        return true;
     }
 }

@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.app.Activity;
 import android.view.MotionEvent;
 
+
 import com.example.cs2340c_team40.Model.Player;
 import com.example.cs2340c_team40.R;
 import com.example.cs2340c_team40.ViewModel.GameScreenViewModel;
@@ -17,7 +18,6 @@ import com.example.cs2340c_team40.ViewModel.GameScreenViewModel;
 
 public class MapStartScreen extends Activity {
     private int counter;
-    private final float TOUCH_SCALE_FACTOR = 180.0f / 320;
     private float previousX;
     private float previousY;
     private Player player = Player.getInstance();
@@ -72,8 +72,8 @@ public class MapStartScreen extends Activity {
     @Override
     public boolean onTouchEvent(MotionEvent e){
         if (e.getAction() == MotionEvent.ACTION_MOVE) {
-            float dx = e.getX() - player.getX();
-            float dy = e.getY() - player.getY();
+            GameScreenViewModel.updateTouch(e.getX(), e.getY());
         }
+        return true;
     }
 }
