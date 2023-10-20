@@ -3,6 +3,7 @@ package com.example.cs2340c_team40.View;
 import android.content.Intent;
 import android.os.Bundle;
 import android.app.Activity;
+import android.view.MotionEvent;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -18,7 +19,7 @@ public class Room2 extends Activity {
         setContentView(R.layout.room2);
 
         Player player = Player.getInstance();
-        GameScreenViewModel.initializePlayer();
+        GameScreenViewModel.initializePlayer(0,0);
 
         EditText displayName = findViewById(R.id.display_player_name_text);
         EditText displayHealth = findViewById(R.id.display_health_text);
@@ -44,5 +45,12 @@ public class Room2 extends Activity {
             Intent goRoom3 = new Intent(this, Room3.class);
             startActivity(goRoom3);
         });
+    }
+    @Override
+    public boolean onTouchEvent(MotionEvent e){
+        if (e.getAction() == MotionEvent.ACTION_MOVE) {
+            GameScreenViewModel.updateTouch(e.getX(), e.getY());
+        }
+        return true;
     }
 }

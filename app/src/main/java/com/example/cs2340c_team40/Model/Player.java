@@ -7,6 +7,9 @@ public class Player {
     private int health;
     private double difficulty;
     private int spriteChoice;
+    private float x;
+    private float y;
+
 
     private static Player player;
 
@@ -37,6 +40,12 @@ public class Player {
     public void setSpriteChoice(int spriteChoice) {
         this.spriteChoice = spriteChoice;
     }
+    public void setX(float x) {
+        this.x = x;
+    }
+    public void setY(float y) {
+        this.y = y;
+    }
     public int getScore() {
         return score;
     }
@@ -51,5 +60,11 @@ public class Player {
     }
     public double getDifficulty() {
         return difficulty;
+    }
+    public float getX() {
+        return x;
+    }
+    public float getY() {
+        return y;
     }
 }
