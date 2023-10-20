@@ -1,6 +1,6 @@
 package com.example.cs2340c_team40.Model;
 
-public class Player {
+public class Player implements Subscriber {
 
     private String name;
     private int score;
@@ -26,6 +26,10 @@ public class Player {
         return player;
     }
 
+    public void update() {
+        //draw(player)
+    }
+    //When button is pressed, set the player direction, then move the player(playerDirection.move()
     public void setPlayerDirection(PlayerDirection playerDirection) {
         this.playerDirection = playerDirection;
     }

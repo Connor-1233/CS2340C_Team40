@@ -11,8 +11,11 @@ import android.widget.TextView;
 
 import com.example.cs2340c_team40.Model.Player;
 import com.example.cs2340c_team40.Model.Room;
+import com.example.cs2340c_team40.Model.Subscriber;
 import com.example.cs2340c_team40.R;
 import com.example.cs2340c_team40.ViewModel.GameScreenViewModel;
+
+import java.util.ArrayList;
 
 public class Room2 extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +24,9 @@ public class Room2 extends Activity {
 
         Player player = Player.getInstance();
         Room room = new Room(); //Need to fill room array
-        GameScreenViewModel.initializePlayer(0,0, room);
+        ArrayList<Subscriber> entities = new ArrayList<Subscriber>();
+        entities.add(player);
+        GameScreenViewModel.initializePlayer(0,0, room, entities);
 
         EditText displayName = findViewById(R.id.display_player_name_text);
         EditText displayHealth = findViewById(R.id.display_health_text);
