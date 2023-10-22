@@ -14,12 +14,14 @@
         android:gravity="center"
         />
 
+    <!--
     <Button
         android:id="@+id/NextRoom3"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
         android:text="@string/next" />
+    -->
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/linearLayout"
@@ -57,8 +59,8 @@
 
         <EditText
             android:id="@+id/score_text"
-            android:layout_width="40dp"
-            android:layout_height="50dp"
+            android:layout_width="62dp"
+            android:layout_height="53dp"
             android:ems="10"
             android:inputType="text"
             android:text="@string/score_display"
