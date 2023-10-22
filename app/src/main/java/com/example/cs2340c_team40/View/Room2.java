@@ -10,8 +10,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.cs2340c_team40.Model.Player;
+import com.example.cs2340c_team40.Model.Room;
+import com.example.cs2340c_team40.Model.Subscriber;
 import com.example.cs2340c_team40.R;
 import com.example.cs2340c_team40.ViewModel.GameScreenViewModel;
+
+import java.util.ArrayList;
 
 public class Room2 extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,7 +23,10 @@ public class Room2 extends Activity {
         setContentView(R.layout.room2);
 
         Player player = Player.getInstance();
-        GameScreenViewModel.initializePlayer(0,0);
+        Room room = new Room(); //Need to fill room array
+        ArrayList<Subscriber> entities = new ArrayList<Subscriber>();
+        entities.add(player);
+        GameScreenViewModel.initializePlayer(0,0, room, entities);
 
         EditText displayName = findViewById(R.id.display_player_name_text);
         EditText displayHealth = findViewById(R.id.display_health_text);
@@ -46,6 +53,7 @@ public class Room2 extends Activity {
             startActivity(goRoom3);
         });
     }
+    /* Touch Controls
     @Override
     public boolean onTouchEvent(MotionEvent e){
         if (e.getAction() == MotionEvent.ACTION_MOVE) {
@@ -53,4 +61,5 @@ public class Room2 extends Activity {
         }
         return true;
     }
+    */
 }

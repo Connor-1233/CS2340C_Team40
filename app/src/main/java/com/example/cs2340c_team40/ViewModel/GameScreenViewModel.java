@@ -1,36 +1,36 @@
 package com.example.cs2340c_team40.ViewModel;
 
-import android.view.MotionEvent;
 
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
-
-import androidx.constraintlayout.widget.ConstraintSet;
-
 import com.example.cs2340c_team40.Model.Player;
+import com.example.cs2340c_team40.Model.Room;
+import com.example.cs2340c_team40.Model.Subscriber;
 
 public class GameScreenViewModel {
     private static Timer dotTimer = new Timer();
-    private static float dx = 0;
-    private static float dy = 0;
-
+    private static Room room;
     private static Player player = Player.getInstance();
+    private static ArrayList<Subscriber> subscribers;
 
-    public static void initializePlayer(float x, float y) {
+    public static void initializePlayer(int x, int y, Room currRoom, ArrayList<Subscriber> entities) {
         player.setHealth(calculateHealth(player.getDifficulty()));
         player.setX(x);
         player.setY(y);
-        /*
-        Timer to call updateLocations to move the player
-         */
+        room = currRoom;
+        subscribers = entities;
+        //Timer to call updateLocations to move the player
         dotTimer.schedule(new TimerTask() {
             @Override
             public void run() {
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        updateLocation();
+                        for (Subscriber subscriber : subscribers) {
+                            subscriber.update();
+                        }
                     }
                 });
             }
@@ -47,6 +47,10 @@ public class GameScreenViewModel {
         }
         return health;
     }
+    public static int collisionCheck(int playerX, int playerY) {
+        return room.checkLocation(playerX, playerY);
+    }
+    /* Touch Controls
     public static void updateTouch(float xx, float yy) {
         float dx = xx - player.getX();
         float dy = yy - player.getY();
@@ -71,5 +75,5 @@ public class GameScreenViewModel {
         player.setY(player.getY() + movey);
         player.setX(player.getX() + movex);
     }
-    //calculating scoring will go here
+    */
 }

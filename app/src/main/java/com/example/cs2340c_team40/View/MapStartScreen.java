@@ -12,19 +12,27 @@ import android.view.MotionEvent;
 
 
 import com.example.cs2340c_team40.Model.Player;
+import com.example.cs2340c_team40.Model.Room;
+import com.example.cs2340c_team40.Model.Subscriber;
 import com.example.cs2340c_team40.R;
 import com.example.cs2340c_team40.ViewModel.GameScreenViewModel;
+
+import java.util.ArrayList;
 
 
 public class MapStartScreen extends Activity {
     private int counter;
     private Player player = Player.getInstance();
+    private Room room;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.room1);
 
-        GameScreenViewModel.initializePlayer(0,0);
+        Room room = new Room(); //Need to fill room array
+        ArrayList<Subscriber> entities = new ArrayList<Subscriber>();
+        entities.add(player);
+        GameScreenViewModel.initializePlayer(0,0, room, entities);
 
         EditText displayName = findViewById(R.id.display_player_name_text);
         EditText displayHealth = findViewById(R.id.display_health_text);
@@ -67,6 +75,7 @@ public class MapStartScreen extends Activity {
             startActivity(goRoom2);
         });
     }
+    /* Touch Controls
     @Override
     public boolean onTouchEvent(MotionEvent e){
         if (e.getAction() == MotionEvent.ACTION_MOVE) {
@@ -74,4 +83,5 @@ public class MapStartScreen extends Activity {
         }
         return true;
     }
+    */
 }
