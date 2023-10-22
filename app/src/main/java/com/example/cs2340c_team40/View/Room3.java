@@ -41,10 +41,12 @@ public class Room3 extends Activity {
             spriteImageView.setImageResource(R.drawable.redpiskel);
         }
 
+        /*
         Button nextButton = findViewById(R.id.NextRoom3);
         nextButton.setOnClickListener(v -> {
             Intent endGame = new Intent(this, EndingScreen.class);
             startActivity(endGame);
         });
+         */
     }
 }
