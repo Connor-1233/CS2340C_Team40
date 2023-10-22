@@ -23,7 +23,12 @@ public class Player implements Subscriber {
 
     public static Player getInstance() {
         if (player == null) {
-            player = new Player();
+            synchronized (Player.class) {
+                if (player == null) {
+                    player = new Player();
+                }
+
+            }
         }
         return player;
     }

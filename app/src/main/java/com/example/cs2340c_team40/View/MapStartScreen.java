@@ -47,11 +47,11 @@ public class MapStartScreen extends Activity {
         ImageView spriteImageView = findViewById(R.id.spriteImageView);
 
         if (player.getSpriteChoice() == 1) {
-            spriteImageView.setImageResource(R.drawable.bluepiskel);
+            spriteImageView.setImageResource(R.drawable.sprite1);
         } else if (player.getSpriteChoice() == 2) {
-            spriteImageView.setImageResource(R.drawable.greenpiskel);
+            spriteImageView.setImageResource(R.drawable.sprite2);
         } else {
-            spriteImageView.setImageResource(R.drawable.redpiskel);
+            spriteImageView.setImageResource(R.drawable.sprite3);
         }
 
         TextView scoreTimerText = findViewById(R.id.score_text);
