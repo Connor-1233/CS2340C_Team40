@@ -29,7 +29,7 @@ public class MapStartScreen extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.room1);
 
-        Room room = new Room(); //Need to fill room array
+        room = new Room(); //Need to fill room array
         ArrayList<Subscriber> entities = new ArrayList<Subscriber>();
         entities.add(player);
         GameScreenViewModel.initializePlayer(0,0, room, entities);
