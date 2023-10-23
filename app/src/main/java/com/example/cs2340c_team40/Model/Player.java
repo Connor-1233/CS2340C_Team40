@@ -35,7 +35,7 @@ public class Player implements Subscriber {
 
     public void update() {
         if (moving) {
-            playerDirection.movePlayer(1);
+            playerDirection.movePlayer();
             moving = false;
             //draw(player)
         }
@@ -65,6 +65,9 @@ public class Player implements Subscriber {
     }
     public void setY(int y) {
         this.y = y;
+    }
+    public void setMoving(boolean moving) {
+        this.moving = moving;
     }
     public int getScore() {
         return score;
