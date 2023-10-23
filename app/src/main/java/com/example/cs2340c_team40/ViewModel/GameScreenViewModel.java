@@ -50,7 +50,6 @@ public class GameScreenViewModel {
     public static int collisionCheck(int playerX, int playerY) {
         return room.checkLocation(playerX, playerY);
     }
-    
     /* Touch Controls
     public static void updateTouch(float xx, float yy) {
         float dx = xx - player.getX();

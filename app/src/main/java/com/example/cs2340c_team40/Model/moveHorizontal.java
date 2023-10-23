@@ -2,17 +2,13 @@ package com.example.cs2340c_team40.Model;
 
 import com.example.cs2340c_team40.ViewModel.GameScreenViewModel;
 
-public class MoveHorizontal implements PlayerDirection {
+public class moveHorizontal implements PlayerDirection {
     private Player player = Player.getInstance();
     private int result;
-    private int dir;
-    public MoveHorizontal(int dir) {
-        this.dir = dir;
-    }
-    public void movePlayer() {
+    public void movePlayer(int dir) {
         if (dir > 0) { //move right
             result = player.getX() + 1;
-        } else if (dir < 0) {
+        } else {
             result = player.getX() - 1;
         }
         if (0 <= result && result <= 31) {
