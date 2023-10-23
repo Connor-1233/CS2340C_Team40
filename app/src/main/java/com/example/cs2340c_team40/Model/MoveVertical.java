@@ -17,7 +17,7 @@ public class MoveVertical implements PlayerDirection {
         }
         if (0 <= result && result <= 31) {
             if (GameScreenViewModel.collisionCheck(result, player.getY()) == 0) {
-                player.setX(result);
+                player.setY(result);
             }
         }
     }

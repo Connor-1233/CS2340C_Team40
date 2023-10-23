@@ -27,9 +27,43 @@ public class Room2 extends Activity {
         setContentView(R.layout.room2);
 
         Room room = new Room(); //Need to fill room array
+
+        //initiializing array for 30x30 grid
+        for (int x = 0; x <= 29; x++) {
+            for (int y = 0; y <= 29; y++) {
+                room.addObject(x, y, 0);
+            }
+        }
+        for (int y = 9; y <= 15; y++) {
+            room.addObject(5, y, 1);
+        }
+        for (int x = 6; x <= 20; x++) {
+            room.addObject(x, 9, 1);
+        }
+        for (int y = 10; y <= 20; y++) {
+            room.addObject(20, y, 1);
+        }
+        for (int x = 6; x <= 16; x++) {
+            room.addObject(x, 15, 1);
+        }
+        for (int y = 16; y <= 20; y++) {
+            room.addObject(16, y, 1);
+        }
+        for (int y = 20; y <= 23; y++) {
+            room.addObject(17, y, 1);
+            room.addObject(19, y, 1);
+        }
+        room.addObject(18, 23, 1);
+
+        room.addObject(18, 23, 2); //door, exit
+
+
+
         ArrayList<Subscriber> entities = new ArrayList<Subscriber>();
         entities.add(player);
-        GameScreenViewModel.initializePlayer(0,0, room, entities);
+
+        //change
+        GameScreenViewModel.initializePlayer(6,12, room, entities);
 
         EditText displayName = findViewById(R.id.display_player_name_text);
         EditText displayHealth = findViewById(R.id.display_health_text);

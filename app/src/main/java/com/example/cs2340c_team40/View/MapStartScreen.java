@@ -34,9 +34,31 @@ public class MapStartScreen extends Activity {
         setContentView(R.layout.room1);
 
         room = new Room(); //Need to fill room array
+
+        //initiializing array for 30x30 grid
+        for (int x = 0; x <= 29; x++) {
+            for (int y = 0; y <= 29; y++) {
+                room.addObject(x, y, 0);
+            }
+        }
+
+        for (int x = 10; x <= 20; x++) {
+            room.addObject(x, 12, 1);
+            room.addObject(x, 19, 1);
+        }
+        for (int y = 13; y <= 18; y++) {
+            room.addObject(10, y, 1);
+            room.addObject(20, y, 1);
+        }
+        room.addObject(15, 19, 2); //door, exit
+
+
         ArrayList<Subscriber> entities = new ArrayList<Subscriber>();
         entities.add(player);
-        GameScreenViewModel.initializePlayer(0,0, room, entities);
+
+        // i update start location to top door
+        GameScreenViewModel.initializePlayer(11,15, room, entities);
+
 
         EditText displayName = findViewById(R.id.display_player_name_text);
         EditText displayHealth = findViewById(R.id.display_health_text);
