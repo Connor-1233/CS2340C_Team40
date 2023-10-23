@@ -11,6 +11,7 @@ public class Player implements Subscriber {
     private int spriteChoice;
     private int x;
     private int y;
+    private boolean moving;
     private PlayerDirection playerDirection;
     private ImageView sprite;
 
@@ -20,6 +21,7 @@ public class Player implements Subscriber {
     private Player() {
         difficulty = 0;
         spriteChoice = 0;
+        moving = false;
     }
 
     public static Player getInstance() {
@@ -35,11 +37,15 @@ public class Player implements Subscriber {
     }
 
     public void update() {
-        //draw(player)
+        if (moving) {
+            playerDirection.movePlayer();
+            moving = false;
+            //draw(player)
+        }
     }
     //When button is pressed, set the player direction, then move the player(playerDirection.move()
-    public void setPlayerDirection(PlayerDirection playerDirection) {
-        this.playerDirection = playerDirection;
+    public void setMoveDirection(PlayerDirection dir) {
+        playerDirection = dir;
     }
 
     public void setName(String name) {
@@ -63,8 +69,12 @@ public class Player implements Subscriber {
     public void setY(int y) {
         this.y = y;
     }
+
     public void setSprite(ImageView sprite) {
         this.sprite = sprite;
+    }
+    public void setMoving(boolean moving) {
+        this.moving = moving;
     }
     public int getScore() {
         return score;
