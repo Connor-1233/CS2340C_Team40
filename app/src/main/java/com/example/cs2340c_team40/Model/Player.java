@@ -10,7 +10,6 @@ public class Player implements Subscriber {
     private int x;
     private int y;
     private PlayerDirection playerDirection;
-    private PlayerDirection noMove;
 
 
     private static Player player;
@@ -18,7 +17,6 @@ public class Player implements Subscriber {
     private Player() {
         difficulty = 0;
         spriteChoice = 0;
-        noMove = new MoveHorizontal(0);
     }
 
     public static Player getInstance() {
@@ -34,11 +32,12 @@ public class Player implements Subscriber {
     }
 
     public void update() {
-        playerDirection.movePlayer();
-        setMoveDirection(noMove);
         //draw(player)
     }
     //When button is pressed, set the player direction, then move the player(playerDirection.move()
+    public void setPlayerDirection(PlayerDirection playerDirection) {
+        this.playerDirection = playerDirection;
+    }
 
     public void setName(String name) {
         this.name = name;
@@ -48,9 +47,6 @@ public class Player implements Subscriber {
     }
     public void setHealth(int health) {
         this.health = health;
-    }
-    public void setMoveDirection(PlayerDirection dir) {
-        playerDirection = dir;
     }
     public void setDifficulty(double difficulty) {
         this.difficulty = difficulty;
