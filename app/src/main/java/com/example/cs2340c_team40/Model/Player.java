@@ -40,9 +40,10 @@ public class Player implements Subscriber {
 //        if (moving) {
         playerDirection.movePlayer();
 //        moving = false;
-        sprite.setX(x);
-        sprite.setY(y);
-            //draw(player)
+        if (x >= 5 || y >= 500) {
+            sprite.setX(x);
+            sprite.setY(y);
+        }
 //        }
     }
     //When button is pressed, set the player direction, then move the player(playerDirection.move()
