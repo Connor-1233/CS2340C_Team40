@@ -15,11 +15,11 @@ public class MoveHorizontal implements PlayerDirection {
         } else {
             result = player.getX() - 1;
         }
-        if (0 <= result && result <= 31) {
-            if (GameScreenViewModel.collisionCheck(result, player.getX()) == 0) {
+//        if (0 <= result && result <= 31) {
+//            if (GameScreenViewModel.collisionCheck(result, player.getX()) == 0) {
                 player.setX(result);
                 player.setMoving(true);
-            }
-        }
+//            }
+//        }
     }
 }

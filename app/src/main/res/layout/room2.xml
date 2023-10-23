@@ -91,5 +91,14 @@
             app:layout_constraintRight_toRightOf="parent"
             tools:ignore="MissingConstraints"/>
 
+        <ImageView
+            android:id="@+id/sprite"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:contentDescription="@string/sprite"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            tools:ignore="MissingConstraints" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>
