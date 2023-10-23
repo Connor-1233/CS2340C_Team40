@@ -121,13 +121,13 @@ public class Room3 extends Activity {
             startActivity(endGame);
         }
 
-        /*
+
         Button nextButton = findViewById(R.id.NextRoom3);
         nextButton.setOnClickListener(v -> {
             Intent endGame = new Intent(this, EndingScreen.class);
             startActivity(endGame);
         });
-         */
+
     }
     /* Touch Controls
     @Override

@@ -3,6 +3,7 @@ package com.example.cs2340c_team40.View;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.view.KeyEvent;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -51,23 +52,26 @@ public class MapStartScreen extends Activity {
         entities.add(player);
 
         // i update start location to top door
-        GameScreenViewModel.initializePlayer(11,15, room, entities);
+        GameScreenViewModel.initializePlayer(200,15, room, entities);
 
 
+        player.setSprite((ImageView) findViewById(R.id.sprite));
         EditText displayName = findViewById(R.id.display_player_name_text);
         EditText displayHealth = findViewById(R.id.display_health_text);
         displayName.setText(player.getName());
         String displayHealthString = "Health: " + player.getHealth();
         displayHealth.setText(displayHealthString);
-
         ImageView spriteImageView = findViewById(R.id.spriteImageView);
 
         if (player.getSpriteChoice() == 1) {
             spriteImageView.setImageResource(R.drawable.sprite1);
+            player.getSprite().setImageResource(R.drawable.sprite1);
         } else if (player.getSpriteChoice() == 2) {
             spriteImageView.setImageResource(R.drawable.sprite2);
+            player.getSprite().setImageResource(R.drawable.sprite2);
         } else {
             spriteImageView.setImageResource(R.drawable.sprite3);
+            player.getSprite().setImageResource(R.drawable.sprite3);
         }
 
         TextView scoreTimerText = findViewById(R.id.score_text);

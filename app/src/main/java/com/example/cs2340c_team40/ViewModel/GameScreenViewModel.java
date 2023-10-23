@@ -1,6 +1,9 @@
 package com.example.cs2340c_team40.ViewModel;
 
 
+import android.view.KeyEvent;
+import android.widget.ImageView;
+
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -50,6 +53,28 @@ public class GameScreenViewModel {
     public static int collisionCheck(int playerX, int playerY) {
         return room.checkLocation(playerX, playerY);
     }
+
+//    public boolean onKeyDown(int keyCode, KeyEvent event) {
+//        switch (keyCode) {
+//        case KeyEvent.KEYCODE_W: //moves player up
+//            player.setPlayerDirIndex(1);
+//            break;
+//        case KeyEvent.KEYCODE_A: //moves player left
+//            player.setPlayerDirIndex(-1);
+//            break;
+//        case KeyEvent.KEYCODE_S: //moves player down
+//            player.setPlayerDirIndex(-1);
+//            break;
+//        case KeyEvent.KEYCODE_D: //moves player right
+//            player.setPlayerDirIndex(1);
+//            break;
+//        default:
+//            player.setX(player.getX());
+//            player.setY(player.getY());
+//        }
+//        return true;
+//    }
+
     /* Touch Controls
     public static void updateTouch(float xx, float yy) {
         float dx = xx - player.getX();

@@ -7,9 +7,9 @@ public class moveVertical implements PlayerDirection {
     private int result;
     public void movePlayer(int dir) {
         if (dir > 0) { //move down
-            result = player.getX() + 1;
+            result = player.getY() + 1;
         } else {
-            result = player.getX() - 1;
+            result = player.getY() - 1;
         }
         if (0 <= result && result <= 31) {
             if (GameScreenViewModel.collisionCheck(result, player.getY()) == 0) {
