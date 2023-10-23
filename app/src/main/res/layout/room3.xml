@@ -14,14 +14,14 @@
         android:gravity="center"
         />
 
-    <!--
+
     <Button
         android:id="@+id/NextRoom3"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
         android:text="@string/next" />
-    -->
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/linearLayout"
@@ -39,6 +39,7 @@
             android:ems="10"
             android:hint="@string/display_name"
             android:inputType="text"
+            android:focusable="false"
             android:textColor="#FFFFFF"
             app:layout_constraintBottom_toTopOf="@id/display_health_text"
             tools:ignore="MissingConstraints" />
@@ -52,6 +53,7 @@
             android:hint="@string/health_display"
             android:inputType="text"
             android:text="@string/health_display"
+            android:focusable="false"
             android:textColor="#FFFFFF"
             app:layout_constraintBottom_toBottomOf="parent"
             tools:ignore="MissingConstraints"
@@ -65,6 +67,7 @@
             android:inputType="text"
             android:text="@string/score_display"
             android:textColor="#FFFFFF"
+            android:focusable="false"
             app:layout_constraintBottom_toTopOf="@+id/display_player_name_text"
             app:layout_constraintStart_toEndOf="@+id/score_text_word"
             tools:ignore="MissingConstraints" />
@@ -77,6 +80,7 @@
             android:inputType="text"
             android:text="@string/score"
             android:textColor="#FFFFFF"
+            android:focusable="false"
             app:layout_constraintBottom_toTopOf="@+id/display_player_name_text"
             tools:ignore="MissingConstraints" />
 
@@ -88,6 +92,15 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             tools:ignore="MissingConstraints"/>
+
+        <ImageView
+            android:id="@+id/sprite"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:contentDescription="@string/sprite"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            tools:ignore="MissingConstraints" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>

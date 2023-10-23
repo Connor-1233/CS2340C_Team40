@@ -73,15 +73,19 @@ public class Room2 extends Activity {
         String displayHealthString = "Health: " + player.getHealth();
         displayHealth.setText(displayHealthString);
         scoreTimerText.setText(String.valueOf(player.getScore()));
-
         ImageView spriteImageView = findViewById(R.id.spriteImageView);
+
+        player.setSprite((ImageView) findViewById(R.id.sprite));
 
         if (player.getSpriteChoice() == 1) {
             spriteImageView.setImageResource(R.drawable.sprite1);
+            player.getSprite().setImageResource(R.drawable.sprite1);
         } else if (player.getSpriteChoice() == 2) {
             spriteImageView.setImageResource(R.drawable.sprite2);
+            player.getSprite().setImageResource(R.drawable.sprite2);
         } else {
             spriteImageView.setImageResource(R.drawable.sprite3);
+            player.getSprite().setImageResource(R.drawable.sprite3);
         }
 
         Button nextButton = findViewById(R.id.NextRoom2);
@@ -91,24 +95,25 @@ public class Room2 extends Activity {
         });
     }
 
-    @Override
-    public boolean onKeyUp(int keyCode, KeyEvent event) {
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
         switch (keyCode) {
-            case KeyEvent.KEYCODE_W:
-                player.setMoveDirection(new MoveVertical(-1));
-                return true;
-            case KeyEvent.KEYCODE_S:
-                player.setMoveDirection(new MoveVertical(1));
-                return true;
-            case KeyEvent.KEYCODE_A:
-                player.setMoveDirection(new MoveHorizontal(-1));
-                return true;
-            case KeyEvent.KEYCODE_D:
-                player.setMoveDirection(new MoveHorizontal(1));
-                return true;
-            default:
-                return super.onKeyUp(keyCode, event);
+        case KeyEvent.KEYCODE_W:
+            player.setMoveDirection(new MoveVertical(-1));
+            break;
+        case KeyEvent.KEYCODE_S:
+            player.setMoveDirection(new MoveVertical(1));
+            break;
+        case KeyEvent.KEYCODE_A:
+            player.setMoveDirection(new MoveHorizontal(-1));
+            break;
+        case KeyEvent.KEYCODE_D:
+            player.setMoveDirection(new MoveHorizontal(1));
+            break;
+        default:
+            return super.onKeyDown(keyCode, event);
         }
+        player.update();
+        return true;
     }
     /* Touch Controls
     @Override

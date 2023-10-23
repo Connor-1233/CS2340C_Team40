@@ -1,5 +1,7 @@
 package com.example.cs2340c_team40.Model;
 
+import android.widget.ImageView;
+
 public class Player implements Subscriber {
 
     private String name;
@@ -11,6 +13,7 @@ public class Player implements Subscriber {
     private int y;
     private boolean moving;
     private PlayerDirection playerDirection;
+    private ImageView sprite;
 
 
     private static Player player;
@@ -34,11 +37,14 @@ public class Player implements Subscriber {
     }
 
     public void update() {
-        if (moving) {
-            playerDirection.movePlayer();
-            moving = false;
-            //draw(player)
+//        if (moving) {
+        playerDirection.movePlayer();
+//        moving = false;
+        if (x >= 5 || y >= 500) {
+            sprite.setX(x);
+            sprite.setY(y);
         }
+//        }
     }
     //When button is pressed, set the player direction, then move the player(playerDirection.move()
     public void setMoveDirection(PlayerDirection dir) {
@@ -66,9 +72,13 @@ public class Player implements Subscriber {
     public void setY(int y) {
         this.y = y;
     }
+    public void setSprite(ImageView sprite) {
+        this.sprite = sprite;
+    }
     public void setMoving(boolean moving) {
         this.moving = moving;
     }
+
     public int getScore() {
         return score;
     }
@@ -90,4 +100,8 @@ public class Player implements Subscriber {
     public int getY() {
         return y;
     }
+    public ImageView getSprite() {
+        return sprite;
+    }
+
 }

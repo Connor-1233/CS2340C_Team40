@@ -3,6 +3,7 @@ package com.example.cs2340c_team40.View;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Handler;
 import android.view.KeyEvent;
 import android.widget.Button;
 import android.widget.EditText;
@@ -27,6 +28,7 @@ public class MapStartScreen extends Activity {
     private int counter;
     private Player player = Player.getInstance();
     private Room room;
+//    private Handler movementHandler = new Handler();
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,23 +56,26 @@ public class MapStartScreen extends Activity {
         entities.add(player);
 
         // i update start location to top door
-        GameScreenViewModel.initializePlayer(11,15, room, entities);
+        GameScreenViewModel.initializePlayer(200,15, room, entities);
 
 
+        player.setSprite((ImageView) findViewById(R.id.sprite));
         EditText displayName = findViewById(R.id.display_player_name_text);
         EditText displayHealth = findViewById(R.id.display_health_text);
         displayName.setText(player.getName());
         String displayHealthString = "Health: " + player.getHealth();
         displayHealth.setText(displayHealthString);
-
         ImageView spriteImageView = findViewById(R.id.spriteImageView);
 
         if (player.getSpriteChoice() == 1) {
             spriteImageView.setImageResource(R.drawable.sprite1);
+            player.getSprite().setImageResource(R.drawable.sprite1);
         } else if (player.getSpriteChoice() == 2) {
             spriteImageView.setImageResource(R.drawable.sprite2);
+            player.getSprite().setImageResource(R.drawable.sprite2);
         } else {
             spriteImageView.setImageResource(R.drawable.sprite3);
+            player.getSprite().setImageResource(R.drawable.sprite3);
         }
 
         TextView scoreTimerText = findViewById(R.id.score_text);
@@ -100,31 +105,24 @@ public class MapStartScreen extends Activity {
     }
 
     @Override
-    public boolean onKeyUp(int keyCode, KeyEvent event) {
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
         switch (keyCode) {
-            case KeyEvent.KEYCODE_W:
-                player.setMoveDirection(new MoveVertical(-1));
-                return true;
-            case KeyEvent.KEYCODE_S:
-                player.setMoveDirection(new MoveVertical(1));
-                return true;
-            case KeyEvent.KEYCODE_A:
-                player.setMoveDirection(new MoveHorizontal(-1));
-                return true;
-            case KeyEvent.KEYCODE_D:
-                player.setMoveDirection(new MoveHorizontal(1));
-                return true;
-            default:
-                return super.onKeyUp(keyCode, event);
+        case KeyEvent.KEYCODE_W:
+            player.setMoveDirection(new MoveVertical(-1));
+            break;
+        case KeyEvent.KEYCODE_S:
+            player.setMoveDirection(new MoveVertical(1));
+            break;
+        case KeyEvent.KEYCODE_A:
+            player.setMoveDirection(new MoveHorizontal(-1));
+            break;
+        case KeyEvent.KEYCODE_D:
+            player.setMoveDirection(new MoveHorizontal(1));
+            break;
+        default:
+            return super.onKeyDown(keyCode, event);
         }
-    }
-    /* Touch Controls
-    @Override
-    public boolean onTouchEvent(MotionEvent e){
-        if (e.getAction() == MotionEvent.ACTION_MOVE) {
-            GameScreenViewModel.updateTouch(e.getX(), e.getY());
-        }
+        player.update();
         return true;
     }
-    */
 }

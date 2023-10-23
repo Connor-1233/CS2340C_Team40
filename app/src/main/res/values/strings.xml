@@ -22,4 +22,5 @@
     <string name="timerFinish">Temporary timer 0</string>
     <string name="score_display">30</string>
     <string name="score">Score:</string>
+    <string name="sprite">\n</string>
 </resources>

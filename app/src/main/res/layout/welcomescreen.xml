@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background = "@drawable/welcome_screen"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".View.WelcomeScreen">
     <LinearLayout
@@ -14,10 +15,13 @@
         tools:layout_editor_absoluteY="56dp">
 
         <EditText
-            android:layout_width="170dp"
+            android:layout_width="210dp"
             android:layout_height="100dp"
-            android:text="@string/intro_message"
-            />
+            android:focusable="false"
+            android:textColor="#FFFFFF"
+            android:textAllCaps="true"
+            android:textStyle="bold"
+            android:text="@string/intro_message" />
 
         <Button
             android:id="@+id/startButton"
