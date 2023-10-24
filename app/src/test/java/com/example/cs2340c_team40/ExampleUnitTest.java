@@ -5,6 +5,9 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 import com.example.cs2340c_team40.Model.Leaderboard;
+import com.example.cs2340c_team40.Model.MoveHorizontal;
+import com.example.cs2340c_team40.Model.MoveVertical;
+import com.example.cs2340c_team40.Model.Player;
 import com.example.cs2340c_team40.View.ConfigScreen;
 import com.example.cs2340c_team40.ViewModel.ConfigScreenViewModel;
 
@@ -55,6 +58,22 @@ public class ExampleUnitTest {
         public void testNameValidator_ValidName() {
             String name = "John Doe";
             assertTrue(ConfigScreenViewModel.isValidName(name));
+        }
+
+        @Test
+        public void testMoveHorizontal() {
+            Player player = Player.getInstance();
+            player.setX(5);
+            new MoveHorizontal(1).movePlayer();
+            assertEquals(player.getX(), 10);
+        }
+
+        @Test
+        public void testMoveVertical() {
+            Player player = Player.getInstance();
+            player.setY(5);
+            new MoveVertical(1).movePlayer();
+            assertEquals(player.getY(), 10);
         }
 
 }
