@@ -16,10 +16,10 @@
 
     <Button
         android:id="@+id/NextRoom2"
-        android:layout_width="100dp"
+        android:layout_width="110dp"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
-        android:text="@string/next" />
+        android:text="@string/restart" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/linearLayout"
@@ -95,9 +95,14 @@
             android:id="@+id/sprite"
             android:layout_width="20dp"
             android:layout_height="20dp"
+            android:layout_marginBottom="177dp"
             android:contentDescription="@string/sprite"
             android:focusable="true"
             android:focusableInTouchMode="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.626"
+            app:layout_constraintStart_toStartOf="parent"
             tools:ignore="MissingConstraints" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

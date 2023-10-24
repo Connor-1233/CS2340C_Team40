@@ -15,11 +15,12 @@ public class MoveVertical implements PlayerDirection {
         } else {
             result = player.getY() - 5;
         }
-//        if (0 <= result && result <= 29) {
-//            if (GameScreenViewModel.collisionCheck(result, player.getY()) == 0) {
-                player.setY(result);
-                player.setMoving(true);
-//            }
-//        }
+        //  if (0 <= result && result <= 29) {
+        //  if (GameScreenViewModel.collisionCheck(result, player.getY()) == 0) {
+        //  if (GameScreenViewModel.collisionCheck(player.getX() / player.getPixelWidth(), result / player.getPixelHeight()) == 0) {
+        player.setY(result);
+        player.setMoving(true);
+        //  }
+        //  }
     }
 }

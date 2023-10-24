@@ -2,6 +2,8 @@ package com.example.cs2340c_team40.Model;
 
 import android.widget.ImageView;
 
+import java.lang.reflect.Array;
+
 public class Player implements Subscriber {
 
     private String name;
@@ -14,6 +16,10 @@ public class Player implements Subscriber {
     private boolean moving;
     private PlayerDirection playerDirection;
     private ImageView sprite;
+    private int pixelHeight;
+    private int pixelWidth;
+    private int arrayX;
+    private int arrayY;
 
 
     private static Player player;
@@ -40,10 +46,8 @@ public class Player implements Subscriber {
 //        if (moving) {
         playerDirection.movePlayer();
 //        moving = false;
-        if (x >= 5 || y >= 500) {
-            sprite.setX(x);
-            sprite.setY(y);
-        }
+        sprite.setX(x);
+        sprite.setY(y);
 //        }
     }
     //When button is pressed, set the player direction, then move the player(playerDirection.move()
@@ -78,6 +82,14 @@ public class Player implements Subscriber {
     public void setMoving(boolean moving) {
         this.moving = moving;
     }
+    public void setPixelHeight(int pixelHeight) {this.pixelHeight = pixelHeight;}
+    public void setPixelWidth(int pixelWidth) {this.pixelWidth = pixelWidth;}
+    public void setArrayX(int arrayX) {
+        this.arrayX = arrayX;
+    }
+    public void setArrayY(int arrayY) {
+        this.arrayY = arrayY;
+    }
 
     public int getScore() {
         return score;
@@ -102,6 +114,20 @@ public class Player implements Subscriber {
     }
     public ImageView getSprite() {
         return sprite;
+    }
+    public int getArrayX() {
+        return arrayX;
+    }
+    public int getArrayY() {
+        return arrayY;
+    }
+
+    public int getPixelHeight() {
+        return pixelHeight;
+    }
+
+    public int getPixelWidth() {
+        return pixelWidth;
     }
 
 }

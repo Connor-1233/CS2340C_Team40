@@ -3,8 +3,8 @@ package com.example.cs2340c_team40.View;
 import android.content.Intent;
 import android.os.Bundle;
 import android.app.Activity;
+import android.util.Log;
 import android.view.KeyEvent;
-import android.view.MotionEvent;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -62,9 +62,9 @@ public class Room2 extends Activity {
         ArrayList<Subscriber> entities = new ArrayList<Subscriber>();
         entities.add(player);
 
-        //change
-        GameScreenViewModel.initializePlayer(6,12, room, entities);
+        GameScreenViewModel.initializePlayer(640, 1415, room, entities);
 
+        //        IterateView.checkA(room, player, this.getApplicationContext(), 2);
         EditText displayName = findViewById(R.id.display_player_name_text);
         EditText displayHealth = findViewById(R.id.display_health_text);
         TextView scoreTimerText = findViewById(R.id.score_text);
@@ -88,40 +88,75 @@ public class Room2 extends Activity {
             player.getSprite().setImageResource(R.drawable.sprite3);
         }
 
-        Button nextButton = findViewById(R.id.NextRoom2);
-        nextButton.setOnClickListener(v -> {
-            Intent goRoom3 = new Intent(this, Room3.class);
+        Button restart = findViewById(R.id.NextRoom2);
+        restart.setOnClickListener(v -> {
+            Intent goRoom3 = new Intent(this, WelcomeScreen.class);
             startActivity(goRoom3);
         });
     }
 
     public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+        int newX = player.getX();
+        int newY = player.getY();
+
         switch (keyCode) {
         case KeyEvent.KEYCODE_W:
-            player.setMoveDirection(new MoveVertical(-1));
+            newY = newY - 5;
             break;
         case KeyEvent.KEYCODE_S:
-            player.setMoveDirection(new MoveVertical(1));
+            newY = newY + 5;
             break;
         case KeyEvent.KEYCODE_A:
-            player.setMoveDirection(new MoveHorizontal(-1));
+            newX = newX - 5;
             break;
         case KeyEvent.KEYCODE_D:
-            player.setMoveDirection(new MoveHorizontal(1));
+            newX = newX + 5;
             break;
         default:
-            return super.onKeyDown(keyCode, event);
+            break;
         }
-        player.update();
+        boolean shouldMove = false;
+
+        if (newY <= 1415 && newY >= 1320 && newX >= 625 && newX <= 645) { //entry way
+            shouldMove = true;
+        } else if (newY >= 1210 && newY <= 1320 && newX == 640) { //hallway
+            shouldMove = true;
+        } else if (newX >= 590 && newX <= 680 && newY <= 1210 && newY >= 975) { //room after hallway
+            shouldMove = true;
+        } else if (newX >= 650 && newX <= 680 && newY <= 975 && newY >= 860) { //passing door
+            shouldMove = true;
+        } else if (newX >= 200 && newX <= 685 && newY <= 860 && newY >= 525) { //big room
+            shouldMove = true;
+        }
+
+
+        if (shouldMove) {
+            switch (keyCode) {
+            case KeyEvent.KEYCODE_W:
+                player.setMoveDirection(new MoveVertical(-1));
+                break;
+            case KeyEvent.KEYCODE_S:
+                player.setMoveDirection(new MoveVertical(1));
+                break;
+            case KeyEvent.KEYCODE_A:
+                player.setMoveDirection(new MoveHorizontal(-1));
+                break;
+            case KeyEvent.KEYCODE_D:
+                player.setMoveDirection(new MoveHorizontal(1));
+                break;
+            default:
+                return super.onKeyDown(keyCode, event);
+            }
+        }
+
+        if (shouldMove) {
+            player.update();
+            if (player.getX() == 200 && player.getY() <= 715 && player.getY() >= 700) {
+                Intent intent = new Intent(this, Room3.class);
+                this.startActivity(intent);
+            }
+        }
         return true;
     }
-    /* Touch Controls
-    @Override
-    public boolean onTouchEvent(MotionEvent e){
-        if (e.getAction() == MotionEvent.ACTION_MOVE) {
-            GameScreenViewModel.updateTouch(e.getX(), e.getY());
-        }
-        return true;
-    }
-    */
 }
