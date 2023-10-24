@@ -3,14 +3,12 @@ package com.example.cs2340c_team40.View;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.os.Handler;
 import android.view.KeyEvent;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.app.Activity;
-import android.view.MotionEvent;
 
 
 import com.example.cs2340c_team40.Model.Player;
@@ -27,13 +25,11 @@ import java.util.ArrayList;
 public class MapStartScreen extends Activity {
     private int counter;
     private Player player = Player.getInstance();
-    private Room room;
-//    private Handler movementHandler = new Handler();
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.room1);
-        room = new Room(); //Need to fill room array
+        Room room = new Room(); //Need to fill room array
 
         //initiializing array for 30x30 grid
         for (int x = 0; x <= 29; x++) {
@@ -41,6 +37,10 @@ public class MapStartScreen extends Activity {
                 room.addObject(x, y, 0);
             }
         }
+
+        //Ground is 0
+        //Walls are 1
+        //Doors are 2
 
         for (int x = 10; x <= 20; x++) {
             room.addObject(x, 12, 1);
@@ -56,7 +56,8 @@ public class MapStartScreen extends Activity {
         entities.add(player);
 
         // i update start location to top door
-        GameScreenViewModel.initializePlayer(200,15, room, entities);
+        GameScreenViewModel.initializePlayer(530, 1000, room, entities);
+
 
 
         player.setSprite((ImageView) findViewById(R.id.sprite));
@@ -97,32 +98,65 @@ public class MapStartScreen extends Activity {
             startActivity(goEndScreen);
         });
 
-        Button nextButton = findViewById(R.id.NextRoom1);
-        nextButton.setOnClickListener(v -> {
-            Intent goRoom2 = new Intent(this, Room2.class);
+        Button restart = findViewById(R.id.NextRoom1);
+        restart.setOnClickListener(v -> {
+            Intent goRoom2 = new Intent(this, WelcomeScreen.class);
             startActivity(goRoom2);
         });
     }
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+        int newX = player.getX();
+        int newY = player.getY();
+
         switch (keyCode) {
         case KeyEvent.KEYCODE_W:
-            player.setMoveDirection(new MoveVertical(-1));
+            newY = newY - 5;
             break;
         case KeyEvent.KEYCODE_S:
-            player.setMoveDirection(new MoveVertical(1));
+            newY = newY + 5;
             break;
         case KeyEvent.KEYCODE_A:
-            player.setMoveDirection(new MoveHorizontal(-1));
+            newX = newX - 5;
             break;
         case KeyEvent.KEYCODE_D:
-            player.setMoveDirection(new MoveHorizontal(1));
+            newX = newX + 5;
             break;
         default:
-            return super.onKeyDown(keyCode, event);
+            break;
         }
-        player.update();
+
+        boolean shouldMove = newY <= 1000 && newY >= 605
+                && newX >= 380 && newX <= 685;
+
+        if (shouldMove) {
+            switch (keyCode) {
+            case KeyEvent.KEYCODE_W:
+                player.setMoveDirection(new MoveVertical(-1));
+                break;
+            case KeyEvent.KEYCODE_S:
+                player.setMoveDirection(new MoveVertical(1));
+                break;
+            case KeyEvent.KEYCODE_A:
+                player.setMoveDirection(new MoveHorizontal(-1));
+                break;
+            case KeyEvent.KEYCODE_D:
+                player.setMoveDirection(new MoveHorizontal(1));
+                break;
+            default:
+                return super.onKeyDown(keyCode, event);
+            }
+        }
+
+        if (shouldMove) {
+            player.update();
+            if (player.getX() == 530 && player.getY() == 605) {
+                Intent intent = new Intent(this, Room2.class);
+                this.startActivity(intent);
+            }
+        }
         return true;
     }
 }

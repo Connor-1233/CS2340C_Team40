@@ -1,9 +1,5 @@
 package com.example.cs2340c_team40.ViewModel;
 
-
-import android.view.KeyEvent;
-import android.widget.ImageView;
-
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -18,7 +14,8 @@ public class GameScreenViewModel {
     private static Player player = Player.getInstance();
     private static ArrayList<Subscriber> subscribers;
 
-    public static void initializePlayer(int x, int y, Room currRoom, ArrayList<Subscriber> entities) {
+    public static void initializePlayer(int x, int y, Room currRoom,
+                                        ArrayList<Subscriber> entities) {
         player.setHealth(calculateHealth(player.getDifficulty()));
         player.setX(x);
         player.setY(y);
@@ -53,52 +50,4 @@ public class GameScreenViewModel {
     public static int collisionCheck(int playerX, int playerY) {
         return room.checkLocation(playerX, playerY);
     }
-
-//    public boolean onKeyDown(int keyCode, KeyEvent event) {
-//        switch (keyCode) {
-//        case KeyEvent.KEYCODE_W: //moves player up
-//            player.setPlayerDirIndex(1);
-//            break;
-//        case KeyEvent.KEYCODE_A: //moves player left
-//            player.setPlayerDirIndex(-1);
-//            break;
-//        case KeyEvent.KEYCODE_S: //moves player down
-//            player.setPlayerDirIndex(-1);
-//            break;
-//        case KeyEvent.KEYCODE_D: //moves player right
-//            player.setPlayerDirIndex(1);
-//            break;
-//        default:
-//            player.setX(player.getX());
-//            player.setY(player.getY());
-//        }
-//        return true;
-//    }
-
-    /* Touch Controls
-    public static void updateTouch(float xx, float yy) {
-        float dx = xx - player.getX();
-        float dy = yy - player.getY();
-    }
-    public static void updateLocation() {
-        int movex = 0;
-        int movey = 0;
-        if (dx < 0) {
-            dx++;
-            movex = 1;
-        } else if (dx > 0) {
-            dx--;
-            movex = -1;
-        }
-        if (dy < 0) {
-            dy++;
-            movey = 1;
-        } else if (dy > 0) {
-            dy--;
-            movey = -1;
-        }
-        player.setY(player.getY() + movey);
-        player.setX(player.getX() + movex);
-    }
-    */
 }

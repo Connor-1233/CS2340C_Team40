@@ -23,4 +23,6 @@
     <string name="score_display">30</string>
     <string name="score">Score:</string>
     <string name="sprite">\n</string>
+    <string name="end">End</string>
+    <string name="restart">Restart</string>
 </resources>
