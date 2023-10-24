@@ -1,7 +1,5 @@
 package com.example.cs2340c_team40.Model;
 
-import com.example.cs2340c_team40.ViewModel.GameScreenViewModel;
-
 public class MoveVertical implements PlayerDirection {
     private Player player = Player.getInstance();
     private int result;
@@ -17,7 +15,8 @@ public class MoveVertical implements PlayerDirection {
         }
         //  if (0 <= result && result <= 29) {
         //  if (GameScreenViewModel.collisionCheck(result, player.getY()) == 0) {
-        //  if (GameScreenViewModel.collisionCheck(player.getX() / player.getPixelWidth(), result / player.getPixelHeight()) == 0) {
+        //  if (GameScreenViewModel.collisionCheck(player.getX() / player.getPixelWidth(),
+        //  result / player.getPixelHeight()) == 0) {
         player.setY(result);
         player.setMoving(true);
         //  }

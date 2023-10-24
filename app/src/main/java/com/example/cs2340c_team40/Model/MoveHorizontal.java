@@ -1,6 +1,5 @@
 package com.example.cs2340c_team40.Model;
 
-import com.example.cs2340c_team40.ViewModel.GameScreenViewModel;
 
 public class MoveHorizontal implements PlayerDirection {
     private Player player = Player.getInstance();
@@ -17,7 +16,8 @@ public class MoveHorizontal implements PlayerDirection {
         }
         //  if (0 <= result && result <= 29) {
         //  if (GameScreenViewModel.collisionCheck(result, player.getX()) == 0) {
-        //  if (GameScreenViewModel.collisionCheck(result / player.getPixelWidth(), player.getY() / player.getPixelHeight()) == 0) {
+        //  if (GameScreenViewModel.collisionCheck(result / player.getPixelWidth(),
+        //  player.getY() / player.getPixelHeight()) == 0) {
         player.setX(result);
         player.setMoving(true);
         //  }

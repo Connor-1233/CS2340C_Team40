@@ -2,8 +2,6 @@ package com.example.cs2340c_team40.Model;
 
 import android.widget.ImageView;
 
-import java.lang.reflect.Array;
-
 public class Player implements Subscriber {
 
     private String name;
@@ -43,12 +41,9 @@ public class Player implements Subscriber {
     }
 
     public void update() {
-//        if (moving) {
         playerDirection.movePlayer();
-//        moving = false;
         sprite.setX(x);
         sprite.setY(y);
-//        }
     }
     //When button is pressed, set the player direction, then move the player(playerDirection.move()
     public void setMoveDirection(PlayerDirection dir) {
@@ -82,8 +77,12 @@ public class Player implements Subscriber {
     public void setMoving(boolean moving) {
         this.moving = moving;
     }
-    public void setPixelHeight(int pixelHeight) {this.pixelHeight = pixelHeight;}
-    public void setPixelWidth(int pixelWidth) {this.pixelWidth = pixelWidth;}
+    public void setPixelHeight(int pixelHeight) {
+        this.pixelHeight = pixelHeight;
+    }
+    public void setPixelWidth(int pixelWidth) {
+        this.pixelWidth = pixelWidth;
+    }
     public void setArrayX(int arrayX) {
         this.arrayX = arrayX;
     }

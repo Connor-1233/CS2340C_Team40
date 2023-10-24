@@ -1,11 +1,9 @@
 package com.example.cs2340c_team40.View;
 import android.content.Context;
 import android.content.Intent;
-import android.app.Activity;
 
 import com.example.cs2340c_team40.Model.Player;
 import com.example.cs2340c_team40.Model.Room;
-import com.example.cs2340c_team40.Model.Subscriber;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -21,21 +19,24 @@ public class IterateView {
                     @Override
                     public void run() {
                         if (roomNum == 1) {
-                            if (room.checkLocation(player.getX() / player.getPixelWidth(), player.getY() / player.getPixelHeight()) == 2) {
+                            if (room.checkLocation(player.getX() / player.getPixelWidth(),
+                                    player.getY() / player.getPixelHeight()) == 2) {
                                 Intent intent = new Intent(context, Room2.class);
                                 context.startActivity(intent);
                             }
                         }
 
                         if (roomNum == 2) {
-                            if (room.checkLocation(player.getX() / player.getPixelWidth(), player.getY() / player.getPixelHeight()) == 2) {
+                            if (room.checkLocation(player.getX() / player.getPixelWidth(),
+                                    player.getY() / player.getPixelHeight()) == 2) {
                                 Intent intent = new Intent(context, Room3.class);
                                 context.startActivity(intent);
                             }
                         }
 
                         if (roomNum == 3) {
-                            if (room.checkLocation(player.getX() / player.getPixelWidth(), player.getY() / player.getPixelHeight()) == 2) {
+                            if (room.checkLocation(player.getX() / player.getPixelWidth(),
+                                    player.getY() / player.getPixelHeight()) == 2) {
                                 Intent intent = new Intent(context, EndingScreen.class);
                                 context.startActivity(intent);
                             }
