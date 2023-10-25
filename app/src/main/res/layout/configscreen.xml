@@ -6,8 +6,18 @@
     tools:context=".View.ConfigScreen"
     android:orientation="vertical">
 
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:focusable="false"
+        android:inputType="none"
+        android:textAllCaps="true"
+        android:textStyle="bold"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/choose_difficulty" />
+
     <RadioGroup
-        android:id = "@+id/RadioGroupDifficulty"
+        android:id="@+id/RadioGroupDifficulty"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -16,6 +26,7 @@
             android:id="@+id/radio_easy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:onClick="onRadioButtonClicked"
             android:text="@string/easy" />
 
@@ -23,6 +34,7 @@
             android:id="@+id/radio_medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:onClick="onRadioButtonClicked"
             android:text="@string/medium" />
 
@@ -30,10 +42,21 @@
             android:id="@+id/radio_hard"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:onClick="onRadioButtonClicked"
             android:text="@string/Hard" />
 
     </RadioGroup>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:focusable="false"
+        android:inputType="none"
+        android:textAllCaps="true"
+        android:textStyle="bold"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/choose_your_sprite" />
 
     <RadioGroup
         android:id="@+id/CostumeChoice"
@@ -45,30 +68,69 @@
             android:id="@+id/radio_costume_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:onClick="onRadioButtonClicked"
-            android:text="@string/sprite_1" />
+            android:text="@string/sprite_1"/>
 
         <RadioButton
             android:id="@+id/radio_costume_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:onClick="onRadioButtonClicked"
-            android:text="@string/sprite_2" />
+            android:text="@string/sprite_2"/>
 
         <RadioButton
             android:id="@+id/radio_costume_3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:onClick="onRadioButtonClicked"
-            android:text="@string/sprite_3" />
+            android:text="@string/sprite_3"/>
 
     </RadioGroup>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/sprite_one"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:contentDescription="@string/sprite_image_description"
+            android:src="@drawable/sprite1"
+            tools:ignore="MissingConstraints" />
+
+        <ImageView
+            android:id="@+id/sprite_two"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:contentDescription="@string/sprite_image_description"
+            android:src="@drawable/sprite2"
+            tools:ignore="MissingConstraints" />
+
+        <ImageView
+            android:id="@+id/sprite_three"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:contentDescription="@string/sprite_image_description"
+            android:src="@drawable/sprite3"
+            tools:ignore="MissingConstraints" />
+
+    </LinearLayout>
 
     <EditText
         android:id="@+id/username"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="text"
+        android:layout_marginTop="20dp"
         android:hint="@string/enter_your_username"/>
 
     <LinearLayout
@@ -89,4 +151,5 @@
             android:layout_height="wrap_content"
             android:text="@string/exit_game" />
     </LinearLayout>
+
 </LinearLayout>

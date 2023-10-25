@@ -25,4 +25,6 @@
     <string name="sprite">\n</string>
     <string name="end">End</string>
     <string name="restart">Restart</string>
+    <string name="choose_difficulty">Choose Your Difficulty</string>
+    <string name="choose_your_sprite">Choose your sprite</string>
 </resources>
