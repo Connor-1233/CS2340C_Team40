@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="sprite_one" type="id" />
+    <item name="sprite_two" type="id" />
+    <item name="sprite_three" type="id" />
+</resources>

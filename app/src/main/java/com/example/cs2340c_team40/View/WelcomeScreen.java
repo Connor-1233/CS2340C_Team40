@@ -17,11 +17,8 @@ public class WelcomeScreen extends Activity {
         Button startButton = findViewById(R.id.startButton);
         Button exitButton = findViewById(R.id.exitButton);
 
-        startButton.setOnClickListener(v -> startGame()); //this method must change
+        startButton.setOnClickListener(v -> startGame());
         exitButton.setOnClickListener(v -> finish());
-        //WelcomeScreenViewModel viewModel = new WelcomeScreenViewModel();
-        //viewModel.getStartButton().setOnClickListener(v -> viewModel.startGame());
-        //viewModel.getExitButton().setOnClickListener(v -> finish());
     }
 
     /** This method "changes activity" to the config screen.
