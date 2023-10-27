@@ -27,4 +27,6 @@
     <string name="restart">Restart</string>
     <string name="choose_difficulty">Choose Your Difficulty</string>
     <string name="choose_your_sprite">Choose your sprite</string>
+    <string name="you_won">You Won!</string>
+    <string name="you_lose">You Lose!</string>
 </resources>
