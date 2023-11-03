@@ -23,4 +23,9 @@ public class MoveHorizontal implements PlayerDirection {
         //  }
         //  }
     }
+
+    public void moveEnemy() {
+        // result = enemy.getX() + enemy.getMoveVertical();
+        // result = enemy.getX() - enemy.getMoveVertical();
+    }
 }
