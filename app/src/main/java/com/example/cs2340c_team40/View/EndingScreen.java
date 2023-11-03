@@ -3,6 +3,7 @@ package com.example.cs2340c_team40.View;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -10,6 +11,7 @@ import com.example.cs2340c_team40.Model.Leaderboard;
 import com.example.cs2340c_team40.Model.Player;
 //import com.example.cs2340c_team40.Model.Score;
 import com.example.cs2340c_team40.R;
+import com.example.cs2340c_team40.ViewModel.GameScreenViewModel;
 
 public class EndingScreen extends Activity {
 
@@ -39,6 +41,7 @@ public class EndingScreen extends Activity {
         scoreDateOne.setText((leaderboard.getScore(0) != null)
                                 ? leaderboard.getScore(0).getTime()
                                 : "More Attempts Needed");
+
         // Rank 2
         TextView scoreNameTwo = findViewById(R.id.score_name_2);
         scoreNameTwo.setText((leaderboard.getScore(1) != null)
@@ -52,6 +55,7 @@ public class EndingScreen extends Activity {
         scoreDateTwo.setText((leaderboard.getScore(1) != null)
                 ? leaderboard.getScore(1).getTime()
                 : "More Attempts Needed");
+
         // Rank 3
         TextView scoreNameThree = findViewById(R.id.score_name_3);
         scoreNameThree.setText((leaderboard.getScore(2) != null)
@@ -65,6 +69,7 @@ public class EndingScreen extends Activity {
         scoreDateThree.setText((leaderboard.getScore(2) != null)
                 ? leaderboard.getScore(2).getTime()
                 : "More Attempts Needed");
+
         // Rank 4
         TextView scoreNameFour = findViewById(R.id.score_name_4);
         scoreNameFour.setText((leaderboard.getScore(3) != null)
@@ -78,6 +83,7 @@ public class EndingScreen extends Activity {
         scoreDateFour.setText((leaderboard.getScore(3) != null)
                 ? leaderboard.getScore(3).getTime()
                 : "More Attempts Needed");
+
         // Rank 5
         TextView scoreNameFive = findViewById(R.id.score_name_5);
         scoreNameFive.setText((leaderboard.getScore(4) != null)
@@ -96,6 +102,24 @@ public class EndingScreen extends Activity {
     private void restartGame() {
         Intent restartGame = new Intent(this, WelcomeScreen.class);
         startActivity(restartGame);
+    }
+
+    /**
+     * Public method that determines which ending screen is displayed,
+     * based on whether the player has died or not.
+     *
+     * Default @+id/win_lable is visible and only becomes invisible when
+     * player has died. If player dies, then @+id/lose_lable becomes visible.
+     */
+    public void setVisibilityEndingScreen() {
+        if (GameScreenViewModel.isPlayerDead()) { //Player has died so change visibilities
+            TextView winLable = findViewById(R.id.win_lable);
+            TextView loseLable = findViewById(R.id.lose_lable);
+
+            winLable.setVisibility(View.INVISIBLE);
+            loseLable.setVisibility(View.VISIBLE);
+        }
+        //Do Nothing because player isn't dead
     }
 
 }

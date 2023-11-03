@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/welcome_screen"
     tools:context=".View.EndingScreen"
     android:orientation="vertical">
 
@@ -24,21 +25,25 @@
             <TextView
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
+                android:textColor="#FFFFFF"
                 android:text="1."/>
             <TextView
                 android:id="@+id/score_name_1"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
+                android:textColor="#FFFFFF"
                 android:text="Hi"/>
             <TextView
                 android:id="@+id/score_score_1"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
+                android:textColor="#FFFFFF"
                 android:text="Hi"/>
             <TextView
                 android:id="@+id/score_date_1"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
+                android:textColor="#FFFFFF"
                 android:text="Hi"/>
 
         </LinearLayout>
@@ -49,21 +54,25 @@
             <TextView
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
+                android:textColor="#FFFFFF"
                 android:text="2."/>
             <TextView
                 android:id="@+id/score_name_2"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
+                android:textColor="#FFFFFF"
                 android:text="Hi"/>
             <TextView
                 android:id="@+id/score_score_2"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
+                android:textColor="#FFFFFF"
                 android:text="Hi"/>
             <TextView
                 android:id="@+id/score_date_2"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
+                android:textColor="#FFFFFF"
                 android:text="Hi"/>
         </LinearLayout>
         <LinearLayout
@@ -73,21 +82,25 @@
             <TextView
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
+                android:textColor="#FFFFFF"
                 android:text="3."/>
             <TextView
                 android:id="@+id/score_name_3"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
+                android:textColor="#FFFFFF"
                 android:text="Hi"/>
             <TextView
                 android:id="@+id/score_score_3"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
+                android:textColor="#FFFFFF"
                 android:text="Hi"/>
             <TextView
                 android:id="@+id/score_date_3"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
+                android:textColor="#FFFFFF"
                 android:text="Hi"/>
         </LinearLayout>
         <LinearLayout
@@ -97,21 +110,25 @@
             <TextView
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
+                android:textColor="#FFFFFF"
                 android:text="4."/>
             <TextView
                 android:id="@+id/score_name_4"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
+                android:textColor="#FFFFFF"
                 android:text="Hi"/>
             <TextView
                 android:id="@+id/score_score_4"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
+                android:textColor="#FFFFFF"
                 android:text="Hi"/>
             <TextView
                 android:id="@+id/score_date_4"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
+                android:textColor="#FFFFFF"
                 android:text="Hi"/>
         </LinearLayout>
         <LinearLayout
@@ -121,21 +138,25 @@
             <TextView
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
+                android:textColor="#FFFFFF"
                 android:text="5."/>
             <TextView
                 android:id="@+id/score_name_5"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
+                android:textColor="#FFFFFF"
                 android:text="Hi"/>
             <TextView
                 android:id="@+id/score_score_5"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
+                android:textColor="#FFFFFF"
                 android:text="Hi"/>
             <TextView
                 android:id="@+id/score_date_5"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
+                android:textColor="#FFFFFF"
                 android:text="Hi"/>
         </LinearLayout>
     </LinearLayout>
@@ -162,6 +183,7 @@
             android:layout_marginEnd="86dp"
             android:layout_marginBottom="62dp"
             android:rating="5"
+            android:focusable="false"
             app:layout_constraintBottom_toTopOf="@+id/restart_game_btn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -170,15 +192,40 @@
             app:layout_constraintVertical_bias="0.0" />
 
         <TextView
-            android:id="@+id/textView2"
-            android:layout_width="117dp"
-            android:layout_height="26dp"
+            android:id="@+id/win_lable"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="147dp"
-            android:layout_marginTop="365dp"
+            android:layout_marginTop="150dp"
             android:layout_marginEnd="147dp"
             android:layout_marginBottom="7dp"
             android:gravity="center"
-            android:text="You Won!"
+            android:textColor="#FFFFFF"
+            android:text="@string/you_won"
+            android:textAllCaps="true"
+            android:textStyle="bold"
+            android:textSize="60sp"
+            android:visibility="visible"
+            app:layout_constraintBottom_toTopOf="@+id/ratingBar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/lose_lable"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="147dp"
+            android:layout_marginTop="150dp"
+            android:layout_marginEnd="147dp"
+            android:layout_marginBottom="7dp"
+            android:gravity="center"
+            android:textColor="#FFFFFF"
+            android:text="@string/you_lose"
+            android:textAllCaps="true"
+            android:textStyle="bold"
+            android:textSize="60sp"
+            android:visibility="invisible"
             app:layout_constraintBottom_toTopOf="@+id/ratingBar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
