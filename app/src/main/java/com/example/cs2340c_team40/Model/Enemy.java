@@ -2,9 +2,7 @@ package com.example.cs2340c_team40.Model;
 
 import android.widget.ImageView;
 
-public abstract class Enemy {
-    private int moveHorizontal;
-    private int moveVertical;
+public abstract class Enemy implements Subscriber {
     private int spriteSize;
     private int health;
     private int x;
@@ -15,12 +13,9 @@ public abstract class Enemy {
     private int pixelHeight;
     private int pixelWidth;
 
-    protected Enemy() {
-        moving = false;
-    }
 
     public void update() {
-        enemyDirection.moveEnemy();
+        enemyDirection.movePlayer();
         sprite.setX(x);
         sprite.setY(y);
     }
@@ -35,21 +30,6 @@ public abstract class Enemy {
         this.health = health;
     }
 
-    public int getMoveHorizontal() {
-        return moveHorizontal;
-    }
-
-    public void setMoveHorizontal(int moveHorizontal) {
-        this.moveHorizontal = moveHorizontal;
-    }
-
-    public int getMoveVertical() {
-        return moveVertical;
-    }
-
-    public void setMoveVertical(int moveVertical) {
-        this.moveVertical = moveVertical;
-    }
 
     public int getSpriteSize() {
         return spriteSize;
@@ -58,4 +38,20 @@ public abstract class Enemy {
     public void setSpriteSize(int spriteSize) {
         this.spriteSize = spriteSize;
     }
+    public void setMoveDirection(PlayerDirection dir) {
+        enemyDirection = dir;
+    }
+    public void setX(int x) {
+        this.x = x;
+    }
+    public void setY(int y) {
+        this.y = y;
+    }
+    public int getX() {
+        return x;
+    }
+    public int getY() {
+        return y;
+    }
+
 }

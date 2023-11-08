@@ -3,6 +3,7 @@ package com.example.cs2340c_team40.View;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,7 +12,11 @@ import android.widget.TextView;
 import android.app.Activity;
 
 
+import com.example.cs2340c_team40.Model.Enemy;
+import com.example.cs2340c_team40.Model.EnemyFactory;
+import com.example.cs2340c_team40.Model.MovePattern;
 import com.example.cs2340c_team40.Model.Player;
+import com.example.cs2340c_team40.Model.PlayerDirection;
 import com.example.cs2340c_team40.Model.Room;
 import com.example.cs2340c_team40.Model.MoveVertical;
 import com.example.cs2340c_team40.Model.MoveHorizontal;
@@ -54,6 +59,16 @@ public class MapStartScreen extends Activity {
 
         ArrayList<Subscriber> entities = new ArrayList<Subscriber>();
         entities.add(player);
+        EnemyFactory enemyCreator = new EnemyFactory();
+        Enemy ghost = enemyCreator.createEnemy("Ghost");
+        ghost.setX(660);
+        ghost.setY(860);
+        int[] ghostArray = {0,230,0,230};
+        PlayerDirection ghostPattern = new MovePattern(ghost, ghostArray, 'd');
+        ghost.setMoveDirection(ghostPattern);
+        entities.add(ghost);
+        Enemy Knight = enemyCreator.createEnemy("Knight");
+
 
         // i update start location to top door
         GameScreenViewModel.initializePlayer(530, 1000, room, entities);
@@ -130,6 +145,8 @@ public class MapStartScreen extends Activity {
 
         boolean shouldMove = newY <= 1000 && newY >= 605
                 && newX >= 380 && newX <= 685;
+
+        Log.d("position",  "x: " + player.getX() + " y: " + player.getY());
 
         if (shouldMove) {
             switch (keyCode) {

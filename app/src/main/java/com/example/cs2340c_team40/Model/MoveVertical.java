@@ -22,10 +22,4 @@ public class MoveVertical implements PlayerDirection {
         //  }
         //  }
     }
-
-    @Override
-    public void moveEnemy() {
-        // result = enemy.getX() + enemy.getMoveHorizontal();
-        // result = enemy.getX() - enemy.getMoveHorizontal();
-    }
 }
