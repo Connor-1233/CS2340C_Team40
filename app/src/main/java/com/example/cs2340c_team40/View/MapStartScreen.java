@@ -17,7 +17,6 @@ import com.example.cs2340c_team40.Model.EnemyFactory;
 import com.example.cs2340c_team40.Model.MovePattern;
 import com.example.cs2340c_team40.Model.Player;
 import com.example.cs2340c_team40.Model.PlayerDirection;
-import com.example.cs2340c_team40.Model.Room;
 import com.example.cs2340c_team40.Model.MoveVertical;
 import com.example.cs2340c_team40.Model.MoveHorizontal;
 import com.example.cs2340c_team40.Model.Subscriber;
@@ -34,28 +33,6 @@ public class MapStartScreen extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.room1);
-        Room room = new Room(); //Need to fill room array
-
-        //initiializing array for 30x30 grid
-        for (int x = 0; x <= 29; x++) {
-            for (int y = 0; y <= 29; y++) {
-                room.addObject(x, y, 0);
-            }
-        }
-
-        //Ground is 0
-        //Walls are 1
-        //Doors are 2
-
-        for (int x = 10; x <= 20; x++) {
-            room.addObject(x, 12, 1);
-            room.addObject(x, 19, 1);
-        }
-        for (int y = 13; y <= 18; y++) {
-            room.addObject(10, y, 1);
-            room.addObject(20, y, 1);
-        }
-        room.addObject(15, 19, 2); //door, exit
 
         ArrayList<Subscriber> entities = new ArrayList<Subscriber>();
         entities.add(player);
@@ -71,7 +48,7 @@ public class MapStartScreen extends Activity {
 
 
         // i update start location to top door
-        GameScreenViewModel.initializePlayer(530, 1000, room, entities);
+        GameScreenViewModel.initializePlayer(530, 1000, entities);
 
 
 

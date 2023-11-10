@@ -10,7 +10,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.cs2340c_team40.Model.Player;
-import com.example.cs2340c_team40.Model.Room;
 import com.example.cs2340c_team40.Model.MoveVertical;
 import com.example.cs2340c_team40.Model.MoveHorizontal;
 import com.example.cs2340c_team40.Model.Subscriber;
@@ -25,43 +24,10 @@ public class Room2 extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.room2);
 
-        Room room = new Room(); //Need to fill room array
-
-        //initiializing array for 30x30 grid
-        for (int x = 0; x <= 29; x++) {
-            for (int y = 0; y <= 29; y++) {
-                room.addObject(x, y, 0);
-            }
-        }
-        for (int y = 9; y <= 15; y++) {
-            room.addObject(5, y, 1);
-        }
-        for (int x = 6; x <= 20; x++) {
-            room.addObject(x, 9, 1);
-        }
-        for (int y = 10; y <= 20; y++) {
-            room.addObject(20, y, 1);
-        }
-        for (int x = 6; x <= 16; x++) {
-            room.addObject(x, 15, 1);
-        }
-        for (int y = 16; y <= 20; y++) {
-            room.addObject(16, y, 1);
-        }
-        for (int y = 20; y <= 23; y++) {
-            room.addObject(17, y, 1);
-            room.addObject(19, y, 1);
-        }
-        room.addObject(18, 23, 1);
-
-        room.addObject(18, 23, 2); //door, exit
-
-
-
         ArrayList<Subscriber> entities = new ArrayList<Subscriber>();
         entities.add(player);
 
-        GameScreenViewModel.initializePlayer(640, 1415, room, entities);
+        GameScreenViewModel.initializePlayer(640, 1415, entities);
 
         //        IterateView.checkA(room, player, this.getApplicationContext(), 2);
         EditText displayName = findViewById(R.id.display_player_name_text);
