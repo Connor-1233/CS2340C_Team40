@@ -3,6 +3,7 @@ package com.example.cs2340c_team40.View;
 import android.content.Intent;
 import android.os.Bundle;
 import android.app.Activity;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,9 +18,12 @@ import com.example.cs2340c_team40.R;
 import com.example.cs2340c_team40.ViewModel.GameScreenViewModel;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Room2 extends Activity {
     private Player player = Player.getInstance();
+    private Timer moveTimer;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.room2);
@@ -28,6 +32,22 @@ public class Room2 extends Activity {
         entities.add(player);
 
         GameScreenViewModel.initializePlayer(640, 1415, entities);
+        moveTimer = new Timer();
+        moveTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        for (Subscriber subscriber : entities) {
+                            subscriber.update();
+                            Log.d("position",  "x: " + subscriber.getX() + " y: " + subscriber.getY());
+                        }
+                    }
+                });
+            }
+
+        }, 0, 50);
 
         //        IterateView.checkA(room, player, this.getApplicationContext(), 2);
         EditText displayName = findViewById(R.id.display_player_name_text);
@@ -56,6 +76,7 @@ public class Room2 extends Activity {
         Button restart = findViewById(R.id.NextRoom2);
         restart.setOnClickListener(v -> {
             Intent goRoom3 = new Intent(this, WelcomeScreen.class);
+            moveTimer.cancel();
             startActivity(goRoom3);
         });
     }
@@ -116,9 +137,9 @@ public class Room2 extends Activity {
         }
 
         if (shouldMove) {
-            player.update();
             if (player.getX() == 200 && player.getY() <= 715 && player.getY() >= 700) {
                 Intent intent = new Intent(this, Room3.class);
+                moveTimer.cancel();
                 this.startActivity(intent);
             }
         }

@@ -16,8 +16,8 @@ public abstract class Enemy implements Subscriber {
 
     public void update() {
         enemyDirection.movePlayer();
-        sprite.setX(x);
-        sprite.setY(y);
+        //sprite.setX(x);
+        //sprite.setY(y);
     }
 
     public abstract void createMovement();

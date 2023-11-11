@@ -33,8 +33,8 @@ public class Player implements Subscriber {
             synchronized (Player.class) {
                 if (player == null) {
                     player = new Player();
+                    player.setMoveDirection(new MoveHorizontal(0));
                 }
-
             }
         }
         return player;

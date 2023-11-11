@@ -18,9 +18,12 @@ import com.example.cs2340c_team40.R;
 import com.example.cs2340c_team40.ViewModel.GameScreenViewModel;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Room3 extends Activity {
     private Player player = Player.getInstance();
+    private Timer moveTimer;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.room3);
@@ -30,6 +33,22 @@ public class Room3 extends Activity {
 
         //have to change x and y to where door is in each map
         GameScreenViewModel.initializePlayer(460, 1550, entities);
+        moveTimer = new Timer();
+        moveTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        for (Subscriber subscriber : entities) {
+                            subscriber.update();
+                            Log.d("position",  "x: " + subscriber.getX() + " y: " + subscriber.getY());
+                        }
+                    }
+                });
+            }
+
+        }, 0, 50);
 
         EditText displayName = findViewById(R.id.display_player_name_text);
         EditText displayHealth = findViewById(R.id.display_health_text);
@@ -53,15 +72,9 @@ public class Room3 extends Activity {
             player.getSprite().setImageResource(R.drawable.sprite3);
         }
 
-        //        if (room.checkLocation(player.getX(), player.getY()) == 2) {
-        //            //if door
-        //            Intent endGame = new Intent(this, EndingScreen.class);
-        //            startActivity(endGame);
-        //        }
-
-
         Button restart = findViewById(R.id.NextRoom3);
         restart.setOnClickListener(v -> {
+            moveTimer.cancel();
             Intent endGame = new Intent(this, WelcomeScreen.class);
             startActivity(endGame);
         });
@@ -92,9 +105,9 @@ public class Room3 extends Activity {
         }
         boolean shouldMove = false;
 
-        if (newY <= 1550 && newY >= 980 && newX >= 375 && newX <= 545) { //first room
+        if (newY <= 1550 && newY >= 1050 && newX >= 375 && newX <= 545) { //first room
             shouldMove = true;
-        } else if (newY >= 925 && newY <= 980 && newX >= 400 && newX <= 525) { //hallway
+        } else if (newY >= 910 && newY <= 1050 && newX >= 400 && newX <= 520) { //hallway
             shouldMove = true;
         } else if (newX >= 265 && newX <= 645 && newY <= 925 && newY >= 325) { //bigRoom
             shouldMove = true;
@@ -103,28 +116,29 @@ public class Room3 extends Activity {
         }
 
         Log.d("position",  "x: " + player.getX() + " y: " + player.getY());
-
-        switch (keyCode) {
-        case KeyEvent.KEYCODE_W:
-            player.setMoveDirection(new MoveVertical(-1));
-            break;
-        case KeyEvent.KEYCODE_S:
-            player.setMoveDirection(new MoveVertical(1));
-            break;
-        case KeyEvent.KEYCODE_A:
-            player.setMoveDirection(new MoveHorizontal(-1));
-            break;
-        case KeyEvent.KEYCODE_D:
-            player.setMoveDirection(new MoveHorizontal(1));
-            break;
-        default:
-            return super.onKeyDown(keyCode, event);
+        if (shouldMove) {
+            switch (keyCode) {
+            case KeyEvent.KEYCODE_W:
+                player.setMoveDirection(new MoveVertical(-1));
+                break;
+            case KeyEvent.KEYCODE_S:
+                player.setMoveDirection(new MoveVertical(1));
+                break;
+            case KeyEvent.KEYCODE_A:
+                player.setMoveDirection(new MoveHorizontal(-1));
+                break;
+            case KeyEvent.KEYCODE_D:
+                player.setMoveDirection(new MoveHorizontal(1));
+                break;
+            default:
+                return super.onKeyDown(keyCode, event);
+            }
         }
 
         if (shouldMove) {
-            player.update();
             if (player.getX() == 925 && player.getY() <= 640 && player.getY() >= 595) {
                 Intent intent = new Intent(this, EndingScreen.class);
+                moveTimer.cancel();
                 this.startActivity(intent);
             }
         }

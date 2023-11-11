@@ -9,18 +9,14 @@ public class MoveHorizontal implements PlayerDirection {
         this.dir = dir;
     }
     public void movePlayer() {
-        if (dir > 0) { //move right
-            result = player.getX() + 5;
-        } else {
-            result = player.getX() - 5;
+        result = player.getX();
+        if (dir == 1) { //move right
+            result += 5;
+        } else if (dir == -1) {
+            result -= 5;
         }
-        //  if (0 <= result && result <= 29) {
-        //  if (GameScreenViewModel.collisionCheck(result, player.getX()) == 0) {
-        //  if (GameScreenViewModel.collisionCheck(result / player.getPixelWidth(),
-        //  player.getY() / player.getPixelHeight()) == 0) {
         player.setX(result);
         player.setMoving(true);
-        //  }
-        //  }
+        dir = 0;
     }
 }

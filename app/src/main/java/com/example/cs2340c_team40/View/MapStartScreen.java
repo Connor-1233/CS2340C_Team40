@@ -24,10 +24,13 @@ import com.example.cs2340c_team40.R;
 import com.example.cs2340c_team40.ViewModel.GameScreenViewModel;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class MapStartScreen extends Activity {
     private int counter;
+    private Timer moveTimer;
     private Player player = Player.getInstance();
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +52,22 @@ public class MapStartScreen extends Activity {
 
         // i update start location to top door
         GameScreenViewModel.initializePlayer(530, 1000, entities);
+        moveTimer = new Timer();
+        moveTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        for (Subscriber subscriber : entities) {
+                            subscriber.update();
+                            Log.d("position",  "x: " + subscriber.getX() + " y: " + subscriber.getY());
+                        }
+                    }
+                });
+            }
 
+        }, 0, 50);
 
 
         player.setSprite((ImageView) findViewById(R.id.sprite));
@@ -86,12 +104,14 @@ public class MapStartScreen extends Activity {
 
         Button endGameBtn = findViewById(R.id.go_end_screen_button);
         endGameBtn.setOnClickListener(v -> {
+            moveTimer.cancel();
             Intent goEndScreen = new Intent(this, EndingScreen.class);
             startActivity(goEndScreen);
         });
 
         Button restart = findViewById(R.id.NextRoom1);
         restart.setOnClickListener(v -> {
+            moveTimer.cancel();
             Intent goRoom2 = new Intent(this, WelcomeScreen.class);
             startActivity(goRoom2);
         });
@@ -123,8 +143,6 @@ public class MapStartScreen extends Activity {
         boolean shouldMove = newY <= 1000 && newY >= 605
                 && newX >= 380 && newX <= 685;
 
-        Log.d("position",  "x: " + player.getX() + " y: " + player.getY());
-
         if (shouldMove) {
             switch (keyCode) {
             case KeyEvent.KEYCODE_W:
@@ -145,9 +163,9 @@ public class MapStartScreen extends Activity {
         }
 
         if (shouldMove) {
-            player.update();
             if (player.getX() == 530 && player.getY() == 605) {
                 Intent intent = new Intent(this, Room2.class);
+                moveTimer.cancel();
                 this.startActivity(intent);
             }
         }
