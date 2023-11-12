@@ -40,14 +40,22 @@ public class MapStartScreen extends Activity {
         ArrayList<Subscriber> entities = new ArrayList<Subscriber>();
         entities.add(player);
         EnemyFactory enemyCreator = new EnemyFactory();
+        //Ghost Enemy
         Enemy ghost = enemyCreator.createEnemy("Ghost");
         ghost.setX(660);
         ghost.setY(860);
         int[] ghostArray = {0,230,0,230};
-        PlayerDirection ghostPattern = new MovePattern(ghost, ghostArray, 'd');
+        PlayerDirection ghostPattern = new MovePattern(ghost, ghostArray, 'a');
         ghost.setMoveDirection(ghostPattern);
         entities.add(ghost);
-        Enemy Knight = enemyCreator.createEnemy("Knight");
+        //Knight Enemy
+        Enemy knight = enemyCreator.createEnemy("Knight");
+        knight.setX(430);
+        knight.setY(730);
+        int[] knightArray = {0,230,0,230};
+        PlayerDirection knightPattern = new MovePattern(knight, knightArray, 'd');
+        knight.setMoveDirection(knightPattern);
+        entities.add(knight);
 
 
         // i update start location to top door
