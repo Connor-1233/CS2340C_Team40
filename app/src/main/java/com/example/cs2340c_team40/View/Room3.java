@@ -10,9 +10,13 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.cs2340c_team40.Model.Enemy;
+import com.example.cs2340c_team40.Model.EnemyFactory;
+import com.example.cs2340c_team40.Model.MovePattern;
 import com.example.cs2340c_team40.Model.Player;
 import com.example.cs2340c_team40.Model.MoveVertical;
 import com.example.cs2340c_team40.Model.MoveHorizontal;
+import com.example.cs2340c_team40.Model.PlayerDirection;
 import com.example.cs2340c_team40.Model.Subscriber;
 import com.example.cs2340c_team40.R;
 import com.example.cs2340c_team40.ViewModel.GameScreenViewModel;
@@ -30,6 +34,23 @@ public class Room3 extends Activity {
 
         ArrayList<Subscriber> entities = new ArrayList<Subscriber>();
         entities.add(player);
+        EnemyFactory enemyCreator = new EnemyFactory();
+        //Ghost Enemy
+        Enemy ghost = enemyCreator.createEnemy("Ghost");
+        ghost.setX(300);
+        ghost.setY(865);
+        int[] ghostArray = {215,230,215,230};
+        PlayerDirection ghostPattern = new MovePattern(ghost, ghostArray, 'w');
+        ghost.setMoveDirection(ghostPattern);
+        entities.add(ghost);
+        //Knight Enemy
+        Enemy knight = enemyCreator.createEnemy("Knight");
+        knight.setX(600);
+        knight.setY(870);
+        int[] knightArray = {480,100,480,100};
+        PlayerDirection knightPattern = new MovePattern(knight, knightArray, 'a');
+        knight.setMoveDirection(knightPattern);
+        entities.add(knight);
 
         //have to change x and y to where door is in each map
         GameScreenViewModel.initializePlayer(460, 1550, entities);
