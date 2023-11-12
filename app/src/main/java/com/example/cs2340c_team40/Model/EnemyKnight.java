@@ -4,9 +4,7 @@ public class EnemyKnight extends Enemy {
 
     @Override
     public void createMovement() {
-        setMoveHorizontal(4);
-        setMoveVertical(4);
-        setHealth(80);
-        setSpriteSize(10);
+        this.setHealth(80);
+        this.setSpriteSize(10);
     }
 }

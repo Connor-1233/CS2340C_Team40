@@ -4,9 +4,7 @@ public class EnemyGhost extends Enemy {
 
     @Override
     public void createMovement() {
-        setMoveHorizontal(0);
-        setMoveVertical(3);
-        setHealth(40);
-        setSpriteSize(10);
+        this.setHealth(40);
+        this.setSpriteSize(10);
     }
 }

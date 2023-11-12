@@ -4,9 +4,7 @@ public class EnemySlime extends Enemy {
     @Override
     public void createMovement() {
         //moves diagonal
-        setMoveHorizontal(8);
-        setMoveVertical(8);
-        setHealth(20);
-        setSpriteSize(10);
+        this.setHealth(20);
+        this.setSpriteSize(10);
     }
 }

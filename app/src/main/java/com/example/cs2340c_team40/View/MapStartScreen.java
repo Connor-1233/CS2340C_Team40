@@ -3,6 +3,7 @@ package com.example.cs2340c_team40.View;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,8 +12,11 @@ import android.widget.TextView;
 import android.app.Activity;
 
 
+import com.example.cs2340c_team40.Model.Enemy;
+import com.example.cs2340c_team40.Model.EnemyFactory;
+import com.example.cs2340c_team40.Model.MovePattern;
 import com.example.cs2340c_team40.Model.Player;
-import com.example.cs2340c_team40.Model.Room;
+import com.example.cs2340c_team40.Model.PlayerDirection;
 import com.example.cs2340c_team40.Model.MoveVertical;
 import com.example.cs2340c_team40.Model.MoveHorizontal;
 import com.example.cs2340c_team40.Model.Subscriber;
@@ -20,44 +24,58 @@ import com.example.cs2340c_team40.R;
 import com.example.cs2340c_team40.ViewModel.GameScreenViewModel;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class MapStartScreen extends Activity {
     private int counter;
+    private Timer moveTimer;
     private Player player = Player.getInstance();
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.room1);
-        Room room = new Room(); //Need to fill room array
-
-        //initiializing array for 30x30 grid
-        for (int x = 0; x <= 29; x++) {
-            for (int y = 0; y <= 29; y++) {
-                room.addObject(x, y, 0);
-            }
-        }
-
-        //Ground is 0
-        //Walls are 1
-        //Doors are 2
-
-        for (int x = 10; x <= 20; x++) {
-            room.addObject(x, 12, 1);
-            room.addObject(x, 19, 1);
-        }
-        for (int y = 13; y <= 18; y++) {
-            room.addObject(10, y, 1);
-            room.addObject(20, y, 1);
-        }
-        room.addObject(15, 19, 2); //door, exit
 
         ArrayList<Subscriber> entities = new ArrayList<Subscriber>();
         entities.add(player);
+        EnemyFactory enemyCreator = new EnemyFactory();
+        //Ghost Enemy
+        Enemy ghost = enemyCreator.createEnemy("Ghost");
+        ghost.setX(660);
+        ghost.setY(860);
+        int[] ghostArray = {0,230,0,230};
+        PlayerDirection ghostPattern = new MovePattern(ghost, ghostArray, 'a');
+        ghost.setMoveDirection(ghostPattern);
+        entities.add(ghost);
+        //Knight Enemy
+        Enemy knight = enemyCreator.createEnemy("Knight");
+        knight.setX(430);
+        knight.setY(730);
+        int[] knightArray = {0,230,0,230};
+        PlayerDirection knightPattern = new MovePattern(knight, knightArray, 'd');
+        knight.setMoveDirection(knightPattern);
+        entities.add(knight);
+
 
         // i update start location to top door
-        GameScreenViewModel.initializePlayer(530, 1000, room, entities);
+        GameScreenViewModel.initializePlayer(530, 1000, entities);
+        moveTimer = new Timer();
+        moveTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        for (Subscriber subscriber : entities) {
+                            subscriber.update();
+                            Log.d("position",  "x: " + subscriber.getX() + " y: " + subscriber.getY());
+                        }
+                    }
+                });
+            }
 
+        }, 0, 50);
 
 
         player.setSprite((ImageView) findViewById(R.id.sprite));
@@ -94,12 +112,14 @@ public class MapStartScreen extends Activity {
 
         Button endGameBtn = findViewById(R.id.go_end_screen_button);
         endGameBtn.setOnClickListener(v -> {
+            moveTimer.cancel();
             Intent goEndScreen = new Intent(this, EndingScreen.class);
             startActivity(goEndScreen);
         });
 
         Button restart = findViewById(R.id.NextRoom1);
         restart.setOnClickListener(v -> {
+            moveTimer.cancel();
             Intent goRoom2 = new Intent(this, WelcomeScreen.class);
             startActivity(goRoom2);
         });
@@ -151,9 +171,9 @@ public class MapStartScreen extends Activity {
         }
 
         if (shouldMove) {
-            player.update();
             if (player.getX() == 530 && player.getY() == 605) {
                 Intent intent = new Intent(this, Room2.class);
+                moveTimer.cancel();
                 this.startActivity(intent);
             }
         }
