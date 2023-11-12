@@ -10,6 +10,7 @@ import com.example.cs2340c_team40.Model.MoveVertical;
 import com.example.cs2340c_team40.Model.Player;
 import com.example.cs2340c_team40.View.ConfigScreen;
 import com.example.cs2340c_team40.ViewModel.ConfigScreenViewModel;
+import com.example.cs2340c_team40.ViewModel.GameScreenViewModel;
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -52,8 +53,6 @@ public class ExampleUnitTest {
             assertFalse(ConfigScreenViewModel.isValidName(name));
         }
 
-
-
         @Test
         public void testNameValidator_ValidName() {
             String name = "John Doe";
@@ -75,5 +74,22 @@ public class ExampleUnitTest {
             new MoveVertical(1).movePlayer();
             assertEquals(player.getY(), 10);
         }
+
+
+        //Connor's Sprint 04 Tests
+        @Test
+        public void testIsPlayerDead() {
+            Player player = Player.getInstance();
+            player.setHealth(-5);
+            assertTrue(GameScreenViewModel.isPlayerDead());
+        }
+
+        @Test
+        public void changesScreenWhenDead() {
+            Player player = Player.getInstance();
+            player.setHealth(100);
+            assertFalse(GameScreenViewModel.isPlayerDead());
+        }
+
 
 }

@@ -44,7 +44,7 @@ public class MapStartScreen extends Activity {
         Enemy ghost = enemyCreator.createEnemy("Ghost");
         ghost.setX(660);
         ghost.setY(860);
-        int[] ghostArray = {0,230,0,230};
+        int[] ghostArray = {0, 230, 0, 230};
         PlayerDirection ghostPattern = new MovePattern(ghost, ghostArray, 'a');
         ghost.setMoveDirection(ghostPattern);
         entities.add(ghost);
@@ -52,7 +52,7 @@ public class MapStartScreen extends Activity {
         Enemy knight = enemyCreator.createEnemy("Knight");
         knight.setX(430);
         knight.setY(730);
-        int[] knightArray = {0,230,0,230};
+        int[] knightArray = {0, 230, 0, 230};
         PlayerDirection knightPattern = new MovePattern(knight, knightArray, 'd');
         knight.setMoveDirection(knightPattern);
         entities.add(knight);
@@ -68,8 +68,10 @@ public class MapStartScreen extends Activity {
                     @Override
                     public void run() {
                         for (Subscriber subscriber : entities) {
+                            checkHealth();
                             subscriber.update();
-                            Log.d("position",  "x: " + subscriber.getX() + " y: " + subscriber.getY());
+                            Log.d("position",  "x: " + subscriber.getX()
+                                    + " y: " + subscriber.getY());
                         }
                     }
                 });
@@ -178,5 +180,22 @@ public class MapStartScreen extends Activity {
             }
         }
         return true;
+    }
+
+
+    public void checkHealth() {
+        if (GameScreenViewModel.isPlayerDead()) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    launchGameLoseScreen();
+                }
+            });
+        }
+    }
+
+    public void launchGameLoseScreen() {
+        Intent intent = new Intent(this, EndingScreen.class);
+        startActivity(intent);
     }
 }
