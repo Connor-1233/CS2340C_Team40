@@ -74,7 +74,7 @@ public class Room2 extends Activity {
 
         skeleton.setSprite((ImageView) findViewById(R.id.knight));
         skeleton.getSprite().setImageResource(R.drawable.skeleton_v1_1);
-        
+
         PlayerDirection skeletonPattern = new MovePattern(skeleton, skeletonArray, 'd');
         skeleton.setMoveDirection(skeletonPattern);
         entities.add(skeleton);

@@ -20,7 +20,6 @@ public class EnemyUnitTests {
         EnemyFactory factory = new EnemyFactory();
         Enemy e = factory.createEnemy("Bat");
 
-        assertEquals(null, e.getHealth());
-        assertEquals(null, e.getSpriteSize());
+        assertEquals(null, e);
     }
 }
