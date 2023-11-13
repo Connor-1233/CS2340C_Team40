@@ -60,8 +60,8 @@
 
         <EditText
             android:id="@+id/score_text"
-            android:layout_width="40dp"
-            android:layout_height="50dp"
+            android:layout_width="62dp"
+            android:layout_height="56dp"
             android:ems="10"
             android:focusable="false"
             android:inputType="text"

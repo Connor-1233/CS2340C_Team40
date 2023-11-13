@@ -44,7 +44,6 @@ public class Room2 extends Activity {
         ghost.setSprite((ImageView) findViewById(R.id.ghost));
         ghost.getSprite().setImageResource(R.drawable.skull_v1_2);
 
-        int[] ghostArray = {0,190,0,190};
         PlayerDirection ghostPattern = new MovePattern(ghost, ghostArray, 'd');
         ghost.setMoveDirection(ghostPattern);
         entities.add(ghost);
@@ -60,7 +59,6 @@ public class Room2 extends Activity {
         knight.setSprite((ImageView) findViewById(R.id.knight));
         knight.getSprite().setImageResource(R.drawable.vampire_v2_2);
 
-        int[] knightArray = {220,0,220,0};
         PlayerDirection knightPattern = new MovePattern(knight, knightArray, 'w');
         knight.setMoveDirection(knightPattern);
         entities.add(knight);
@@ -76,8 +74,7 @@ public class Room2 extends Activity {
 
         skeleton.setSprite((ImageView) findViewById(R.id.knight));
         skeleton.getSprite().setImageResource(R.drawable.skeleton_v1_1);
-
-        int[] skeletonArray = {100,200,100,200};
+        
         PlayerDirection skeletonPattern = new MovePattern(skeleton, skeletonArray, 'd');
         skeleton.setMoveDirection(skeletonPattern);
         entities.add(skeleton);
