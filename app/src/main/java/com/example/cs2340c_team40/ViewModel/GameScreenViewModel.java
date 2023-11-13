@@ -1,17 +1,11 @@
 package com.example.cs2340c_team40.ViewModel;
 
-import android.app.Activity;
-import android.util.Log;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Timer;
-import java.util.TimerTask;
 
 import com.example.cs2340c_team40.Model.Player;
-import com.example.cs2340c_team40.Model.PrimeThread;
 import com.example.cs2340c_team40.Model.Subscriber;
-import com.example.cs2340c_team40.R;
 
 public class GameScreenViewModel {
     private static Timer dotTimer = new Timer();
