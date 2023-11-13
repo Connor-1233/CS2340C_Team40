@@ -14,6 +14,7 @@ import org.junit.Test;
 import java.util.ArrayList;
 
 public class StrategyUnitTests {
+
     @Test
     public void StrategyTest() {
         Player p = Player.getInstance();
