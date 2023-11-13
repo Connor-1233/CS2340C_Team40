@@ -26,7 +26,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class Room3 extends Activity {
-    private Player player = Player.getInstance();
+    private final Player player = Player.getInstance();
     private Timer moveTimer;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,7 +82,6 @@ public class Room3 extends Activity {
                         for (Subscriber subscriber : entities) {
                             checkHealth();
                             subscriber.update();
-                            // Log.d("position",  "x: " + subscriber.getX() + " y: " + subscriber.getY());
                             EditText displayName = findViewById(R.id.display_player_name_text);
                             EditText displayHealth = findViewById(R.id.display_health_text);
                             displayName.setText(player.getName());
@@ -137,20 +136,20 @@ public class Room3 extends Activity {
         int newY = player.getY();
 
         switch (keyCode) {
-            case KeyEvent.KEYCODE_W:
-                newY = newY - 5;
-                break;
-            case KeyEvent.KEYCODE_S:
-                newY = newY + 5;
-                break;
-            case KeyEvent.KEYCODE_A:
-                newX = newX - 5;
-                break;
-            case KeyEvent.KEYCODE_D:
-                newX = newX + 5;
-                break;
-            default:
-                break;
+        case KeyEvent.KEYCODE_W:
+            newY = newY - 5;
+            break;
+        case KeyEvent.KEYCODE_S:
+            newY = newY + 5;
+            break;
+        case KeyEvent.KEYCODE_A:
+            newX = newX - 5;
+            break;
+        case KeyEvent.KEYCODE_D:
+            newX = newX + 5;
+            break;
+        default:
+            break;
         }
         boolean shouldMove = false;
 
@@ -167,20 +166,20 @@ public class Room3 extends Activity {
         Log.d("position",  "x: " + player.getX() + " y: " + player.getY());
         if (shouldMove) {
             switch (keyCode) {
-                case KeyEvent.KEYCODE_W:
-                    player.setMoveDirection(new MoveVertical(-1));
-                    break;
-                case KeyEvent.KEYCODE_S:
-                    player.setMoveDirection(new MoveVertical(1));
-                    break;
-                case KeyEvent.KEYCODE_A:
-                    player.setMoveDirection(new MoveHorizontal(-1));
-                    break;
-                case KeyEvent.KEYCODE_D:
-                    player.setMoveDirection(new MoveHorizontal(1));
-                    break;
-                default:
-                    return super.onKeyDown(keyCode, event);
+            case KeyEvent.KEYCODE_W:
+                player.setMoveDirection(new MoveVertical(-1));
+                break;
+            case KeyEvent.KEYCODE_S:
+                player.setMoveDirection(new MoveVertical(1));
+                break;
+            case KeyEvent.KEYCODE_A:
+                player.setMoveDirection(new MoveHorizontal(-1));
+                break;
+            case KeyEvent.KEYCODE_D:
+                player.setMoveDirection(new MoveHorizontal(1));
+                break;
+            default:
+                return super.onKeyDown(keyCode, event);
             }
         }
 
@@ -196,12 +195,13 @@ public class Room3 extends Activity {
 
     public void checkHealth() {
         if (GameScreenViewModel.isPlayerDead()) {
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    launchGameLoseScreen();
-                }
-            });
+            //            runOnUiThread(new Runnable() {
+            //                @Override
+            //                public void run() {
+            //                    launchGameLoseScreen();
+            //                }
+            //            });
+            launchGameLoseScreen();
         }
     }
 
