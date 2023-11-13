@@ -106,6 +106,21 @@
             app:layout_constraintStart_toStartOf="parent"
             tools:ignore="MissingConstraints" />
 
+
+        <ImageView
+            android:id="@+id/ghost"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginBottom="368dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.521"
+            app:layout_constraintStart_toStartOf="parent"
+            android:focusable="true"
+            android:contentDescription="@string/sprite"
+            android:focusableInTouchMode="true"
+            app:srcCompat="@drawable/skull_v2_4" />
+
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline"
             android:layout_width="wrap_content"
