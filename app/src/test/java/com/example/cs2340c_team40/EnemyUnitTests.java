@@ -14,6 +14,7 @@ public class EnemyUnitTests {
 
         assertEquals(60, e.getHealth());
         assertEquals(10, e.getSpriteSize());
+        //s
     }
     @Test
     public void testInvalidEnemyType() {
