@@ -60,8 +60,8 @@
 
         <EditText
             android:id="@+id/score_text"
-            android:layout_width="40dp"
-            android:layout_height="50dp"
+            android:layout_width="66dp"
+            android:layout_height="51dp"
             android:ems="10"
             android:focusable="false"
             android:inputType="text"
@@ -112,6 +112,21 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintGuide_begin="20dp" />
+
+        <ImageView
+            android:id="@+id/ghost"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginBottom="368dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.521"
+            app:layout_constraintStart_toStartOf="parent"
+            android:focusable="true"
+            android:contentDescription="@string/sprite"
+            android:focusableInTouchMode="true"
+            app:srcCompat="@drawable/skull_v2_4" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>

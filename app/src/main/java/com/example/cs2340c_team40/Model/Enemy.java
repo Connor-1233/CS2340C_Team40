@@ -14,13 +14,19 @@ public abstract class Enemy {
     private ImageView sprite;
     private int pixelHeight;
     private int pixelWidth;
+    private ImageView enemySprite;
+
 
     protected Enemy() {
         moving = false;
     }
 
     public void update() {
+<<<<<<< Updated upstream
         enemyDirection.moveEnemy();
+=======
+        enemyDirection.movePlayer();
+>>>>>>> Stashed changes
         sprite.setX(x);
         sprite.setY(y);
     }
@@ -58,4 +64,29 @@ public abstract class Enemy {
     public void setSpriteSize(int spriteSize) {
         this.spriteSize = spriteSize;
     }
+<<<<<<< Updated upstream
+=======
+    public void setMoveDirection(PlayerDirection dir) {
+        enemyDirection = dir;
+    }
+    public void setX(int x) {
+        this.x = x;
+    }
+    public void setY(int y) {
+        this.y = y;
+    }
+    public int getX() {
+        return x;
+    }
+    public int getY() {
+        return y;
+    }
+
+    public ImageView getSprite() {
+        return enemySprite;
+    }
+    public void setSprite(ImageView enemySprite) {
+        this.enemySprite = enemySprite;
+    }
+>>>>>>> Stashed changes
 }

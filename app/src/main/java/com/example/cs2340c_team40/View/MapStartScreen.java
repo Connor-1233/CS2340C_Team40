@@ -54,6 +54,24 @@ public class MapStartScreen extends Activity {
 
         ArrayList<Subscriber> entities = new ArrayList<Subscriber>();
         entities.add(player);
+<<<<<<< Updated upstream
+=======
+        EnemyFactory enemyCreator = new EnemyFactory();
+        Enemy ghost = enemyCreator.createEnemy("Ghost");
+        int[] ghostArray = {0,230,0,230};
+        PlayerDirection ghostPattern = new MovePattern(ghost, ghostArray, 'd');
+        ghost.setMoveDirection(ghostPattern);
+        entities.add(ghost);
+        Enemy Knight = enemyCreator.createEnemy("Knight");
+
+        ghost.setSprite((ImageView) findViewById(R.id.ghost));
+        ghost.getSprite().setImageResource(R.drawable.skull_v2_4);
+        //ghost.getSprite().setX(660);
+        //ghost.getSprite().setY(860);
+       // ImageView ghostImageView = findViewById(R.id.spriteImageView);
+
+
+>>>>>>> Stashed changes
 
         // i update start location to top door
         GameScreenViewModel.initializePlayer(530, 1000, room, entities);
