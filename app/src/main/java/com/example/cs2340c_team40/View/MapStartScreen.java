@@ -3,7 +3,6 @@ package com.example.cs2340c_team40.View;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.widget.Button;
 import android.widget.EditText;
@@ -86,8 +85,6 @@ public class MapStartScreen extends Activity {
                         for (Subscriber subscriber : entities) {
                             checkHealth();
                             subscriber.update();
-                            Log.d("position",  "x: " + subscriber.getX()
-                                    + " y: " + subscriber.getY());
                         }
                     }
                 });

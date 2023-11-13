@@ -27,7 +27,6 @@ public class Collision {
         if (xCollision && yCollision) {
             // Log.d("collision: ", String.valueOf(xCollision && yCollision));
             double difficulty = p.getDifficulty();
-            Log.d("Before Health : ", String.valueOf(p.getHealth()));
             if (difficulty == 0.5) {
                 // Easy Difficulty, decrease hp by a fifteenth
                 diff_a = p.getHealth() - 150 / 10;
@@ -51,7 +50,6 @@ public class Collision {
         if (xCollision && yCollision) {
             // Log.d("collision: ", String.valueOf(xCollision && yCollision));
             double difficulty = p.getDifficulty();
-            Log.d("Before Health : ", String.valueOf(p.getHealth()));
             if (difficulty == 0.5) {
                 // Easy Difficulty, decrease hp by a fifteenth
                 diff_b = p.getHealth() - 150 / 10;

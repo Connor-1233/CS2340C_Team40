@@ -3,7 +3,6 @@ package com.example.cs2340c_team40.View;
 import android.content.Intent;
 import android.os.Bundle;
 import android.app.Activity;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.widget.Button;
 import android.widget.EditText;
@@ -100,8 +99,6 @@ public class Room2 extends Activity {
                             String displayHealthString = "Health: " + player.getHealth();
                             displayHealth.setText(displayHealthString);
                             ImageView spriteImageView = findViewById(R.id.spriteImageView);
-                            Log.d("position",  "x: " + subscriber.getX()
-                                    + " y: " + subscriber.getY());
                         }
                     }
                 });
