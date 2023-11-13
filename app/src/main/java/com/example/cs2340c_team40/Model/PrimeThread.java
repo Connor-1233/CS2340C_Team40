@@ -5,7 +5,7 @@ import android.util.Log;
 import java.util.ArrayList;
 
 public class PrimeThread extends Thread {
-    ArrayList<Subscriber> entities;
+    private ArrayList<Subscriber> entities;
     public PrimeThread(ArrayList<Subscriber> entities) {
         this.entities = entities;
     }

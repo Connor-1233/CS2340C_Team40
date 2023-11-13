@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.example.cs2340c_team40.Model.Leaderboard;
@@ -18,6 +19,10 @@ public class EndingScreen extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.endingscreen);
+
+        //sets end screen to win or lose depending on whether health <= 0
+        setVisibilityEndingScreen();
+
         Button restartGameBtn = findViewById(R.id.restart_game_btn);
         restartGameBtn.setOnClickListener(v -> restartGame());
         TextView gameScore = findViewById(R.id.textView);
@@ -118,6 +123,13 @@ public class EndingScreen extends Activity {
 
             winLable.setVisibility(View.INVISIBLE);
             loseLable.setVisibility(View.VISIBLE);
+
+            RatingBar winBar = findViewById(R.id.ratingBarWin);
+            RatingBar loseBar = findViewById(R.id.ratingBarLose);
+
+            winBar.setVisibility(RatingBar.INVISIBLE);
+            loseBar.setVisibility(RatingBar.VISIBLE);
+
         }
         //Do Nothing because player isn't dead
     }

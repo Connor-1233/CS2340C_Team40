@@ -39,11 +39,11 @@ public class Room2 extends Activity {
         Enemy ghost = enemyCreator.createEnemy("Ghost");
         ghost.setX(460);
         ghost.setY(820);
+        int[] ghostArray = {0, 190, 0, 190};
 
         ghost.setSprite((ImageView) findViewById(R.id.ghost));
         ghost.getSprite().setImageResource(R.drawable.skull_v1_2);
 
-        int[] ghostArray = {0,190,0,190};
         PlayerDirection ghostPattern = new MovePattern(ghost, ghostArray, 'd');
         ghost.setMoveDirection(ghostPattern);
         entities.add(ghost);
@@ -54,11 +54,11 @@ public class Room2 extends Activity {
         Enemy knight = enemyCreator.createEnemy("Knight");
         knight.setX(260);
         knight.setY(830);
+        int[] knightArray = {220, 0, 220, 0};
 
         knight.setSprite((ImageView) findViewById(R.id.knight));
         knight.getSprite().setImageResource(R.drawable.vampire_v2_2);
 
-        int[] knightArray = {220,0,220,0};
         PlayerDirection knightPattern = new MovePattern(knight, knightArray, 'w');
         knight.setMoveDirection(knightPattern);
         entities.add(knight);
@@ -70,10 +70,11 @@ public class Room2 extends Activity {
         skeleton.setX(400);
         skeleton.setY(620);
 
+        int[] skeletonArray = {100, 200, 100, 200};
+
         skeleton.setSprite((ImageView) findViewById(R.id.knight));
         skeleton.getSprite().setImageResource(R.drawable.skeleton_v1_1);
 
-        int[] skeletonArray = {100,200,100,200};
         PlayerDirection skeletonPattern = new MovePattern(skeleton, skeletonArray, 'd');
         skeleton.setMoveDirection(skeletonPattern);
         entities.add(skeleton);
@@ -88,8 +89,10 @@ public class Room2 extends Activity {
                     @Override
                     public void run() {
                         for (Subscriber subscriber : entities) {
+                            checkHealth();
                             subscriber.update();
-                            Log.d("position",  "x: " + subscriber.getX() + " y: " + subscriber.getY());
+                            Log.d("position",  "x: " + subscriber.getX()
+                                    + " y: " + subscriber.getY());
                         }
                     }
                 });
@@ -192,5 +195,21 @@ public class Room2 extends Activity {
             }
         }
         return true;
+    }
+
+    public void checkHealth() {
+        if (GameScreenViewModel.isPlayerDead()) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    launchGameLoseScreen();
+                }
+            });
+        }
+    }
+
+    public void launchGameLoseScreen() {
+        Intent intent = new Intent(this, EndingScreen.class);
+        startActivity(intent);
     }
 }

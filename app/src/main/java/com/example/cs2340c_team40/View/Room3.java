@@ -40,10 +40,12 @@ public class Room3 extends Activity {
         ghost.setX(300);
         ghost.setY(865);
 
+        int[] ghostArray = {215, 230, 215, 230};
+
         ghost.setSprite((ImageView) findViewById(R.id.ghost));
         ghost.getSprite().setImageResource(R.drawable.skull_v1_2);
 
-        int[] ghostArray = {215,230,215,230};
+
         PlayerDirection ghostPattern = new MovePattern(ghost, ghostArray, 'w');
         ghost.setMoveDirection(ghostPattern);
         entities.add(ghost);
@@ -55,10 +57,12 @@ public class Room3 extends Activity {
         knight.setX(600);
         knight.setY(870);
 
+        int[] knightArray = {480, 100, 480, 100};
+
         knight.setSprite((ImageView) findViewById(R.id.knight));
         knight.getSprite().setImageResource(R.drawable.vampire_v2_2);
 
-        int[] knightArray = {480,100,480,100};
+
         PlayerDirection knightPattern = new MovePattern(knight, knightArray, 'a');
         knight.setMoveDirection(knightPattern);
         entities.add(knight);
@@ -73,8 +77,10 @@ public class Room3 extends Activity {
                     @Override
                     public void run() {
                         for (Subscriber subscriber : entities) {
+                            checkHealth();
                             subscriber.update();
-                            Log.d("position",  "x: " + subscriber.getX() + " y: " + subscriber.getY());
+                            Log.d("position",  "x: " + subscriber.getX()
+                                    + " y: " + subscriber.getY());
                         }
                     }
                 });
@@ -175,6 +181,22 @@ public class Room3 extends Activity {
             }
         }
         return true;
+    }
+
+    public void checkHealth() {
+        if (GameScreenViewModel.isPlayerDead()) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    launchGameLoseScreen();
+                }
+            });
+        }
+    }
+
+    public void launchGameLoseScreen() {
+        Intent intent = new Intent(this, EndingScreen.class);
+        startActivity(intent);
     }
 
 }
