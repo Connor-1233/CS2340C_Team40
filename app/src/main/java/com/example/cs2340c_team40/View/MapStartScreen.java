@@ -142,20 +142,20 @@ public class MapStartScreen extends Activity {
         int newY = player.getY();
 
         switch (keyCode) {
-        case KeyEvent.KEYCODE_W:
-            newY = newY - 5;
-            break;
-        case KeyEvent.KEYCODE_S:
-            newY = newY + 5;
-            break;
-        case KeyEvent.KEYCODE_A:
-            newX = newX - 5;
-            break;
-        case KeyEvent.KEYCODE_D:
-            newX = newX + 5;
-            break;
-        default:
-            break;
+            case KeyEvent.KEYCODE_W:
+                newY = newY - 5;
+                break;
+            case KeyEvent.KEYCODE_S:
+                newY = newY + 5;
+                break;
+            case KeyEvent.KEYCODE_A:
+                newX = newX - 5;
+                break;
+            case KeyEvent.KEYCODE_D:
+                newX = newX + 5;
+                break;
+            default:
+                break;
         }
 
         boolean shouldMove = newY <= 1000 && newY >= 605
@@ -163,20 +163,20 @@ public class MapStartScreen extends Activity {
 
         if (shouldMove) {
             switch (keyCode) {
-            case KeyEvent.KEYCODE_W:
-                player.setMoveDirection(new MoveVertical(-1));
-                break;
-            case KeyEvent.KEYCODE_S:
-                player.setMoveDirection(new MoveVertical(1));
-                break;
-            case KeyEvent.KEYCODE_A:
-                player.setMoveDirection(new MoveHorizontal(-1));
-                break;
-            case KeyEvent.KEYCODE_D:
-                player.setMoveDirection(new MoveHorizontal(1));
-                break;
-            default:
-                return super.onKeyDown(keyCode, event);
+                case KeyEvent.KEYCODE_W:
+                    player.setMoveDirection(new MoveVertical(-1));
+                    break;
+                case KeyEvent.KEYCODE_S:
+                    player.setMoveDirection(new MoveVertical(1));
+                    break;
+                case KeyEvent.KEYCODE_A:
+                    player.setMoveDirection(new MoveHorizontal(-1));
+                    break;
+                case KeyEvent.KEYCODE_D:
+                    player.setMoveDirection(new MoveHorizontal(1));
+                    break;
+                default:
+                    return super.onKeyDown(keyCode, event);
             }
         }
 
