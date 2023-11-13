@@ -45,10 +45,14 @@ public class MapStartScreen extends Activity {
         ghost.setX(660);
         ghost.setY(860);
 
+        int[] ghostArray = {0, 230, 0, 230};
+
+
         ghost.setSprite((ImageView) findViewById(R.id.ghost));
         ghost.getSprite().setImageResource(R.drawable.skull_v1_2);
 
         int[] ghostArray = {0,230,0,230};
+
         PlayerDirection ghostPattern = new MovePattern(ghost, ghostArray, 'a');
         ghost.setMoveDirection(ghostPattern);
         entities.add(ghost);
@@ -59,10 +63,14 @@ public class MapStartScreen extends Activity {
         knight.setX(430);
         knight.setY(730);
 
+        int[] knightArray = {0, 230, 0, 230};
+
+
         knight.setSprite((ImageView) findViewById(R.id.knight));
         knight.getSprite().setImageResource(R.drawable.vampire_v2_2);
 
         int[] knightArray = {0,230,0,230};
+      
         PlayerDirection knightPattern = new MovePattern(knight, knightArray, 'd');
         knight.setMoveDirection(knightPattern);
         entities.add(knight);
@@ -78,8 +86,10 @@ public class MapStartScreen extends Activity {
                     @Override
                     public void run() {
                         for (Subscriber subscriber : entities) {
+                            checkHealth();
                             subscriber.update();
-                            Log.d("position",  "x: " + subscriber.getX() + " y: " + subscriber.getY());
+                            Log.d("position",  "x: " + subscriber.getX()
+                                    + " y: " + subscriber.getY());
                         }
                     }
                 });
@@ -188,5 +198,22 @@ public class MapStartScreen extends Activity {
             }
         }
         return true;
+    }
+
+
+    public void checkHealth() {
+        if (GameScreenViewModel.isPlayerDead()) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    launchGameLoseScreen();
+                }
+            });
+        }
+    }
+
+    public void launchGameLoseScreen() {
+        Intent intent = new Intent(this, EndingScreen.class);
+        startActivity(intent);
     }
 }
