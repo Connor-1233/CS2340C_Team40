@@ -44,14 +44,24 @@ public class MapStartScreen extends Activity {
         Enemy ghost = enemyCreator.createEnemy("Ghost");
         ghost.setX(660);
         ghost.setY(860);
+
+        ghost.setSprite((ImageView) findViewById(R.id.ghost));
+        ghost.getSprite().setImageResource(R.drawable.skull_v1_2);
+
         int[] ghostArray = {0,230,0,230};
         PlayerDirection ghostPattern = new MovePattern(ghost, ghostArray, 'a');
         ghost.setMoveDirection(ghostPattern);
         entities.add(ghost);
+
+
         //Knight Enemy
         Enemy knight = enemyCreator.createEnemy("Knight");
         knight.setX(430);
         knight.setY(730);
+
+        knight.setSprite((ImageView) findViewById(R.id.knight));
+        knight.getSprite().setImageResource(R.drawable.vampire_v2_2);
+
         int[] knightArray = {0,230,0,230};
         PlayerDirection knightPattern = new MovePattern(knight, knightArray, 'd');
         knight.setMoveDirection(knightPattern);
