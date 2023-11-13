@@ -44,14 +44,24 @@ public class MapStartScreen extends Activity {
         Enemy ghost = enemyCreator.createEnemy("Ghost");
         ghost.setX(660);
         ghost.setY(860);
+
+        ghost.setSprite((ImageView) findViewById(R.id.ghost));
+        ghost.getSprite().setImageResource(R.drawable.skull_v1_2);
+
         int[] ghostArray = {0,230,0,230};
         PlayerDirection ghostPattern = new MovePattern(ghost, ghostArray, 'a');
         ghost.setMoveDirection(ghostPattern);
         entities.add(ghost);
+
+
         //Knight Enemy
         Enemy knight = enemyCreator.createEnemy("Knight");
         knight.setX(430);
         knight.setY(730);
+
+        knight.setSprite((ImageView) findViewById(R.id.knight));
+        knight.getSprite().setImageResource(R.drawable.vampire_v2_2);
+
         int[] knightArray = {0,230,0,230};
         PlayerDirection knightPattern = new MovePattern(knight, knightArray, 'd');
         knight.setMoveDirection(knightPattern);
@@ -132,20 +142,20 @@ public class MapStartScreen extends Activity {
         int newY = player.getY();
 
         switch (keyCode) {
-        case KeyEvent.KEYCODE_W:
-            newY = newY - 5;
-            break;
-        case KeyEvent.KEYCODE_S:
-            newY = newY + 5;
-            break;
-        case KeyEvent.KEYCODE_A:
-            newX = newX - 5;
-            break;
-        case KeyEvent.KEYCODE_D:
-            newX = newX + 5;
-            break;
-        default:
-            break;
+            case KeyEvent.KEYCODE_W:
+                newY = newY - 5;
+                break;
+            case KeyEvent.KEYCODE_S:
+                newY = newY + 5;
+                break;
+            case KeyEvent.KEYCODE_A:
+                newX = newX - 5;
+                break;
+            case KeyEvent.KEYCODE_D:
+                newX = newX + 5;
+                break;
+            default:
+                break;
         }
 
         boolean shouldMove = newY <= 1000 && newY >= 605
@@ -153,20 +163,20 @@ public class MapStartScreen extends Activity {
 
         if (shouldMove) {
             switch (keyCode) {
-            case KeyEvent.KEYCODE_W:
-                player.setMoveDirection(new MoveVertical(-1));
-                break;
-            case KeyEvent.KEYCODE_S:
-                player.setMoveDirection(new MoveVertical(1));
-                break;
-            case KeyEvent.KEYCODE_A:
-                player.setMoveDirection(new MoveHorizontal(-1));
-                break;
-            case KeyEvent.KEYCODE_D:
-                player.setMoveDirection(new MoveHorizontal(1));
-                break;
-            default:
-                return super.onKeyDown(keyCode, event);
+                case KeyEvent.KEYCODE_W:
+                    player.setMoveDirection(new MoveVertical(-1));
+                    break;
+                case KeyEvent.KEYCODE_S:
+                    player.setMoveDirection(new MoveVertical(1));
+                    break;
+                case KeyEvent.KEYCODE_A:
+                    player.setMoveDirection(new MoveHorizontal(-1));
+                    break;
+                case KeyEvent.KEYCODE_D:
+                    player.setMoveDirection(new MoveHorizontal(1));
+                    break;
+                default:
+                    return super.onKeyDown(keyCode, event);
             }
         }
 
