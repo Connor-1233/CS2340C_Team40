@@ -5,7 +5,6 @@ import static org.junit.Assert.assertEquals;
 import com.example.cs2340c_team40.Model.MoveHorizontal;
 import com.example.cs2340c_team40.Model.Player;
 import com.example.cs2340c_team40.Model.PlayerDirection;
-import com.example.cs2340c_team40.Model.Room;
 import com.example.cs2340c_team40.Model.Subscriber;
 import com.example.cs2340c_team40.ViewModel.GameScreenViewModel;
 
@@ -17,7 +16,7 @@ public class StrategyUnitTests {
     @Test
     public void StrategyTest() {
         Player p = Player.getInstance();
-        GameScreenViewModel.initializePlayer(5,0,new Room(), new ArrayList<Subscriber>());
+        GameScreenViewModel.initializePlayer(5,0, new ArrayList<Subscriber>());
         PlayerDirection dir = new MoveHorizontal(-1);
         p.setMoveDirection(dir);
         dir.movePlayer();

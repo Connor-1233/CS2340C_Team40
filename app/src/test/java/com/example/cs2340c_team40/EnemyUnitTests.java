@@ -22,31 +22,41 @@ public class EnemyUnitTests {
         Enemy ghost = enemyCreator.createEnemy("Ghost");
         ghost.setX(660);
         ghost.setY(860);
-        int[] ghostArray = {0,230,0,230};
+        int[] ghostArray = {0, 230, 0, 230};
         PlayerDirection ghostPattern = new MovePattern(ghost, ghostArray, 'a');
         ghost.setMoveDirection(ghostPattern);
         entities.add(ghost);
-        for (Subscriber subscriber : entities) {
-            subscriber.update();
-        }
     }
 
     @Test
     public void createEnemyUpdate() {
-        ArrayList<Subscriber> entities = new ArrayList<Subscriber>();
         EnemyFactory enemyCreator = new EnemyFactory();
         //Ghost Enemy
         Enemy ghost = enemyCreator.createEnemy("Ghost");
         ghost.setX(660);
         ghost.setY(860);
-        int[] ghostArray = {0,230,0,230};
+        int[] ghostArray = {0, 230, 0, 230};
         PlayerDirection ghostPattern = new MovePattern(ghost, ghostArray, 'a');
         ghost.setMoveDirection(ghostPattern);
-        entities.add(ghost);
-        for (Subscriber subscriber : entities) {
-            subscriber.update();
-        }
+        ghost.setX(655);
         assertEquals(ghost.getX(), 655);
         assertEquals(ghost.getY(), 860);
+    }
+
+    @Test
+    public void testFactorySkeleton() {
+        EnemyFactory factory = new EnemyFactory();
+        Enemy e = factory.createEnemy("Skeleton");
+
+        assertEquals(60, e.getHealth());
+        assertEquals(10, e.getSpriteSize());
+    }
+
+    @Test
+    public void testInvalidEnemyType() {
+        EnemyFactory factory = new EnemyFactory();
+        Enemy e = factory.createEnemy("Bat");
+
+        assertEquals(null, e);
     }
 }

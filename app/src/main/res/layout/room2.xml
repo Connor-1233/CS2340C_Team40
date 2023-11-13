@@ -59,13 +59,13 @@
 
         <EditText
             android:id="@+id/score_text"
-            android:layout_width="40dp"
-            android:layout_height="50dp"
+            android:layout_width="57dp"
+            android:layout_height="51dp"
             android:ems="10"
+            android:focusable="false"
             android:inputType="text"
             android:text="@string/score_display"
             android:textColor="#FFFFFF"
-            android:focusable="false"
             app:layout_constraintBottom_toTopOf="@+id/display_player_name_text"
             app:layout_constraintStart_toEndOf="@+id/score_text_word"
             tools:ignore="MissingConstraints" />
@@ -104,6 +104,49 @@
             app:layout_constraintHorizontal_bias="0.626"
             app:layout_constraintStart_toStartOf="parent"
             tools:ignore="MissingConstraints" />
+
+
+        <ImageView
+            android:id="@+id/ghost"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginBottom="388dp"
+            android:contentDescription="@string/sprite"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.45"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/skull_v1_2" />
+
+        <ImageView
+            android:id="@+id/knight"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginBottom="432dp"
+            android:contentDescription="@string/sprite"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.381"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/vampire_v2_2" />
+
+        <ImageView
+            android:id="@+id/skeleton"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginBottom="408dp"
+            android:contentDescription="@string/sprite"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.329"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/skeleton_v1_1" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>

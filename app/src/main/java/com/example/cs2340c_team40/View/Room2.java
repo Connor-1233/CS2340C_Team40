@@ -39,23 +39,42 @@ public class Room2 extends Activity {
         Enemy ghost = enemyCreator.createEnemy("Ghost");
         ghost.setX(460);
         ghost.setY(820);
-        int[] ghostArray = {0,190,0,190};
+        int[] ghostArray = {0, 190, 0, 190};
+
+        ghost.setSprite((ImageView) findViewById(R.id.ghost));
+        ghost.getSprite().setImageResource(R.drawable.skull_v1_2);
+
         PlayerDirection ghostPattern = new MovePattern(ghost, ghostArray, 'd');
         ghost.setMoveDirection(ghostPattern);
         entities.add(ghost);
+
+
+
         //Knight Enemy
         Enemy knight = enemyCreator.createEnemy("Knight");
         knight.setX(260);
         knight.setY(830);
-        int[] knightArray = {220,0,220,0};
+        int[] knightArray = {220, 0, 220, 0};
+
+        knight.setSprite((ImageView) findViewById(R.id.knight));
+        knight.getSprite().setImageResource(R.drawable.vampire_v2_2);
+
         PlayerDirection knightPattern = new MovePattern(knight, knightArray, 'w');
         knight.setMoveDirection(knightPattern);
         entities.add(knight);
+
+
+
         //Skeleton Enemy
         Enemy skeleton = enemyCreator.createEnemy("Skeleton");
         skeleton.setX(400);
         skeleton.setY(620);
-        int[] skeletonArray = {100,200,100,200};
+
+        int[] skeletonArray = {100, 200, 100, 200};
+
+        skeleton.setSprite((ImageView) findViewById(R.id.knight));
+        skeleton.getSprite().setImageResource(R.drawable.skeleton_v1_1);
+
         PlayerDirection skeletonPattern = new MovePattern(skeleton, skeletonArray, 'd');
         skeleton.setMoveDirection(skeletonPattern);
         entities.add(skeleton);
@@ -70,8 +89,10 @@ public class Room2 extends Activity {
                     @Override
                     public void run() {
                         for (Subscriber subscriber : entities) {
+                            checkHealth();
                             subscriber.update();
-                            Log.d("position",  "x: " + subscriber.getX() + " y: " + subscriber.getY());
+                            Log.d("position",  "x: " + subscriber.getX()
+                                    + " y: " + subscriber.getY());
                         }
                     }
                 });
@@ -117,20 +138,20 @@ public class Room2 extends Activity {
         int newY = player.getY();
 
         switch (keyCode) {
-        case KeyEvent.KEYCODE_W:
-            newY = newY - 5;
-            break;
-        case KeyEvent.KEYCODE_S:
-            newY = newY + 5;
-            break;
-        case KeyEvent.KEYCODE_A:
-            newX = newX - 5;
-            break;
-        case KeyEvent.KEYCODE_D:
-            newX = newX + 5;
-            break;
-        default:
-            break;
+            case KeyEvent.KEYCODE_W:
+                newY = newY - 5;
+                break;
+            case KeyEvent.KEYCODE_S:
+                newY = newY + 5;
+                break;
+            case KeyEvent.KEYCODE_A:
+                newX = newX - 5;
+                break;
+            case KeyEvent.KEYCODE_D:
+                newX = newX + 5;
+                break;
+            default:
+                break;
         }
         boolean shouldMove = false;
 
@@ -149,20 +170,20 @@ public class Room2 extends Activity {
 
         if (shouldMove) {
             switch (keyCode) {
-            case KeyEvent.KEYCODE_W:
-                player.setMoveDirection(new MoveVertical(-1));
-                break;
-            case KeyEvent.KEYCODE_S:
-                player.setMoveDirection(new MoveVertical(1));
-                break;
-            case KeyEvent.KEYCODE_A:
-                player.setMoveDirection(new MoveHorizontal(-1));
-                break;
-            case KeyEvent.KEYCODE_D:
-                player.setMoveDirection(new MoveHorizontal(1));
-                break;
-            default:
-                return super.onKeyDown(keyCode, event);
+                case KeyEvent.KEYCODE_W:
+                    player.setMoveDirection(new MoveVertical(-1));
+                    break;
+                case KeyEvent.KEYCODE_S:
+                    player.setMoveDirection(new MoveVertical(1));
+                    break;
+                case KeyEvent.KEYCODE_A:
+                    player.setMoveDirection(new MoveHorizontal(-1));
+                    break;
+                case KeyEvent.KEYCODE_D:
+                    player.setMoveDirection(new MoveHorizontal(1));
+                    break;
+                default:
+                    return super.onKeyDown(keyCode, event);
             }
         }
 
@@ -174,5 +195,21 @@ public class Room2 extends Activity {
             }
         }
         return true;
+    }
+
+    public void checkHealth() {
+        if (GameScreenViewModel.isPlayerDead()) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    launchGameLoseScreen();
+                }
+            });
+        }
+    }
+
+    public void launchGameLoseScreen() {
+        Intent intent = new Intent(this, EndingScreen.class);
+        startActivity(intent);
     }
 }
