@@ -18,16 +18,16 @@ public abstract class Enemy implements Subscriber {
     public void playerCollision() {
         Player p = Player.getInstance();
         // Log.d("Player Collision Accessed", "Collision Accessed");
-//        boolean xCollisionRight = (p.getX() - p.getPixelWidth() < getX())
-//                && (p.getX() - p.getPixelWidth() > getX() - getPixelWidth());
-//        boolean xCollisionLeft = (p.getX() > getX() - getPixelWidth())
-//                && (p.getX() < getX());
-//        boolean xCollision = xCollisionLeft || xCollisionRight;
-//        boolean yCollisionUp = (p.getY() - p.getPixelHeight() < getY())
-//                && (p.getY() - p.getPixelHeight() > getY() - getPixelHeight());
-//        boolean yCollisionDown = (p.getY() > getY() - p.getPixelHeight())
-//                && (p.getY() < getY());
-//        boolean yCollision = yCollisionUp || yCollisionDown;
+        //        boolean xCollisionRight = (p.getX() - p.getPixelWidth() < getX())
+        //                && (p.getX() - p.getPixelWidth() > getX() - getPixelWidth());
+        //        boolean xCollisionLeft = (p.getX() > getX() - getPixelWidth())
+        //                && (p.getX() < getX());
+        //        boolean xCollision = xCollisionLeft || xCollisionRight;
+        //        boolean yCollisionUp = (p.getY() - p.getPixelHeight() < getY())
+        //                && (p.getY() - p.getPixelHeight() > getY() - getPixelHeight());
+        //        boolean yCollisionDown = (p.getY() > getY() - p.getPixelHeight())
+        //                && (p.getY() < getY());
+        //        boolean yCollision = yCollisionUp || yCollisionDown;
         boolean xCollision = p.getX() >= (getX() - 5) && p.getX() <= (getX() + 5);
         // Log.d("xCollision", String.valueOf(xCollision));
         boolean yCollision = p.getY() >= (getY() - 5) && p.getY() <= (getY() + 5);
@@ -39,15 +39,15 @@ public abstract class Enemy implements Subscriber {
             Log.d("Before Health : ", String.valueOf(p.getHealth()));
             if (difficulty == 0.5) {
                 // Easy Difficulty, decrease hp by a fifteenth
-                p.setHealth(p.getHealth() - 150 / 10);
+                p.setHealth(p.getHealth() - 10);
                 hitPlayer = true;
             } else if (difficulty == 0.75) {
                 // Medium Difficulty, decrease hp by a tenth
-                p.setHealth(p.getHealth() - 100 / 10);
+                p.setHealth(p.getHealth() - 15);
                 hitPlayer = true;
             } else {
                 // Hard Difficulty, decrease hp by a fifth
-                p.setHealth(p.getHealth() - 50 / 10);
+                p.setHealth(p.getHealth() - 20);
                 hitPlayer = true;
             }
             Log.d("After Health: ", String.valueOf(p.getHealth()));
