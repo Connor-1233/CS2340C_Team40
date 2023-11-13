@@ -1,6 +1,10 @@
 package com.example.cs2340c_team40.Model;
 
+import android.util.Log;
 import android.widget.ImageView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Player implements Subscriber {
 
@@ -18,8 +22,7 @@ public class Player implements Subscriber {
     private int pixelWidth;
     private int arrayX;
     private int arrayY;
-
-
+    private List<Enemy> enemyList = new ArrayList<>();
     private static Player player;
 
     private Player() {
@@ -27,7 +30,12 @@ public class Player implements Subscriber {
         spriteChoice = 0;
         moving = false;
     }
+    public void notifyEnemies() {
+        for (Enemy e : enemyList) {
 
+            e.playerCollision();
+        }
+    }
     public static Player getInstance() {
         if (player == null) {
             synchronized (Player.class) {
@@ -67,9 +75,11 @@ public class Player implements Subscriber {
     }
     public void setX(int x) {
         this.x = x;
+        notifyEnemies();
     }
     public void setY(int y) {
         this.y = y;
+        notifyEnemies();
     }
     public void setSprite(ImageView sprite) {
         this.sprite = sprite;
@@ -127,6 +137,10 @@ public class Player implements Subscriber {
 
     public int getPixelWidth() {
         return pixelWidth;
+    }
+
+    public List<Enemy> getEnemyList() {
+        return enemyList;
     }
 
 }

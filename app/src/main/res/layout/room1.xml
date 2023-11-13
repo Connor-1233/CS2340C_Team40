@@ -119,7 +119,7 @@
             android:focusable="true"
             android:contentDescription="@string/sprite"
             android:focusableInTouchMode="true"
-            app:srcCompat="@drawable/skull_v2_4" />
+            app:srcCompat="@drawable/skull_v1_2" />
 
 
         <ImageView
