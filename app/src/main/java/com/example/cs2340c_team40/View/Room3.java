@@ -67,6 +67,9 @@ public class Room3 extends Activity {
         knight.setMoveDirection(knightPattern);
         entities.add(knight);
 
+        player.getEnemyList().add(ghost);
+        player.getEnemyList().add(knight);
+
         //have to change x and y to where door is in each map
         GameScreenViewModel.initializePlayer(460, 1550, entities);
         moveTimer = new Timer();
@@ -79,6 +82,14 @@ public class Room3 extends Activity {
                         for (Subscriber subscriber : entities) {
                             checkHealth();
                             subscriber.update();
+                            // Log.d("position",  "x: " + subscriber.getX() + " y: " + subscriber.getY());
+                            EditText displayName = findViewById(R.id.display_player_name_text);
+                            EditText displayHealth = findViewById(R.id.display_health_text);
+                            displayName.setText(player.getName());
+                            String displayHealthString = "Health: " + player.getHealth();
+                            displayHealth.setText(displayHealthString);
+                            ImageView spriteImageView = findViewById(R.id.spriteImageView);
+                            
                             Log.d("position",  "x: " + subscriber.getX()
                                     + " y: " + subscriber.getY());
                         }

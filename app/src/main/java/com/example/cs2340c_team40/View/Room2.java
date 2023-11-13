@@ -63,6 +63,9 @@ public class Room2 extends Activity {
         knight.setMoveDirection(knightPattern);
         entities.add(knight);
 
+        player.getEnemyList().add(knight);
+        player.getEnemyList().add(ghost);
+
 
 
         //Skeleton Enemy
@@ -91,6 +94,13 @@ public class Room2 extends Activity {
                         for (Subscriber subscriber : entities) {
                             checkHealth();
                             subscriber.update();
+                            // Log.d("position",  "x: " + subscriber.getX() + " y: " + subscriber.getY());
+                            EditText displayName = findViewById(R.id.display_player_name_text);
+                            EditText displayHealth = findViewById(R.id.display_health_text);
+                            displayName.setText(player.getName());
+                            String displayHealthString = "Health: " + player.getHealth();
+                            displayHealth.setText(displayHealthString);
+                            ImageView spriteImageView = findViewById(R.id.spriteImageView);
                             Log.d("position",  "x: " + subscriber.getX()
                                     + " y: " + subscriber.getY());
                         }

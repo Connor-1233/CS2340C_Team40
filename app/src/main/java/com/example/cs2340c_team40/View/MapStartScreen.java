@@ -70,6 +70,8 @@ public class MapStartScreen extends Activity {
         PlayerDirection knightPattern = new MovePattern(knight, knightArray, 'd');
         knight.setMoveDirection(knightPattern);
         entities.add(knight);
+        player.getEnemyList().add(knight);
+        player.getEnemyList().add(ghost);
 
 
         // i update start location to top door
@@ -105,12 +107,18 @@ public class MapStartScreen extends Activity {
         if (player.getSpriteChoice() == 1) {
             spriteImageView.setImageResource(R.drawable.sprite1);
             player.getSprite().setImageResource(R.drawable.sprite1);
+            player.setPixelHeight(spriteImageView.getHeight());
+            player.setPixelWidth(spriteImageView.getWidth());
         } else if (player.getSpriteChoice() == 2) {
             spriteImageView.setImageResource(R.drawable.sprite2);
             player.getSprite().setImageResource(R.drawable.sprite2);
+            player.setPixelHeight(spriteImageView.getHeight());
+            player.setPixelWidth(spriteImageView.getWidth());
         } else {
             spriteImageView.setImageResource(R.drawable.sprite3);
             player.getSprite().setImageResource(R.drawable.sprite3);
+            player.setPixelHeight(spriteImageView.getHeight());
+            player.setPixelWidth(spriteImageView.getWidth());
         }
 
         TextView scoreTimerText = findViewById(R.id.score_text);
@@ -120,6 +128,11 @@ public class MapStartScreen extends Activity {
                 scoreTimerText.setText(String.valueOf(counter));
                 counter--;
                 player.setScore(counter);
+                EditText displayName = findViewById(R.id.display_player_name_text);
+                EditText displayHealth = findViewById(R.id.display_health_text);
+                displayName.setText(player.getName());
+                String displayHealthString = "Health: " + player.getHealth();
+                displayHealth.setText(displayHealthString);
             }
             public void onFinish() {
                 scoreTimerText.setText(R.string.timerFinish);
