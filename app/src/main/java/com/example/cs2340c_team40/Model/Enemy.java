@@ -8,6 +8,7 @@ public abstract class Enemy implements Subscriber {
     private int x;
     private int y;
     private boolean moving;
+
     private PlayerDirection enemyDirection;
     private ImageView sprite;
     private int pixelHeight;
@@ -16,8 +17,8 @@ public abstract class Enemy implements Subscriber {
 
     public void update() {
         enemyDirection.movePlayer();
-        //sprite.setX(x);
-        //sprite.setY(y);
+        sprite.setX(x);
+        sprite.setY(y);
     }
 
     public abstract void createMovement();
@@ -52,6 +53,13 @@ public abstract class Enemy implements Subscriber {
     }
     public int getY() {
         return y;
+    }
+
+    public void setSprite(ImageView sprite) {
+        this.sprite = sprite;
+    }
+    public ImageView getSprite() {
+        return sprite;
     }
 
 }
