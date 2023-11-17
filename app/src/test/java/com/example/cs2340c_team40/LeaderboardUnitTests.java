@@ -10,6 +10,7 @@ public class LeaderboardUnitTests {
     @Test
     public void AddScoreToLeaderboard() {
         Leaderboard testBoard = Leaderboard.getInstance();
+        testBoard.resetLeaderboard();
         //Add a first score
         testBoard.updateScore(70, "James");
         assertEquals(testBoard.getScore(0).getScore(), 70);
@@ -30,6 +31,7 @@ public class LeaderboardUnitTests {
     @Test
     public void AddManyScores() {
         Leaderboard testBoard = Leaderboard.getInstance();
+        testBoard.resetLeaderboard();
         //Add 6 scores
         testBoard.updateScore(10, "A");
         testBoard.updateScore(20, "B");
