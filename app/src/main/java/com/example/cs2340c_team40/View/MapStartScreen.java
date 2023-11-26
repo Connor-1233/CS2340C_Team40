@@ -125,9 +125,9 @@ public class MapStartScreen extends Activity {
                 scoreTimerText.setText(String.valueOf(counter));
                 counter--;
                 player.setScore(counter);
-                EditText displayName = findViewById(R.id.display_player_name_text);
+                //EditText displayName = findViewById(R.id.display_player_name_text);
                 EditText displayHealth = findViewById(R.id.display_health_text);
-                displayName.setText(player.getName());
+                //displayName.setText(player.getName());
                 String displayHealthString = "Health: " + player.getHealth();
                 displayHealth.setText(displayHealthString);
             }

@@ -3,6 +3,7 @@ package com.example.cs2340c_team40.View;
 import android.content.Intent;
 import android.os.Bundle;
 import android.app.Activity;
+import android.os.CountDownTimer;
 import android.view.KeyEvent;
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,6 +27,7 @@ import java.util.TimerTask;
 
 public class Room2 extends Activity {
     private final Player player = Player.getInstance();
+    private int counter;
     private Timer moveTimer;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,18 +70,18 @@ public class Room2 extends Activity {
 
 
         //Skeleton Enemy
-        Enemy skeleton = enemyCreator.createEnemy("Skeleton");
-        skeleton.setX(400);
-        skeleton.setY(620);
-
-        int[] skeletonArray = {100, 200, 100, 200};
-
-        skeleton.setSprite((ImageView) findViewById(R.id.knight));
-        skeleton.getSprite().setImageResource(R.drawable.skeleton_v1_1);
-
-        PlayerDirection skeletonPattern = new MovePattern(skeleton, skeletonArray, 'd');
-        skeleton.setMoveDirection(skeletonPattern);
-        entities.add(skeleton);
+        //        Enemy skeleton = enemyCreator.createEnemy("Skeleton");
+        //        skeleton.setX(400);
+        //        skeleton.setY(620);
+        //
+        //        int[] skeletonArray = {100, 200, 100, 200};
+        //
+        //        skeleton.setSprite((ImageView) findViewById(R.id.knight));
+        //        skeleton.getSprite().setImageResource(R.drawable.skeleton_v1_1);
+        //
+        //        PlayerDirection skeletonPattern = new MovePattern(skeleton, skeletonArray, 'd');
+        //        skeleton.setMoveDirection(skeletonPattern);
+        //        entities.add(skeleton);
 
 
         GameScreenViewModel.initializePlayer(640, 1415, entities);
@@ -107,16 +109,38 @@ public class Room2 extends Activity {
         }, 0, 50);
 
         //        IterateView.checkA(room, player, this.getApplicationContext(), 2);
-        EditText displayName = findViewById(R.id.display_player_name_text);
-        EditText displayHealth = findViewById(R.id.display_health_text);
-        TextView scoreTimerText = findViewById(R.id.score_text);
+        //        EditText displayName = findViewById(R.id.display_player_name_text);
+        //        EditText displayHealth = findViewById(R.id.display_health_text);
+                TextView scoreTimerText = findViewById(R.id.score_text);
+        //
+        //        displayName.setText(player.getName());
+        //        String displayHealthString = "Health: " + player.getHealth();
+        //        displayHealth.setText(displayHealthString);
+        //        scoreTimerText.setText(String.valueOf(player.getScore()));
 
-        displayName.setText(player.getName());
-        String displayHealthString = "Health: " + player.getHealth();
-        displayHealth.setText(displayHealthString);
-        scoreTimerText.setText(String.valueOf(player.getScore()));
+        counter = player.getScore();
+        new CountDownTimer(30000, 1000) {
+            public void onTick(long millisUntilFinished) {
+                if (counter >= 0) {
+                    if (counter != 0) {
+                        counter--;
+                    }
+                    scoreTimerText.setText(String.valueOf(counter));
+                    player.setScore(counter);
+                    //EditText displayName = findViewById(R.id.display_player_name_text);
+                    EditText displayHealth = findViewById(R.id.display_health_text);
+                    //displayName.setText(player.getName());
+                    String displayHealthString = "Health: " + player.getHealth();
+                    displayHealth.setText(displayHealthString);
+                }
+
+            }
+            public void onFinish() {
+                scoreTimerText.setText(R.string.timerFinish);
+            }
+        }.start();
+
         ImageView spriteImageView = findViewById(R.id.spriteImageView);
-
         player.setSprite((ImageView) findViewById(R.id.sprite));
 
         if (player.getSpriteChoice() == 1) {

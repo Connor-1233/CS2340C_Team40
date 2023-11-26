@@ -3,6 +3,7 @@ package com.example.cs2340c_team40.View;
 import android.content.Intent;
 import android.os.Bundle;
 import android.app.Activity;
+import android.os.CountDownTimer;
 import android.view.KeyEvent;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,6 +26,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class Room3 extends Activity {
+    private int counter;
     private final Player player = Player.getInstance();
     private Timer moveTimer;
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,15 +97,37 @@ public class Room3 extends Activity {
 
         }, 0, 50);
 
-        EditText displayName = findViewById(R.id.display_player_name_text);
-        EditText displayHealth = findViewById(R.id.display_health_text);
-        TextView scoreTimerText = findViewById(R.id.score_text);
+        //        EditText displayName = findViewById(R.id.display_player_name_text);
+        //        EditText displayHealth = findViewById(R.id.display_health_text);
+        //displayName.setText(player.getName());
+        //String displayHealthString = "Health: " + player.getHealth();
+        //displayHealth.setText(displayHealthString);
+        //.setText(String.valueOf(player.getScore()));
 
+        TextView scoreTimerText = findViewById(R.id.score_text);
         player.setSprite((ImageView) findViewById(R.id.sprite));
-        displayName.setText(player.getName());
-        String displayHealthString = "Health: " + player.getHealth();
-        displayHealth.setText(displayHealthString);
-        scoreTimerText.setText(String.valueOf(player.getScore()));
+
+        counter = player.getScore();
+        new CountDownTimer(30000, 1000) {
+            public void onTick(long millisUntilFinished) {
+                if (counter >= 0) {
+                    if (counter != 0) {
+                        counter--;
+                    }
+                    scoreTimerText.setText(String.valueOf(counter));
+                    player.setScore(counter);
+                    EditText displayName = findViewById(R.id.display_player_name_text);
+                    EditText displayHealth = findViewById(R.id.display_health_text);
+                    displayName.setText(player.getName());
+                    String displayHealthString = "Health: " + player.getHealth();
+                    displayHealth.setText(displayHealthString);
+                }
+            }
+            public void onFinish() {
+                scoreTimerText.setText(R.string.timerFinish);
+            }
+        }.start();
+
         ImageView spriteImageView = findViewById(R.id.spriteImageView);
 
         if (player.getSpriteChoice() == 1) {
