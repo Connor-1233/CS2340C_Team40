@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.app.Activity;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.KeyEvent;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -165,6 +167,7 @@ public class Room2 extends Activity {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         int[] coords = GameScreenViewModel.getNewCoordinates(keyCode, player.getX(), player.getY());
         boolean shouldMove = GameScreenViewModel.shouldPlayerMove(Room2.class, coords[0], coords[1]);
+        boolean[] hitPowerUpArray = GameScreenViewModel.hasHitPowerUp(Room2.class, coords[0], coords[1]);
 
         if (shouldMove) {
             switch (keyCode) {
@@ -185,6 +188,17 @@ public class Room2 extends Activity {
             }
         }
 
+        if (hitPowerUpArray[0]) { //we've hit the bottom power-up
+            ImageView scorePowerUp = findViewById(R.id.score_powerup);
+            scorePowerUp.setVisibility(View.INVISIBLE);
+            //probably implement the power-up functionality here
+        } else if (hitPowerUpArray[1]) { //we've hit the top power-up
+            ImageView damagePowerUp = findViewById(R.id.damage_powerup);
+            damagePowerUp.setVisibility(View.INVISIBLE);
+            //probably implement the power-up functionality here
+        }
+
+        //Log.d("Room2 Position",  "x: " + player.getX() + " y: " + player.getY());
         if (shouldMove) {
             if (player.getX() == 200 && player.getY() <= 715 && player.getY() >= 700) {
                 Intent intent = new Intent(this, Room3.class);

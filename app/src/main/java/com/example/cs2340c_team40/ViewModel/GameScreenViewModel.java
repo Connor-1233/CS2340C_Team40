@@ -102,18 +102,36 @@ public class GameScreenViewModel {
 
     }
 
-    public static boolean hasHitPowerUp(Class<?> clazz, int newX, int newY) {
-        boolean hitPowerUp = false;
+    public static boolean[] hasHitPowerUp(Class<?> clazz, int newX, int newY) {
+        boolean[] powerUpArray = new boolean[2];
+
+        boolean hitPowerBottom = false; //this is the power-up closest to top of screen
+        boolean hitPowerTop = false; //this is the power-up closest to bottom of screen
+
 
         if (clazz.equals(Room1.class)) {
-            hitPowerUp = true;
+            if (newX <= 410 && newY >= 955) {
+                hitPowerBottom = true;
+            } else if (newX >= 585 && newX <= 660 && newY >= 605 && newY <= 650) {
+                hitPowerTop = true;
+            }
         } else if (clazz.equals(Room2.class)) {
-            hitPowerUp = newX > newY; //change this
+            if (newX >= 615 && newX <= 680 && newY >= 1085 && newY <= 1170) {
+                hitPowerBottom = true;
+            } else if (newX >= 645 && newX <= 685 && newY >= 795 && newY <= 865) {
+                hitPowerTop = true;
+            }
         } else if (clazz.equals(Room3.class)) {
-            hitPowerUp = newX > newY; //change this
+            if (newX >= 430 && newX <= 490 && newY >= 1340 && newY <= 1425) {
+                hitPowerBottom = true;
+            } else if (newX >= 435 && newX <= 500 && newY >= 1090 && newY <= 1170) {
+                hitPowerTop = true;
+            }
         }
 
-        return hitPowerUp; //if player has hit a powerup
+        powerUpArray[0] = hitPowerBottom;
+        powerUpArray[1] = hitPowerTop;
+        return powerUpArray; //if player has hit a powerup
     }
 
     /**
