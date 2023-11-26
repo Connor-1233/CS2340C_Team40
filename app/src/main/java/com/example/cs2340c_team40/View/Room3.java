@@ -187,7 +187,7 @@ public class Room3 extends Activity {
             //probably implement the power-up functionality here
         }
 
-        Log.d("Room3 Position",  "x: " + player.getX() + " y: " + player.getY());
+        //Log.d("Room3 Position",  "x: " + player.getX() + " y: " + player.getY());
         if (shouldMove) {
             if (player.getX() == 925 && player.getY() <= 640 && player.getY() >= 595) {
                 Intent intent = new Intent(this, EndingScreen.class);

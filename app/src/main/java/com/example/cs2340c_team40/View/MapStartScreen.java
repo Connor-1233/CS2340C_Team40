@@ -188,7 +188,7 @@ public class MapStartScreen extends Activity {
             //probably implement the power-up functionality here
         }
 
-        Log.d("Room1 Position",  "x: " + player.getX() + " y: " + player.getY());
+        //Log.d("Room1 Position",  "x: " + player.getX() + " y: " + player.getY());
         if (shouldMove) {
             if (player.getX() == 530 && player.getY() == 605) {
                 Intent intent = new Intent(this, Room2.class);
