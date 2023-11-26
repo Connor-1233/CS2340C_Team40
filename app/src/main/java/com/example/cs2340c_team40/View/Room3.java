@@ -152,37 +152,8 @@ public class Room3 extends Activity {
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-
-        int newX = player.getX();
-        int newY = player.getY();
-
-        switch (keyCode) {
-        case KeyEvent.KEYCODE_W:
-            newY = newY - 5;
-            break;
-        case KeyEvent.KEYCODE_S:
-            newY = newY + 5;
-            break;
-        case KeyEvent.KEYCODE_A:
-            newX = newX - 5;
-            break;
-        case KeyEvent.KEYCODE_D:
-            newX = newX + 5;
-            break;
-        default:
-            break;
-        }
-        boolean shouldMove = false;
-
-        if (newY <= 1550 && newY >= 1050 && newX >= 375 && newX <= 545) { //first room
-            shouldMove = true;
-        } else if (newY >= 910 && newY <= 1050 && newX >= 400 && newX <= 520) { //hallway
-            shouldMove = true;
-        } else if (newX >= 265 && newX <= 645 && newY <= 925 && newY >= 325) { //bigRoom
-            shouldMove = true;
-        } else if (newX >= 640 && newX <= 925 && newY <= 640 && newY >= 595) { //passing door
-            shouldMove = true;
-        }
+        int[] coords = GameScreenViewModel.getNewCoordinates(keyCode, player.getX(), player.getY());
+        boolean shouldMove = GameScreenViewModel.shouldPlayerMove(Room3.class, coords[0], coords[1]);
 
         if (shouldMove) {
             switch (keyCode) {
