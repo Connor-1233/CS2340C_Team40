@@ -10,7 +10,8 @@ public class Player implements Subscriber {
     private String name;
     private int score; //power up
     private int health; //power up
-    private int speed; //power up
+    private int damage; //power up
+    private int speed;
     private double difficulty;
     private int spriteChoice;
     private int x;
@@ -28,8 +29,10 @@ public class Player implements Subscriber {
     private Player() {
         difficulty = 0;
         spriteChoice = 0;
-        speed = 5;
+        damage = 20;
         moving = false;
+        speed = 5;
+        score = 0;
     }
     public void notifyEnemies() {
         for (Enemy e : enemyList) {
@@ -142,6 +145,14 @@ public class Player implements Subscriber {
 
     public List<Enemy> getEnemyList() {
         return enemyList;
+    }
+
+    public int getDamage() {
+        return damage;
+    }
+
+    public void setDamage(int damage) {
+        this.damage = damage;
     }
 
     public int getSpeed() {
