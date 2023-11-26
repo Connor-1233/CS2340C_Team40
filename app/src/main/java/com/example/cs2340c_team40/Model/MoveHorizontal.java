@@ -11,9 +11,9 @@ public class MoveHorizontal implements PlayerDirection {
     public void movePlayer() {
         result = player.getX();
         if (dir == 1) { //move right
-            result += 5;
+            result += player.getSpeed();
         } else if (dir == -1) {
-            result -= 5;
+            result -= player.getSpeed();
         }
         player.setX(result);
         player.setMoving(true);

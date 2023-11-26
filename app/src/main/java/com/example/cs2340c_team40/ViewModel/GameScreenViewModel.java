@@ -46,16 +46,16 @@ public class GameScreenViewModel {
 
         switch (keyCode) {
         case KeyEvent.KEYCODE_W:
-            newY = newY - 5;
+            newY = newY - player.getSpeed();
             break;
         case KeyEvent.KEYCODE_S:
-            newY = newY + 5;
+            newY = newY + player.getSpeed();
             break;
         case KeyEvent.KEYCODE_A:
-            newX = newX - 5;
+            newX = newX - player.getSpeed();
             break;
         case KeyEvent.KEYCODE_D:
-            newX = newX + 5;
+            newX = newX + player.getSpeed();
             break;
         default:
             break;

@@ -10,9 +10,9 @@ public class MoveVertical implements PlayerDirection {
     public void movePlayer() {
         result = player.getY();
         if (dir == 1) { //move down
-            result += 5;
+            result += player.getSpeed();
         } else if (dir == -1) {
-            result -= 5;
+            result -= player.getSpeed();
         }
         player.setY(result);
         player.setMoving(true);
