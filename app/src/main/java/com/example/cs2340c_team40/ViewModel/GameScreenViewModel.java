@@ -39,6 +39,15 @@ public class GameScreenViewModel {
         return health;
     }
 
+    /**
+     * A method that calculates the new x and y coordinates based on the key input.
+     * @param keyCode an int that represents W, S, A or D (do nothing with anything else)
+     * @param x current x position of the player
+     * @param y current y position of the player
+     * @return an integer array of the new X and new Y variables
+     *         the 0th index holds the newX
+     *         the 1st index holds the newY
+     */
     public static int[] getNewCoordinates(int keyCode, int x, int y) {
         int[] coords = new int[2];
         int newX = x;
@@ -66,6 +75,14 @@ public class GameScreenViewModel {
         return coords;
     }
 
+    /**
+     * A method that checks whether a player can move. It performs collision detection
+     * with walls.
+     * @param clazz class the player is in for the specific collision detection
+     * @param newX the calculated new X variable from a key input
+     * @param newY the calculated new Y variable from a key input
+     * @return true if the player should move, false if a player will collide into a wall
+     */
     public static boolean shouldPlayerMove(Class<?> clazz, int newX, int newY) {
 
         boolean shouldMove = false;
@@ -102,6 +119,17 @@ public class GameScreenViewModel {
 
     }
 
+    /**
+     * A method that will calculate whether a player's position overlaps or aligns with
+     * a power-ups' position. It returns a boolean array because there are two power-ups
+     * in each room, thus the first index (index 0) holds whether the power-up closest to the
+     * bottom of the screen has been hit. The second index (index 1) holds the boolean of
+     * whether the power-up closest to the top of the screen has collided with the player.
+     * @param clazz class the player is in for the specific collision detection
+     * @param newX the calculated new X variable from a key input
+     * @param newY the calculated new Y variable from a key input
+     * @return boolean array of whether a player has gained a power-up
+     */
     public static boolean[] hasHitPowerUp(Class<?> clazz, int newX, int newY) {
         boolean[] powerUpArray = new boolean[2];
 
