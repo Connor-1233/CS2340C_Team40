@@ -137,6 +137,32 @@
             app:layout_constraintStart_toStartOf="parent"
             app:srcCompat="@drawable/vampire_v2_2" />
 
+        <ImageView
+            android:id="@+id/damage_powerup"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginBottom="188dp"
+            android:contentDescription="@string/Damage_PowerUp"
+            android:src="@drawable/power_up_damage"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.447"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:id="@+id/health_powerup"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginBottom="280dp"
+            android:contentDescription="@string/Health_PowerUp"
+            android:src="@drawable/power_up_health"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.45"
+            app:layout_constraintStart_toStartOf="parent" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>
