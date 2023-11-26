@@ -36,7 +36,7 @@ public abstract class Enemy implements Subscriber {
         if (xCollision && yCollision) {
             // Log.d("collision: ", String.valueOf(xCollision && yCollision));
             double difficulty = p.getDifficulty();
-            Log.d("Before Health : ", String.valueOf(p.getHealth()));
+            //Log.d("Before Health : ", String.valueOf(p.getHealth()));
             if (difficulty == 0.5) {
                 // Easy Difficulty, decrease hp by a fifteenth
                 p.setHealth(p.getHealth() - 10);
@@ -50,7 +50,7 @@ public abstract class Enemy implements Subscriber {
                 p.setHealth(p.getHealth() - 20);
                 hitPlayer = true;
             }
-            Log.d("After Health: ", String.valueOf(p.getHealth()));
+            //Log.d("After Health: ", String.valueOf(p.getHealth()));
         }
         if (hitPlayer) {
             p.setY(p.getY() + 30);

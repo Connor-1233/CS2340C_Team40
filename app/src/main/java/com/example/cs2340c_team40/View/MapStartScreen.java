@@ -3,7 +3,9 @@ package com.example.cs2340c_team40.View;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.KeyEvent;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -155,6 +157,7 @@ public class MapStartScreen extends Activity {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         int[] coords = GameScreenViewModel.getNewCoordinates(keyCode, player.getX(), player.getY());
         boolean shouldMove = GameScreenViewModel.shouldPlayerMove(Room1.class, coords[0], coords[1]);
+        boolean[] hitPowerUpArray = GameScreenViewModel.hasHitPowerUp(Room1.class, coords[0], coords[1]);
 
         if (shouldMove) {
             switch (keyCode) {
@@ -175,6 +178,17 @@ public class MapStartScreen extends Activity {
             }
         }
 
+        if (hitPowerUpArray[0]) { //we've hit the bottom power-up
+            ImageView scorePowerUp = findViewById(R.id.score_powerup);
+            scorePowerUp.setVisibility(View.INVISIBLE);
+            //probably implement the power-up functionality here
+        } else if (hitPowerUpArray[1]) { //we've hit the top power-up
+            ImageView healthPowerUp = findViewById(R.id.health_powerup);
+            healthPowerUp.setVisibility(View.INVISIBLE);
+            //probably implement the power-up functionality here
+        }
+
+        Log.d("Room1 Position",  "x: " + player.getX() + " y: " + player.getY());
         if (shouldMove) {
             if (player.getX() == 530 && player.getY() == 605) {
                 Intent intent = new Intent(this, Room2.class);
@@ -196,4 +210,7 @@ public class MapStartScreen extends Activity {
         Intent intent = new Intent(this, EndingScreen.class);
         startActivity(intent);
     }
+
+
+
 }
