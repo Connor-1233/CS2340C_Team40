@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Timer;
 
 import com.example.cs2340c_team40.Model.Player;
+import com.example.cs2340c_team40.Model.PowerUp;
 import com.example.cs2340c_team40.Model.Subscriber;
 
 public class GameScreenViewModel {
@@ -32,6 +33,17 @@ public class GameScreenViewModel {
             health = 50;
         }
         return health;
+    }
+
+    public static void applyPowerUps() {
+        if (hasHitPowerUp()) {
+            PowerUp basicPlayer = player;
+
+        }
+    }
+
+    public static boolean hasHitPowerUp() {
+        return true; //if player has hit a powerup
     }
 
     /**
