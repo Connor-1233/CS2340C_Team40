@@ -76,10 +76,16 @@ public class Player implements Subscriber {
     public void setX(int x) {
         this.x = x;
         notifyEnemies();
+        Weapon weapon = Weapon.getInstance();
+        weapon.setX(x);
+        // Sets the x-value to that of the Player (make sure there is some offset)
     }
     public void setY(int y) {
         this.y = y;
         notifyEnemies();
+        Weapon weapon = Weapon.getInstance();
+        weapon.setY(y);
+        // Sets the y-value to that of the Player (make sure there is some offset so that the weapon shows)
     }
     public void setSprite(ImageView sprite) {
         this.sprite = sprite;
