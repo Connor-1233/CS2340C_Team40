@@ -30,4 +30,7 @@
     <string name="you_won">You Won!</string>
     <string name="you_lose">You Lose!</string>
     <string name="restart_game">Restart Game</string>
+    <string name="Score_PowerUp" />
+    <string name="Health_PowerUp" />
+    <string name="Damage_PowerUp" />
 </resources>

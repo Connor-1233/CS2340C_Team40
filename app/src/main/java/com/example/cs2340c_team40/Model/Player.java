@@ -8,8 +8,8 @@ import java.util.List;
 public class Player implements Subscriber {
 
     private String name;
-    private int score;
-    private int health;
+    private int score; //power up
+    private int health; //power up
     private double difficulty;
     private int spriteChoice;
     private int x;

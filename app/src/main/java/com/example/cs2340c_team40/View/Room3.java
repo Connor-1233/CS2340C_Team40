@@ -3,6 +3,7 @@ package com.example.cs2340c_team40.View;
 import android.content.Intent;
 import android.os.Bundle;
 import android.app.Activity;
+import android.os.CountDownTimer;
 import android.view.KeyEvent;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,6 +26,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class Room3 extends Activity {
+    private int counter;
     private final Player player = Player.getInstance();
     private Timer moveTimer;
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,12 +83,12 @@ public class Room3 extends Activity {
                         for (Subscriber subscriber : entities) {
                             checkHealth();
                             subscriber.update();
-                            EditText displayName = findViewById(R.id.display_player_name_text);
-                            EditText displayHealth = findViewById(R.id.display_health_text);
-                            displayName.setText(player.getName());
-                            String displayHealthString = "Health: " + player.getHealth();
-                            displayHealth.setText(displayHealthString);
-                            ImageView spriteImageView = findViewById(R.id.spriteImageView);
+                            //EditText displayName = findViewById(R.id.display_player_name_text);
+                            //EditText displayHealth = findViewById(R.id.display_health_text);
+                            //displayName.setText(player.getName());
+                            //String displayHealthString = "Health: " + player.getHealth();
+                            //displayHealth.setText(displayHealthString);
+                            //ImageView spriteImageView = findViewById(R.id.spriteImageView);
 
                         }
                     }
@@ -95,15 +97,37 @@ public class Room3 extends Activity {
 
         }, 0, 50);
 
-        EditText displayName = findViewById(R.id.display_player_name_text);
-        EditText displayHealth = findViewById(R.id.display_health_text);
-        TextView scoreTimerText = findViewById(R.id.score_text);
+        //        EditText displayName = findViewById(R.id.display_player_name_text);
+        //        EditText displayHealth = findViewById(R.id.display_health_text);
+        //displayName.setText(player.getName());
+        //String displayHealthString = "Health: " + player.getHealth();
+        //displayHealth.setText(displayHealthString);
+        //.setText(String.valueOf(player.getScore()));
 
+        TextView scoreTimerText = findViewById(R.id.score_text);
         player.setSprite((ImageView) findViewById(R.id.sprite));
-        displayName.setText(player.getName());
-        String displayHealthString = "Health: " + player.getHealth();
-        displayHealth.setText(displayHealthString);
-        scoreTimerText.setText(String.valueOf(player.getScore()));
+
+        counter = player.getScore();
+        new CountDownTimer(30000, 1000) {
+            public void onTick(long millisUntilFinished) {
+                if (counter >= 0) {
+                    if (counter != 0) {
+                        counter--;
+                    }
+                    scoreTimerText.setText(String.valueOf(counter));
+                    player.setScore(counter);
+                    EditText displayName = findViewById(R.id.display_player_name_text);
+                    EditText displayHealth = findViewById(R.id.display_health_text);
+                    displayName.setText(player.getName());
+                    String displayHealthString = "Health: " + player.getHealth();
+                    displayHealth.setText(displayHealthString);
+                }
+            }
+            public void onFinish() {
+                scoreTimerText.setText(R.string.timerFinish);
+            }
+        }.start();
+
         ImageView spriteImageView = findViewById(R.id.spriteImageView);
 
         if (player.getSpriteChoice() == 1) {
@@ -128,37 +152,8 @@ public class Room3 extends Activity {
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-
-        int newX = player.getX();
-        int newY = player.getY();
-
-        switch (keyCode) {
-        case KeyEvent.KEYCODE_W:
-            newY = newY - 5;
-            break;
-        case KeyEvent.KEYCODE_S:
-            newY = newY + 5;
-            break;
-        case KeyEvent.KEYCODE_A:
-            newX = newX - 5;
-            break;
-        case KeyEvent.KEYCODE_D:
-            newX = newX + 5;
-            break;
-        default:
-            break;
-        }
-        boolean shouldMove = false;
-
-        if (newY <= 1550 && newY >= 1050 && newX >= 375 && newX <= 545) { //first room
-            shouldMove = true;
-        } else if (newY >= 910 && newY <= 1050 && newX >= 400 && newX <= 520) { //hallway
-            shouldMove = true;
-        } else if (newX >= 265 && newX <= 645 && newY <= 925 && newY >= 325) { //bigRoom
-            shouldMove = true;
-        } else if (newX >= 640 && newX <= 925 && newY <= 640 && newY >= 595) { //passing door
-            shouldMove = true;
-        }
+        int[] coords = GameScreenViewModel.getNewCoordinates(keyCode, player.getX(), player.getY());
+        boolean shouldMove = GameScreenViewModel.shouldPlayerMove(Room3.class, coords[0], coords[1]);
 
         if (shouldMove) {
             switch (keyCode) {
@@ -191,12 +186,6 @@ public class Room3 extends Activity {
 
     public void checkHealth() {
         if (GameScreenViewModel.isPlayerDead()) {
-            //            runOnUiThread(new Runnable() {
-            //                @Override
-            //                public void run() {
-            //                    launchGameLoseScreen();
-            //                }
-            //            });
             launchGameLoseScreen();
         }
     }

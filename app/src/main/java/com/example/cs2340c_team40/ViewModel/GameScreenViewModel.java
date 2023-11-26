@@ -1,11 +1,16 @@
 package com.example.cs2340c_team40.ViewModel;
 
 
+import android.view.KeyEvent;
+
 import java.util.ArrayList;
 import java.util.Timer;
 
 import com.example.cs2340c_team40.Model.Player;
 import com.example.cs2340c_team40.Model.Subscriber;
+import com.example.cs2340c_team40.View.Room1;
+import com.example.cs2340c_team40.View.Room2;
+import com.example.cs2340c_team40.View.Room3;
 
 public class GameScreenViewModel {
     private static Timer dotTimer = new Timer();
@@ -32,6 +37,83 @@ public class GameScreenViewModel {
             health = 50;
         }
         return health;
+    }
+
+    public static int[] getNewCoordinates(int keyCode, int x, int y) {
+        int[] coords = new int[2];
+        int newX = x;
+        int newY = y;
+
+        switch (keyCode) {
+        case KeyEvent.KEYCODE_W:
+            newY = newY - 5;
+            break;
+        case KeyEvent.KEYCODE_S:
+            newY = newY + 5;
+            break;
+        case KeyEvent.KEYCODE_A:
+            newX = newX - 5;
+            break;
+        case KeyEvent.KEYCODE_D:
+            newX = newX + 5;
+            break;
+        default:
+            break;
+        }
+
+        coords[0] = newX;
+        coords[1] = newY;
+        return coords;
+    }
+
+    public static boolean shouldPlayerMove(Class<?> clazz, int newX, int newY) {
+
+        boolean shouldMove = false;
+
+        if (clazz.equals(Room1.class)) {
+            shouldMove = newY <= 1000 && newY >= 605 && newX >= 380 && newX <= 685;
+        } else if (clazz.equals(Room2.class)) {
+            if (newY <= 1415 && newY >= 1320 && newX >= 625 && newX <= 645) { //entry way
+                shouldMove = true;
+            } else if (newY >= 1210 && newY <= 1320 && newX == 640) { //hallway
+                shouldMove = true;
+            } else if (newX >= 590 && newX <= 680 && newY <= 1210 && newY >= 975) { //room after hallway
+                shouldMove = true;
+            } else if (newX >= 650 && newX <= 680 && newY <= 975 && newY >= 860) { //passing door
+                shouldMove = true;
+            } else if (newX >= 200 && newX <= 685 && newY <= 860 && newY >= 525) { //big room
+                shouldMove = true;
+            }
+        } else if (clazz.equals(Room3.class)) {
+            if (newY <= 1550 && newY >= 1050 && newX >= 375 && newX <= 545) { //first room
+                shouldMove = true;
+            } else if (newY >= 910 && newY <= 1050 && newX >= 400 && newX <= 520) { //hallway
+                shouldMove = true;
+            } else if (newX >= 265 && newX <= 645 && newY <= 925 && newY >= 325) { //bigRoom
+                shouldMove = true;
+            } else if (newX >= 640 && newX <= 925 && newY <= 640 && newY >= 595) { //passing door
+                shouldMove = true;
+            }
+        }
+        return shouldMove;
+    }
+
+    public static void applyPowerUps() {
+
+    }
+
+    public static boolean hasHitPowerUp(Class<?> clazz, int newX, int newY) {
+        boolean hitPowerUp = false;
+
+        if (clazz.equals(Room1.class)) {
+            hitPowerUp = true;
+        } else if (clazz.equals(Room2.class)) {
+            hitPowerUp = newX > newY; //change this
+        } else if (clazz.equals(Room3.class)) {
+            hitPowerUp = newX > newY; //change this
+        }
+
+        return hitPowerUp; //if player has hit a powerup
     }
 
     /**

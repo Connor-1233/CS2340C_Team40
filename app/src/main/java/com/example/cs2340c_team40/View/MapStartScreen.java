@@ -125,9 +125,9 @@ public class MapStartScreen extends Activity {
                 scoreTimerText.setText(String.valueOf(counter));
                 counter--;
                 player.setScore(counter);
-                EditText displayName = findViewById(R.id.display_player_name_text);
+                //EditText displayName = findViewById(R.id.display_player_name_text);
                 EditText displayHealth = findViewById(R.id.display_health_text);
-                displayName.setText(player.getName());
+                //displayName.setText(player.getName());
                 String displayHealthString = "Health: " + player.getHealth();
                 displayHealth.setText(displayHealthString);
             }
@@ -153,29 +153,8 @@ public class MapStartScreen extends Activity {
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-
-        int newX = player.getX();
-        int newY = player.getY();
-
-        switch (keyCode) {
-        case KeyEvent.KEYCODE_W:
-            newY = newY - 5;
-            break;
-        case KeyEvent.KEYCODE_S:
-            newY = newY + 5;
-            break;
-        case KeyEvent.KEYCODE_A:
-            newX = newX - 5;
-            break;
-        case KeyEvent.KEYCODE_D:
-            newX = newX + 5;
-            break;
-        default:
-            break;
-        }
-
-        boolean shouldMove = newY <= 1000 && newY >= 605
-                && newX >= 380 && newX <= 685;
+        int[] coords = GameScreenViewModel.getNewCoordinates(keyCode, player.getX(), player.getY());
+        boolean shouldMove = GameScreenViewModel.shouldPlayerMove(Room1.class, coords[0], coords[1]);
 
         if (shouldMove) {
             switch (keyCode) {
@@ -209,12 +188,6 @@ public class MapStartScreen extends Activity {
 
     public void checkHealth() {
         if (GameScreenViewModel.isPlayerDead()) {
-            //            runOnUiThread(new Runnable() {
-            //                @Override
-            //                public void run() {
-            //                    launchGameLoseScreen();
-            //                }
-            //            });
             launchGameLoseScreen();
         }
     }
