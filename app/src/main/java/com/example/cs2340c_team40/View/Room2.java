@@ -95,12 +95,12 @@ public class Room2 extends Activity {
                         for (Subscriber subscriber : entities) {
                             checkHealth();
                             subscriber.update();
-                            EditText displayName = findViewById(R.id.display_player_name_text);
-                            EditText displayHealth = findViewById(R.id.display_health_text);
-                            displayName.setText(player.getName());
-                            String displayHealthString = "Health: " + player.getHealth();
-                            displayHealth.setText(displayHealthString);
-                            ImageView spriteImageView = findViewById(R.id.spriteImageView);
+                            //EditText displayName = findViewById(R.id.display_player_name_text);
+                            //EditText displayHealth = findViewById(R.id.display_health_text);
+                            //displayName.setText(player.getName());
+                            //String displayHealthString = "Health: " + player.getHealth();
+                            //displayHealth.setText(displayHealthString);
+                            //ImageView spriteImageView = findViewById(R.id.spriteImageView);
                         }
                     }
                 });
@@ -109,11 +109,11 @@ public class Room2 extends Activity {
         }, 0, 50);
 
         //        IterateView.checkA(room, player, this.getApplicationContext(), 2);
-        //        EditText displayName = findViewById(R.id.display_player_name_text);
+        EditText displayName = findViewById(R.id.display_player_name_text);
         //        EditText displayHealth = findViewById(R.id.display_health_text);
-                TextView scoreTimerText = findViewById(R.id.score_text);
+        TextView scoreTimerText = findViewById(R.id.score_text);
         //
-        //        displayName.setText(player.getName());
+        displayName.setText(player.getName());
         //        String displayHealthString = "Health: " + player.getHealth();
         //        displayHealth.setText(displayHealthString);
         //        scoreTimerText.setText(String.valueOf(player.getScore()));
