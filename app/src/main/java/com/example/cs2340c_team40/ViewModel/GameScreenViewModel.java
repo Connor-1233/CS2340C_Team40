@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.Timer;
 
 import com.example.cs2340c_team40.Model.Player;
-import com.example.cs2340c_team40.Model.PowerUp;
 import com.example.cs2340c_team40.Model.Subscriber;
 import com.example.cs2340c_team40.View.Room1;
 import com.example.cs2340c_team40.View.Room2;
@@ -44,6 +43,7 @@ public class GameScreenViewModel {
         int[] coords = new int[2];
         int newX = x;
         int newY = y;
+
         switch (keyCode) {
         case KeyEvent.KEYCODE_W:
             newY = newY - 5;
@@ -102,8 +102,18 @@ public class GameScreenViewModel {
 
     }
 
-    public static boolean hasHitPowerUp(int x, int y) {
-        return true; //if player has hit a powerup
+    public static boolean hasHitPowerUp(Class<?> clazz, int newX, int newY) {
+        boolean hitPowerUp = false;
+
+        if (clazz.equals(Room1.class)) {
+            hitPowerUp = true;
+        } else if (clazz.equals(Room2.class)) {
+            hitPowerUp = newX > newY; //change this
+        } else if (clazz.equals(Room3.class)) {
+            hitPowerUp = newX > newY; //change this
+        }
+
+        return hitPowerUp; //if player has hit a powerup
     }
 
     /**

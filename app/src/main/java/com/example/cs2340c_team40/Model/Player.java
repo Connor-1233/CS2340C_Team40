@@ -5,7 +5,7 @@ import android.widget.ImageView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Player implements Subscriber, PowerUp {
+public class Player implements Subscriber {
 
     private String name;
     private int score; //power up
@@ -142,8 +142,4 @@ public class Player implements Subscriber, PowerUp {
         return enemyList;
     }
 
-    @Override
-    public void applyPowerUp() {
-        //do nothing in this implementation
-    }
 }

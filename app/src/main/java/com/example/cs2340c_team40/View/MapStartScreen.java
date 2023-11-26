@@ -188,12 +188,6 @@ public class MapStartScreen extends Activity {
 
     public void checkHealth() {
         if (GameScreenViewModel.isPlayerDead()) {
-            //            runOnUiThread(new Runnable() {
-            //                @Override
-            //                public void run() {
-            //                    launchGameLoseScreen();
-            //                }
-            //            });
             launchGameLoseScreen();
         }
     }
