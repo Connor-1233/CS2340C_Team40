@@ -3,7 +3,6 @@ package com.example.cs2340c_team40.View;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.widget.Button;
 import android.widget.EditText;
@@ -31,7 +30,7 @@ import java.util.TimerTask;
 public class MapStartScreen extends Activity {
     private int counter;
     private Timer moveTimer;
-    private Player player = Player.getInstance();
+    private final Player player = Player.getInstance();
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,6 +69,8 @@ public class MapStartScreen extends Activity {
         PlayerDirection knightPattern = new MovePattern(knight, knightArray, 'd');
         knight.setMoveDirection(knightPattern);
         entities.add(knight);
+        player.getEnemyList().add(knight);
+        player.getEnemyList().add(ghost);
 
 
         // i update start location to top door
@@ -84,8 +85,6 @@ public class MapStartScreen extends Activity {
                         for (Subscriber subscriber : entities) {
                             checkHealth();
                             subscriber.update();
-                            Log.d("position",  "x: " + subscriber.getX()
-                                    + " y: " + subscriber.getY());
                         }
                     }
                 });
@@ -105,12 +104,18 @@ public class MapStartScreen extends Activity {
         if (player.getSpriteChoice() == 1) {
             spriteImageView.setImageResource(R.drawable.sprite1);
             player.getSprite().setImageResource(R.drawable.sprite1);
+            player.setPixelHeight(spriteImageView.getHeight());
+            player.setPixelWidth(spriteImageView.getWidth());
         } else if (player.getSpriteChoice() == 2) {
             spriteImageView.setImageResource(R.drawable.sprite2);
             player.getSprite().setImageResource(R.drawable.sprite2);
+            player.setPixelHeight(spriteImageView.getHeight());
+            player.setPixelWidth(spriteImageView.getWidth());
         } else {
             spriteImageView.setImageResource(R.drawable.sprite3);
             player.getSprite().setImageResource(R.drawable.sprite3);
+            player.setPixelHeight(spriteImageView.getHeight());
+            player.setPixelWidth(spriteImageView.getWidth());
         }
 
         TextView scoreTimerText = findViewById(R.id.score_text);
@@ -120,6 +125,11 @@ public class MapStartScreen extends Activity {
                 scoreTimerText.setText(String.valueOf(counter));
                 counter--;
                 player.setScore(counter);
+                //EditText displayName = findViewById(R.id.display_player_name_text);
+                EditText displayHealth = findViewById(R.id.display_health_text);
+                //displayName.setText(player.getName());
+                String displayHealthString = "Health: " + player.getHealth();
+                displayHealth.setText(displayHealthString);
             }
             public void onFinish() {
                 scoreTimerText.setText(R.string.timerFinish);
@@ -143,46 +153,25 @@ public class MapStartScreen extends Activity {
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-
-        int newX = player.getX();
-        int newY = player.getY();
-
-        switch (keyCode) {
-            case KeyEvent.KEYCODE_W:
-                newY = newY - 5;
-                break;
-            case KeyEvent.KEYCODE_S:
-                newY = newY + 5;
-                break;
-            case KeyEvent.KEYCODE_A:
-                newX = newX - 5;
-                break;
-            case KeyEvent.KEYCODE_D:
-                newX = newX + 5;
-                break;
-            default:
-                break;
-        }
-
-        boolean shouldMove = newY <= 1000 && newY >= 605
-                && newX >= 380 && newX <= 685;
+        int[] coords = GameScreenViewModel.getNewCoordinates(keyCode, player.getX(), player.getY());
+        boolean shouldMove = GameScreenViewModel.shouldPlayerMove(Room1.class, coords[0], coords[1]);
 
         if (shouldMove) {
             switch (keyCode) {
-                case KeyEvent.KEYCODE_W:
-                    player.setMoveDirection(new MoveVertical(-1));
-                    break;
-                case KeyEvent.KEYCODE_S:
-                    player.setMoveDirection(new MoveVertical(1));
-                    break;
-                case KeyEvent.KEYCODE_A:
-                    player.setMoveDirection(new MoveHorizontal(-1));
-                    break;
-                case KeyEvent.KEYCODE_D:
-                    player.setMoveDirection(new MoveHorizontal(1));
-                    break;
-                default:
-                    return super.onKeyDown(keyCode, event);
+            case KeyEvent.KEYCODE_W:
+                player.setMoveDirection(new MoveVertical(-1));
+                break;
+            case KeyEvent.KEYCODE_S:
+                player.setMoveDirection(new MoveVertical(1));
+                break;
+            case KeyEvent.KEYCODE_A:
+                player.setMoveDirection(new MoveHorizontal(-1));
+                break;
+            case KeyEvent.KEYCODE_D:
+                player.setMoveDirection(new MoveHorizontal(1));
+                break;
+            default:
+                return super.onKeyDown(keyCode, event);
             }
         }
 
@@ -199,12 +188,7 @@ public class MapStartScreen extends Activity {
 
     public void checkHealth() {
         if (GameScreenViewModel.isPlayerDead()) {
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    launchGameLoseScreen();
-                }
-            });
+            launchGameLoseScreen();
         }
     }
 
