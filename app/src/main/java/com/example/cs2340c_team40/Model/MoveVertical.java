@@ -7,15 +7,19 @@ public class MoveVertical implements PlayerDirection {
     public MoveVertical(int dir) {
         this.dir = dir;
     }
-    public void movePlayer() {
+    public char movePlayer() {
+        char direction = '.';
         result = player.getY();
         if (dir == 1) { //move down
             result += player.getSpeed();
+            direction = 's';
         } else if (dir == -1) {
             result -= player.getSpeed();
+            direction = 'w';
         }
         player.setY(result);
         player.setMoving(true);
         dir = 0;
+        return direction;
     }
 }

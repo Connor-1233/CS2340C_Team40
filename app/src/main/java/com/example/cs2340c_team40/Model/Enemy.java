@@ -15,47 +15,55 @@ public abstract class Enemy implements Subscriber {
     private ImageView sprite;
     private int pixelHeight;
     private int pixelWidth;
+    private boolean enemyDestroyed;
 
     public Enemy() {
         this.p = Player.getInstance();
+        enemyDestroyed = false;
     }
 
     public void playerCollision() {
-        boolean xCollision = p.getX() >= (x - 30) && p.getX() <= (x + 30);
-        // Log.d("xCollision", String.valueOf(xCollision));
-        boolean yCollision = p.getY() >= (y - 30) && p.getY() <= (y + 30);
-        // Log.d("yCollision", String.valueOf(yCollision));
-        boolean hitPlayer = false;
-        if (xCollision && yCollision) {
-            // Log.d("collision: ", String.valueOf(xCollision && yCollision));
-            double difficulty = p.getDifficulty();
-            //Log.d("Before Health : ", String.valueOf(p.getHealth()));
-            if (difficulty == 0.5) {
-                // Easy Difficulty, decrease hp by a fifteenth
-                p.setHealth(p.getHealth() - 10);
-                hitPlayer = true;
-            } else if (difficulty == 0.75) {
-                // Medium Difficulty, decrease hp by a tenth
-                p.setHealth(p.getHealth() - 15);
-                hitPlayer = true;
-            } else {
-                // Hard Difficulty, decrease hp by a fifth
-                p.setHealth(p.getHealth() - 20);
-                hitPlayer = true;
+        if (!enemyDestroyed) {
+            boolean xCollision = p.getX() >= (x - 30) && p.getX() <= (x + 30);
+            // Log.d("xCollision", String.valueOf(xCollision));
+            boolean yCollision = p.getY() >= (y - 30) && p.getY() <= (y + 30);
+            // Log.d("yCollision", String.valueOf(yCollision));
+            boolean hitPlayer = false;
+            if (xCollision && yCollision) {
+                // Log.d("collision: ", String.valueOf(xCollision && yCollision));
+                double difficulty = p.getDifficulty();
+                //Log.d("Before Health : ", String.valueOf(p.getHealth()));
+                if (difficulty == 0.5) {
+                    // Easy Difficulty, decrease hp by a fifteenth
+                    p.setHealth(p.getHealth() - 10);
+                    hitPlayer = true;
+                } else if (difficulty == 0.75) {
+                    // Medium Difficulty, decrease hp by a tenth
+                    p.setHealth(p.getHealth() - 15);
+                    hitPlayer = true;
+                } else {
+                    // Hard Difficulty, decrease hp by a fifth
+                    p.setHealth(p.getHealth() - 20);
+                    hitPlayer = true;
+                }
+                //Log.d("After Health: ", String.valueOf(p.getHealth()));
             }
-            //Log.d("After Health: ", String.valueOf(p.getHealth()));
-        }
-        if (hitPlayer) {
-            p.setY(p.getY() + 30);
-            // Room 1 - 530, 1000
-            // Room 2 - 640, 1415
-            // Room 3 - 460, 1550
-            hitPlayer = false;
+            if (hitPlayer) {
+                p.setY(p.getY() + 30);
+                // Room 1 - 530, 1000
+                // Room 2 - 640, 1415
+                // Room 3 - 460, 1550
+                hitPlayer = false;
+            }
         }
     }
 
-    public void weaponCollision() {
-
+    public void weaponCollision(int weaponX, int weaponY) {
+        boolean xCollision = weaponX >= (x - 30) && weaponX <= (x + 30);
+        boolean yCollision = weaponY >= (y - 30) && weaponY <= (y + 30);
+        if (xCollision && yCollision) {
+            enemyDestroyed = true;
+        }
     }
 
 

@@ -21,6 +21,7 @@ import com.example.cs2340c_team40.Model.PlayerDirection;
 import com.example.cs2340c_team40.Model.MoveVertical;
 import com.example.cs2340c_team40.Model.MoveHorizontal;
 import com.example.cs2340c_team40.Model.Subscriber;
+import com.example.cs2340c_team40.Model.Weapon;
 import com.example.cs2340c_team40.R;
 import com.example.cs2340c_team40.ViewModel.GameScreenViewModel;
 
@@ -33,6 +34,7 @@ public class MapStartScreen extends Activity {
     private int counter;
     private Timer moveTimer;
     private final Player player = Player.getInstance();
+    private Weapon weapon = Weapon.getInstance();
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -172,6 +174,9 @@ public class MapStartScreen extends Activity {
                 break;
             case KeyEvent.KEYCODE_D:
                 player.setMoveDirection(new MoveHorizontal(1));
+                break;
+            case KeyEvent.KEYCODE_L:
+                weapon.notifyEnemies();
                 break;
             default:
                 return super.onKeyDown(keyCode, event);

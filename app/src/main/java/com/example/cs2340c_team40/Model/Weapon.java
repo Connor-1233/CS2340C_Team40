@@ -29,12 +29,25 @@ public class Weapon implements Subscriber {
 
     @Override
     public void update() {
-
     }
 
     public void notifyEnemies() {
+        Player player = Player.getInstance();
+        char direction = player.getDirection();
+        enemyList = player.getEnemyList();
+        int x = player.getX();
+        int y = player.getY();
+        if (direction == 'w') {
+            y -= 30;
+        } else if (direction == 's') {
+            y += 30;
+        } else if (direction == 'a') {
+            x -= 30;
+        } else if (direction == 'd') {
+            x += 30;
+        }
         for (Enemy e : enemyList) {
-            e.weaponCollision();
+            e.weaponCollision(x,y);
         }
     }
 

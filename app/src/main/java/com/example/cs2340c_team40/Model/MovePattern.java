@@ -10,7 +10,7 @@ public class MovePattern implements PlayerDirection {
         this.pattern = pattern;
         this.dir = dir;
     }
-    public void movePlayer() {
+    public char movePlayer() {
         switch (dir) {
         case 'w':
             dirProgress += 5;
@@ -51,5 +51,6 @@ public class MovePattern implements PlayerDirection {
         default:
             break;
         }
+        return dir;
     }
 }
