@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.app.Activity;
 import android.os.CountDownTimer;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -14,11 +13,15 @@ import android.widget.TextView;
 
 import com.example.cs2340c_team40.Model.Enemy;
 import com.example.cs2340c_team40.Model.EnemyFactory;
+import com.example.cs2340c_team40.Model.HealthPowerUpDecorator;
 import com.example.cs2340c_team40.Model.MovePattern;
 import com.example.cs2340c_team40.Model.Player;
 import com.example.cs2340c_team40.Model.MoveVertical;
 import com.example.cs2340c_team40.Model.MoveHorizontal;
 import com.example.cs2340c_team40.Model.PlayerDirection;
+import com.example.cs2340c_team40.Model.PowerUp;
+import com.example.cs2340c_team40.Model.PowerUpItem;
+import com.example.cs2340c_team40.Model.DamagePowerUpDecorator;
 import com.example.cs2340c_team40.Model.Subscriber;
 import com.example.cs2340c_team40.R;
 import com.example.cs2340c_team40.ViewModel.GameScreenViewModel;
@@ -179,10 +182,15 @@ public class Room3 extends Activity {
         if (hitPowerUpArray[0]) { //we've hit the bottom power-up
             ImageView damagePowerUp = findViewById(R.id.damage_powerup);
             damagePowerUp.setVisibility(View.INVISIBLE);
-            //probably implement the power-up functionality here
+            PowerUp p = new DamagePowerUpDecorator(new PowerUpItem(), player);
+            p.updatePowerUpEffect();
+            hitPowerUpArray[0] = false;
         } else if (hitPowerUpArray[1]) { //we've hit the top power-up
             ImageView healthPowerUp = findViewById(R.id.health_powerup);
             healthPowerUp.setVisibility(View.INVISIBLE);
+            PowerUp p = new HealthPowerUpDecorator(new PowerUpItem(), player);
+            p.updatePowerUpEffect();
+            hitPowerUpArray[1] = false;
             //probably implement the power-up functionality here
         }
 
