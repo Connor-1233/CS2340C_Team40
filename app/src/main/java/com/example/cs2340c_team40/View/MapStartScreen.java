@@ -3,7 +3,6 @@ package com.example.cs2340c_team40.View;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -15,11 +14,15 @@ import android.app.Activity;
 
 import com.example.cs2340c_team40.Model.Enemy;
 import com.example.cs2340c_team40.Model.EnemyFactory;
+import com.example.cs2340c_team40.Model.HealthPowerUpDecorator;
 import com.example.cs2340c_team40.Model.MovePattern;
 import com.example.cs2340c_team40.Model.Player;
 import com.example.cs2340c_team40.Model.PlayerDirection;
 import com.example.cs2340c_team40.Model.MoveVertical;
 import com.example.cs2340c_team40.Model.MoveHorizontal;
+import com.example.cs2340c_team40.Model.PowerUp;
+import com.example.cs2340c_team40.Model.PowerUpItem;
+import com.example.cs2340c_team40.Model.ScorePowerUpDecorator;
 import com.example.cs2340c_team40.Model.Subscriber;
 import com.example.cs2340c_team40.Model.Weapon;
 import com.example.cs2340c_team40.R;
@@ -188,10 +191,16 @@ public class MapStartScreen extends Activity {
         if (hitPowerUpArray[0]) { //we've hit the bottom power-up
             ImageView scorePowerUp = findViewById(R.id.score_powerup);
             scorePowerUp.setVisibility(View.INVISIBLE);
+            PowerUp p = new ScorePowerUpDecorator(new PowerUpItem(), player);
+            p.updatePowerUpEffect();
+            hitPowerUpArray[0] = false;
             //probably implement the power-up functionality here
         } else if (hitPowerUpArray[1]) { //we've hit the top power-up
             ImageView healthPowerUp = findViewById(R.id.health_powerup);
             healthPowerUp.setVisibility(View.INVISIBLE);
+            PowerUp p = new HealthPowerUpDecorator(new PowerUpItem(), player);
+            p.updatePowerUpEffect();
+            hitPowerUpArray[1] = false;
             //probably implement the power-up functionality here
         }
 
