@@ -54,7 +54,10 @@ public class Player implements Subscriber {
     }
 
     public void update() {
-        direction = playerDirection.movePlayer();
+        char newDirection = playerDirection.movePlayer();
+        if (newDirection != '.') {
+            direction = newDirection;
+        }
         sprite.setX(x);
         sprite.setY(y);
     }

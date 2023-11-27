@@ -35,12 +35,13 @@ public class MapStartScreen extends Activity {
     private Timer moveTimer;
     private final Player player = Player.getInstance();
     private Weapon weapon = Weapon.getInstance();
+    private ArrayList<Subscriber> entities;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.room1);
+        entities = new ArrayList<Subscriber>();
 
-        ArrayList<Subscriber> entities = new ArrayList<Subscriber>();
         entities.add(player);
         EnemyFactory enemyCreator = new EnemyFactory();
         //Ghost Enemy
@@ -177,6 +178,7 @@ public class MapStartScreen extends Activity {
                 break;
             case KeyEvent.KEYCODE_L:
                 weapon.notifyEnemies();
+                updateEnemyList();
                 break;
             default:
                 return super.onKeyDown(keyCode, event);
@@ -215,6 +217,20 @@ public class MapStartScreen extends Activity {
         moveTimer.cancel();
         Intent intent = new Intent(this, EndingScreen.class);
         startActivity(intent);
+    }
+    public void updateEnemyList() {
+        ArrayList<Subscriber> removedEnemies = new ArrayList<>();
+        for (Subscriber e: entities){
+            if (e instanceof Enemy) {
+                Enemy enemy = (Enemy) e;
+                if (enemy.isEnemyDestroyed()) {
+                    removedEnemies.add((Subscriber) e);
+                }
+            }
+        }
+        for (Subscriber removed : removedEnemies) {
+            entities.remove(removed);
+        }
     }
 
 

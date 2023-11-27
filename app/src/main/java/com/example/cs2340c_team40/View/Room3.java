@@ -33,11 +33,13 @@ public class Room3 extends Activity {
     private final Player player = Player.getInstance();
     private Weapon weapon = Weapon.getInstance();
     private Timer moveTimer;
+    private ArrayList<Subscriber> entities;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.room3);
 
-        ArrayList<Subscriber> entities = new ArrayList<Subscriber>();
+        entities = new ArrayList<Subscriber>();
         entities.add(player);
         EnemyFactory enemyCreator = new EnemyFactory();
         //Ghost Enemy
@@ -175,6 +177,7 @@ public class Room3 extends Activity {
                 break;
             case KeyEvent.KEYCODE_L:
                 weapon.notifyEnemies();
+                updateEnemyList();
                 break;
             default:
                 return super.onKeyDown(keyCode, event);
@@ -207,7 +210,20 @@ public class Room3 extends Activity {
             launchGameLoseScreen();
         }
     }
-
+    public void updateEnemyList() {
+        ArrayList<Subscriber> removedEnemies = new ArrayList<>();
+        for (Subscriber e: entities){
+            if (e instanceof Enemy) {
+                Enemy enemy = (Enemy) e;
+                if (enemy.isEnemyDestroyed()) {
+                    removedEnemies.add((Subscriber) e);
+                }
+            }
+        }
+        for (Subscriber removed : removedEnemies) {
+            entities.remove(removed);
+        }
+    }
     public void launchGameLoseScreen() {
         moveTimer.cancel();
         Intent intent = new Intent(this, EndingScreen.class);
