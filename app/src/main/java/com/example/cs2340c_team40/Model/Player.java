@@ -25,12 +25,14 @@ public class Player implements Subscriber {
     private int arrayY;
     private List<Enemy> enemyList = new ArrayList<>();
     private static Player player;
+    private static Weapon weapon;
 
     private Player() {
         difficulty = 0;
         spriteChoice = 0;
         damage = 20;
         moving = false;
+        weapon = Weapon.getInstance();
         speed = 5;
         score = 0;
     }
@@ -80,10 +82,14 @@ public class Player implements Subscriber {
     public void setX(int x) {
         this.x = x;
         notifyEnemies();
+        weapon.setX(x);
+        // Sets the x-value to that of the Player (make sure there is some offset)
     }
     public void setY(int y) {
         this.y = y;
         notifyEnemies();
+        weapon.setY(y);
+        // Sets the y-value to that of the Player (make sure there is some offset so that the weapon shows)
     }
     public void setSprite(ImageView sprite) {
         this.sprite = sprite;
@@ -143,6 +149,9 @@ public class Player implements Subscriber {
         return pixelWidth;
     }
 
+    public void resetEnemyList() {
+        enemyList = new ArrayList<>();
+    }
     public List<Enemy> getEnemyList() {
         return enemyList;
     }

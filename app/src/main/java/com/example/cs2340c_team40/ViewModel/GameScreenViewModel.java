@@ -22,6 +22,7 @@ public class GameScreenViewModel {
         player.setHealth(calculateHealth(player.getDifficulty()));
         player.setX(x);
         player.setY(y);
+        player.resetEnemyList();
         subscribers = entities;
         //Timer to call updateLocations to move the player
         //PrimeThread pThread = new PrimeThread(entities);

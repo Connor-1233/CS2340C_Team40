@@ -73,11 +73,10 @@ public class Room3 extends Activity {
         knight.setMoveDirection(knightPattern);
         entities.add(knight);
 
-        player.getEnemyList().add(ghost);
-        player.getEnemyList().add(knight);
-
         //have to change x and y to where door is in each map
         GameScreenViewModel.initializePlayer(460, 1550, entities);
+        player.getEnemyList().add(ghost);
+        player.getEnemyList().add(knight);
         moveTimer = new Timer();
         moveTimer.schedule(new TimerTask() {
             @Override
@@ -213,6 +212,7 @@ public class Room3 extends Activity {
     }
 
     public void launchGameLoseScreen() {
+        moveTimer.cancel();
         Intent intent = new Intent(this, EndingScreen.class);
         startActivity(intent);
     }

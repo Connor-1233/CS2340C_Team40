@@ -11,26 +11,19 @@ public abstract class Enemy implements Subscriber {
     private boolean moving;
 
     private PlayerDirection enemyDirection;
+    private Player p;
     private ImageView sprite;
     private int pixelHeight;
     private int pixelWidth;
 
+    public Enemy() {
+        this.p = Player.getInstance();
+    }
+
     public void playerCollision() {
-        Player p = Player.getInstance();
-        // Log.d("Player Collision Accessed", "Collision Accessed");
-        //        boolean xCollisionRight = (p.getX() - p.getPixelWidth() < getX())
-        //                && (p.getX() - p.getPixelWidth() > getX() - getPixelWidth());
-        //        boolean xCollisionLeft = (p.getX() > getX() - getPixelWidth())
-        //                && (p.getX() < getX());
-        //        boolean xCollision = xCollisionLeft || xCollisionRight;
-        //        boolean yCollisionUp = (p.getY() - p.getPixelHeight() < getY())
-        //                && (p.getY() - p.getPixelHeight() > getY() - getPixelHeight());
-        //        boolean yCollisionDown = (p.getY() > getY() - p.getPixelHeight())
-        //                && (p.getY() < getY());
-        //        boolean yCollision = yCollisionUp || yCollisionDown;
-        boolean xCollision = p.getX() >= (getX() - 5) && p.getX() <= (getX() + 5);
+        boolean xCollision = p.getX() >= (x - 30) && p.getX() <= (x + 30);
         // Log.d("xCollision", String.valueOf(xCollision));
-        boolean yCollision = p.getY() >= (getY() - 5) && p.getY() <= (getY() + 5);
+        boolean yCollision = p.getY() >= (y - 30) && p.getY() <= (y + 30);
         // Log.d("yCollision", String.valueOf(yCollision));
         boolean hitPlayer = false;
         if (xCollision && yCollision) {
@@ -61,6 +54,9 @@ public abstract class Enemy implements Subscriber {
         }
     }
 
+    public void weaponCollision() {
+
+    }
 
 
     public void update() {

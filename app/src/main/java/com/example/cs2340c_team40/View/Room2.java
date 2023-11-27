@@ -69,11 +69,6 @@ public class Room2 extends Activity {
         knight.setMoveDirection(knightPattern);
         entities.add(knight);
 
-        player.getEnemyList().add(knight);
-        player.getEnemyList().add(ghost);
-
-
-
         //Skeleton Enemy
         //        Enemy skeleton = enemyCreator.createEnemy("Skeleton");
         //        skeleton.setX(400);
@@ -90,6 +85,8 @@ public class Room2 extends Activity {
 
 
         GameScreenViewModel.initializePlayer(640, 1415, entities);
+        player.getEnemyList().add(knight);
+        player.getEnemyList().add(ghost);
         moveTimer = new Timer();
         moveTimer.schedule(new TimerTask() {
             @Override
@@ -225,6 +222,7 @@ public class Room2 extends Activity {
     }
 
     public void launchGameLoseScreen() {
+        moveTimer.cancel();
         Intent intent = new Intent(this, EndingScreen.class);
         startActivity(intent);
     }

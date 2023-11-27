@@ -74,12 +74,12 @@ public class MapStartScreen extends Activity {
         PlayerDirection knightPattern = new MovePattern(knight, knightArray, 'd');
         knight.setMoveDirection(knightPattern);
         entities.add(knight);
-        player.getEnemyList().add(knight);
-        player.getEnemyList().add(ghost);
 
 
         // i update start location to top door
         GameScreenViewModel.initializePlayer(530, 1000, entities);
+        player.getEnemyList().add(knight);
+        player.getEnemyList().add(ghost);
         moveTimer = new Timer();
         moveTimer.schedule(new TimerTask() {
             @Override
@@ -216,6 +216,7 @@ public class MapStartScreen extends Activity {
     }
 
     public void launchGameLoseScreen() {
+        moveTimer.cancel();
         Intent intent = new Intent(this, EndingScreen.class);
         startActivity(intent);
     }
