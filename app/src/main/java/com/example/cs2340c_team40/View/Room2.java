@@ -3,8 +3,10 @@ package com.example.cs2340c_team40.View;
 import android.content.Intent;
 import android.os.Bundle;
 import android.app.Activity;
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -26,7 +28,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class Room2 extends Activity {
-    private Player player = Player.getInstance();
+    private final Player player = Player.getInstance();
+    private int counter;
     private Timer moveTimer;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,11 +42,11 @@ public class Room2 extends Activity {
         Enemy ghost = enemyCreator.createEnemy("Ghost");
         ghost.setX(460);
         ghost.setY(820);
+        int[] ghostArray = {0, 190, 0, 190};
 
         ghost.setSprite((ImageView) findViewById(R.id.ghost));
         ghost.getSprite().setImageResource(R.drawable.skull_v1_2);
 
-        int[] ghostArray = {0,190,0,190};
         PlayerDirection ghostPattern = new MovePattern(ghost, ghostArray, 'd');
         ghost.setMoveDirection(ghostPattern);
         entities.add(ghost);
@@ -54,11 +57,11 @@ public class Room2 extends Activity {
         Enemy knight = enemyCreator.createEnemy("Knight");
         knight.setX(260);
         knight.setY(830);
+        int[] knightArray = {220, 0, 220, 0};
 
         knight.setSprite((ImageView) findViewById(R.id.knight));
         knight.getSprite().setImageResource(R.drawable.vampire_v2_2);
 
-        int[] knightArray = {220,0,220,0};
         PlayerDirection knightPattern = new MovePattern(knight, knightArray, 'w');
         knight.setMoveDirection(knightPattern);
         entities.add(knight);
@@ -69,17 +72,18 @@ public class Room2 extends Activity {
 
 
         //Skeleton Enemy
-        Enemy skeleton = enemyCreator.createEnemy("Skeleton");
-        skeleton.setX(400);
-        skeleton.setY(620);
-
-        skeleton.setSprite((ImageView) findViewById(R.id.knight));
-        skeleton.getSprite().setImageResource(R.drawable.skeleton_v1_1);
-
-        int[] skeletonArray = {100,200,100,200};
-        PlayerDirection skeletonPattern = new MovePattern(skeleton, skeletonArray, 'd');
-        skeleton.setMoveDirection(skeletonPattern);
-        entities.add(skeleton);
+        //        Enemy skeleton = enemyCreator.createEnemy("Skeleton");
+        //        skeleton.setX(400);
+        //        skeleton.setY(620);
+        //
+        //        int[] skeletonArray = {100, 200, 100, 200};
+        //
+        //        skeleton.setSprite((ImageView) findViewById(R.id.knight));
+        //        skeleton.getSprite().setImageResource(R.drawable.skeleton_v1_1);
+        //
+        //        PlayerDirection skeletonPattern = new MovePattern(skeleton, skeletonArray, 'd');
+        //        skeleton.setMoveDirection(skeletonPattern);
+        //        entities.add(skeleton);
 
 
         GameScreenViewModel.initializePlayer(640, 1415, entities);
@@ -91,14 +95,14 @@ public class Room2 extends Activity {
                     @Override
                     public void run() {
                         for (Subscriber subscriber : entities) {
+                            checkHealth();
                             subscriber.update();
-                            // Log.d("position",  "x: " + subscriber.getX() + " y: " + subscriber.getY());
-                            EditText displayName = findViewById(R.id.display_player_name_text);
-                            EditText displayHealth = findViewById(R.id.display_health_text);
-                            displayName.setText(player.getName());
-                            String displayHealthString = "Health: " + player.getHealth();
-                            displayHealth.setText(displayHealthString);
-                            ImageView spriteImageView = findViewById(R.id.spriteImageView);
+                            //EditText displayName = findViewById(R.id.display_player_name_text);
+                            //EditText displayHealth = findViewById(R.id.display_health_text);
+                            //displayName.setText(player.getName());
+                            //String displayHealthString = "Health: " + player.getHealth();
+                            //displayHealth.setText(displayHealthString);
+                            //ImageView spriteImageView = findViewById(R.id.spriteImageView);
                         }
                     }
                 });
@@ -108,15 +112,37 @@ public class Room2 extends Activity {
 
         //        IterateView.checkA(room, player, this.getApplicationContext(), 2);
         EditText displayName = findViewById(R.id.display_player_name_text);
-        EditText displayHealth = findViewById(R.id.display_health_text);
+        //        EditText displayHealth = findViewById(R.id.display_health_text);
         TextView scoreTimerText = findViewById(R.id.score_text);
-
+        //
         displayName.setText(player.getName());
-        String displayHealthString = "Health: " + player.getHealth();
-        displayHealth.setText(displayHealthString);
-        scoreTimerText.setText(String.valueOf(player.getScore()));
-        ImageView spriteImageView = findViewById(R.id.spriteImageView);
+        //        String displayHealthString = "Health: " + player.getHealth();
+        //        displayHealth.setText(displayHealthString);
+        //        scoreTimerText.setText(String.valueOf(player.getScore()));
 
+        counter = player.getScore();
+        new CountDownTimer(30000, 1000) {
+            public void onTick(long millisUntilFinished) {
+                if (counter >= 0) {
+                    if (counter != 0) {
+                        counter--;
+                    }
+                    scoreTimerText.setText(String.valueOf(counter));
+                    player.setScore(counter);
+                    //EditText displayName = findViewById(R.id.display_player_name_text);
+                    EditText displayHealth = findViewById(R.id.display_health_text);
+                    //displayName.setText(player.getName());
+                    String displayHealthString = "Health: " + player.getHealth();
+                    displayHealth.setText(displayHealthString);
+                }
+
+            }
+            public void onFinish() {
+                scoreTimerText.setText(R.string.timerFinish);
+            }
+        }.start();
+
+        ImageView spriteImageView = findViewById(R.id.spriteImageView);
         player.setSprite((ImageView) findViewById(R.id.sprite));
 
         if (player.getSpriteChoice() == 1) {
@@ -139,60 +165,40 @@ public class Room2 extends Activity {
     }
 
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-
-        int newX = player.getX();
-        int newY = player.getY();
-
-        switch (keyCode) {
-            case KeyEvent.KEYCODE_W:
-                newY = newY - 5;
-                break;
-            case KeyEvent.KEYCODE_S:
-                newY = newY + 5;
-                break;
-            case KeyEvent.KEYCODE_A:
-                newX = newX - 5;
-                break;
-            case KeyEvent.KEYCODE_D:
-                newX = newX + 5;
-                break;
-            default:
-                break;
-        }
-        boolean shouldMove = false;
-
-        if (newY <= 1415 && newY >= 1320 && newX >= 625 && newX <= 645) { //entry way
-            shouldMove = true;
-        } else if (newY >= 1210 && newY <= 1320 && newX == 640) { //hallway
-            shouldMove = true;
-        } else if (newX >= 590 && newX <= 680 && newY <= 1210 && newY >= 975) { //room after hallway
-            shouldMove = true;
-        } else if (newX >= 650 && newX <= 680 && newY <= 975 && newY >= 860) { //passing door
-            shouldMove = true;
-        } else if (newX >= 200 && newX <= 685 && newY <= 860 && newY >= 525) { //big room
-            shouldMove = true;
-        }
-
+        int[] coords = GameScreenViewModel.getNewCoordinates(keyCode, player.getX(), player.getY());
+        boolean shouldMove = GameScreenViewModel.shouldPlayerMove(Room2.class, coords[0], coords[1]);
+        boolean[] hitPowerUpArray = GameScreenViewModel.hasHitPowerUp(Room2.class, coords[0], coords[1]);
 
         if (shouldMove) {
             switch (keyCode) {
-                case KeyEvent.KEYCODE_W:
-                    player.setMoveDirection(new MoveVertical(-1));
-                    break;
-                case KeyEvent.KEYCODE_S:
-                    player.setMoveDirection(new MoveVertical(1));
-                    break;
-                case KeyEvent.KEYCODE_A:
-                    player.setMoveDirection(new MoveHorizontal(-1));
-                    break;
-                case KeyEvent.KEYCODE_D:
-                    player.setMoveDirection(new MoveHorizontal(1));
-                    break;
-                default:
-                    return super.onKeyDown(keyCode, event);
+            case KeyEvent.KEYCODE_W:
+                player.setMoveDirection(new MoveVertical(-1));
+                break;
+            case KeyEvent.KEYCODE_S:
+                player.setMoveDirection(new MoveVertical(1));
+                break;
+            case KeyEvent.KEYCODE_A:
+                player.setMoveDirection(new MoveHorizontal(-1));
+                break;
+            case KeyEvent.KEYCODE_D:
+                player.setMoveDirection(new MoveHorizontal(1));
+                break;
+            default:
+                return super.onKeyDown(keyCode, event);
             }
         }
 
+        if (hitPowerUpArray[0]) { //we've hit the bottom power-up
+            ImageView scorePowerUp = findViewById(R.id.score_powerup);
+            scorePowerUp.setVisibility(View.INVISIBLE);
+            //probably implement the power-up functionality here
+        } else if (hitPowerUpArray[1]) { //we've hit the top power-up
+            ImageView damagePowerUp = findViewById(R.id.damage_powerup);
+            damagePowerUp.setVisibility(View.INVISIBLE);
+            //probably implement the power-up functionality here
+        }
+
+        //Log.d("Room2 Position",  "x: " + player.getX() + " y: " + player.getY());
         if (shouldMove) {
             if (player.getX() == 200 && player.getY() <= 715 && player.getY() >= 700) {
                 Intent intent = new Intent(this, Room3.class);
@@ -201,5 +207,16 @@ public class Room2 extends Activity {
             }
         }
         return true;
+    }
+
+    public void checkHealth() {
+        if (GameScreenViewModel.isPlayerDead()) {
+            launchGameLoseScreen();
+        }
+    }
+
+    public void launchGameLoseScreen() {
+        Intent intent = new Intent(this, EndingScreen.class);
+        startActivity(intent);
     }
 }

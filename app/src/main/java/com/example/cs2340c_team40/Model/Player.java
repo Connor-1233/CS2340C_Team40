@@ -1,6 +1,5 @@
 package com.example.cs2340c_team40.Model;
 
-import android.util.Log;
 import android.widget.ImageView;
 
 import java.util.ArrayList;
@@ -9,8 +8,9 @@ import java.util.List;
 public class Player implements Subscriber {
 
     private String name;
-    private int score;
-    private int health;
+    private int score; //power up
+    private int health; //power up
+    private int speed; //power up
     private double difficulty;
     private int spriteChoice;
     private int x;
@@ -29,6 +29,7 @@ public class Player implements Subscriber {
     private Player() {
         difficulty = 0;
         spriteChoice = 0;
+        speed = 5;
         moving = false;
         weapon = Weapon.getInstance();
 
@@ -150,4 +151,11 @@ public class Player implements Subscriber {
         return enemyList;
     }
 
+    public int getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(int speed) {
+        this.speed = speed;
+    }
 }

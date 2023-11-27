@@ -60,8 +60,8 @@
 
         <EditText
             android:id="@+id/score_text"
-            android:layout_width="40dp"
-            android:layout_height="50dp"
+            android:layout_width="62dp"
+            android:layout_height="56dp"
             android:ems="10"
             android:focusable="false"
             android:inputType="text"
@@ -135,6 +135,32 @@
             app:layout_constraintHorizontal_bias="0.47"
             app:layout_constraintStart_toStartOf="parent"
             app:srcCompat="@drawable/vampire_v2_2" />
+
+        <ImageView
+            android:id="@+id/score_powerup"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginBottom="282dp"
+            android:contentDescription="@string/Score_PowerUp"
+            android:visibility="visible"
+            android:src="@drawable/power_up_score"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.37"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:id="@+id/health_powerup"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginBottom="420dp"
+            android:contentDescription="@string/Health_PowerUp"
+            android:src="@drawable/power_up_health"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.606"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline"

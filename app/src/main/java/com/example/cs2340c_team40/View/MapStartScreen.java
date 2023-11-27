@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -31,7 +32,7 @@ import java.util.TimerTask;
 public class MapStartScreen extends Activity {
     private int counter;
     private Timer moveTimer;
-    private Player player = Player.getInstance();
+    private final Player player = Player.getInstance();
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,10 +46,12 @@ public class MapStartScreen extends Activity {
         ghost.setX(660);
         ghost.setY(860);
 
+        int[] ghostArray = {0, 230, 0, 230};
+
+
         ghost.setSprite((ImageView) findViewById(R.id.ghost));
         ghost.getSprite().setImageResource(R.drawable.skull_v1_2);
 
-        int[] ghostArray = {0,230,0,230};
         PlayerDirection ghostPattern = new MovePattern(ghost, ghostArray, 'a');
         ghost.setMoveDirection(ghostPattern);
         entities.add(ghost);
@@ -59,10 +62,12 @@ public class MapStartScreen extends Activity {
         knight.setX(430);
         knight.setY(730);
 
+        int[] knightArray = {0, 230, 0, 230};
+
+
         knight.setSprite((ImageView) findViewById(R.id.knight));
         knight.getSprite().setImageResource(R.drawable.vampire_v2_2);
-
-        int[] knightArray = {0,230,0,230};
+      
         PlayerDirection knightPattern = new MovePattern(knight, knightArray, 'd');
         knight.setMoveDirection(knightPattern);
         entities.add(knight);
@@ -80,8 +85,8 @@ public class MapStartScreen extends Activity {
                     @Override
                     public void run() {
                         for (Subscriber subscriber : entities) {
+                            checkHealth();
                             subscriber.update();
-                            // Log.d("position",  "x: " + subscriber.getX() + " y: " + subscriber.getY());
                         }
                     }
                 });
@@ -122,9 +127,9 @@ public class MapStartScreen extends Activity {
                 scoreTimerText.setText(String.valueOf(counter));
                 counter--;
                 player.setScore(counter);
-                EditText displayName = findViewById(R.id.display_player_name_text);
+                //EditText displayName = findViewById(R.id.display_player_name_text);
                 EditText displayHealth = findViewById(R.id.display_health_text);
-                displayName.setText(player.getName());
+                //displayName.setText(player.getName());
                 String displayHealthString = "Health: " + player.getHealth();
                 displayHealth.setText(displayHealthString);
             }
@@ -150,49 +155,40 @@ public class MapStartScreen extends Activity {
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-
-        int newX = player.getX();
-        int newY = player.getY();
-
-        switch (keyCode) {
-            case KeyEvent.KEYCODE_W:
-                newY = newY - 5;
-                break;
-            case KeyEvent.KEYCODE_S:
-                newY = newY + 5;
-                break;
-            case KeyEvent.KEYCODE_A:
-                newX = newX - 5;
-                break;
-            case KeyEvent.KEYCODE_D:
-                newX = newX + 5;
-                break;
-            default:
-                break;
-        }
-
-        boolean shouldMove = newY <= 1000 && newY >= 605
-                && newX >= 380 && newX <= 685;
+        int[] coords = GameScreenViewModel.getNewCoordinates(keyCode, player.getX(), player.getY());
+        boolean shouldMove = GameScreenViewModel.shouldPlayerMove(Room1.class, coords[0], coords[1]);
+        boolean[] hitPowerUpArray = GameScreenViewModel.hasHitPowerUp(Room1.class, coords[0], coords[1]);
 
         if (shouldMove) {
             switch (keyCode) {
-                case KeyEvent.KEYCODE_W:
-                    player.setMoveDirection(new MoveVertical(-1));
-                    break;
-                case KeyEvent.KEYCODE_S:
-                    player.setMoveDirection(new MoveVertical(1));
-                    break;
-                case KeyEvent.KEYCODE_A:
-                    player.setMoveDirection(new MoveHorizontal(-1));
-                    break;
-                case KeyEvent.KEYCODE_D:
-                    player.setMoveDirection(new MoveHorizontal(1));
-                    break;
-                default:
-                    return super.onKeyDown(keyCode, event);
+            case KeyEvent.KEYCODE_W:
+                player.setMoveDirection(new MoveVertical(-1));
+                break;
+            case KeyEvent.KEYCODE_S:
+                player.setMoveDirection(new MoveVertical(1));
+                break;
+            case KeyEvent.KEYCODE_A:
+                player.setMoveDirection(new MoveHorizontal(-1));
+                break;
+            case KeyEvent.KEYCODE_D:
+                player.setMoveDirection(new MoveHorizontal(1));
+                break;
+            default:
+                return super.onKeyDown(keyCode, event);
             }
         }
 
+        if (hitPowerUpArray[0]) { //we've hit the bottom power-up
+            ImageView scorePowerUp = findViewById(R.id.score_powerup);
+            scorePowerUp.setVisibility(View.INVISIBLE);
+            //probably implement the power-up functionality here
+        } else if (hitPowerUpArray[1]) { //we've hit the top power-up
+            ImageView healthPowerUp = findViewById(R.id.health_powerup);
+            healthPowerUp.setVisibility(View.INVISIBLE);
+            //probably implement the power-up functionality here
+        }
+
+        //Log.d("Room1 Position",  "x: " + player.getX() + " y: " + player.getY());
         if (shouldMove) {
             if (player.getX() == 530 && player.getY() == 605) {
                 Intent intent = new Intent(this, Room2.class);
@@ -202,4 +198,19 @@ public class MapStartScreen extends Activity {
         }
         return true;
     }
+
+
+    public void checkHealth() {
+        if (GameScreenViewModel.isPlayerDead()) {
+            launchGameLoseScreen();
+        }
+    }
+
+    public void launchGameLoseScreen() {
+        Intent intent = new Intent(this, EndingScreen.class);
+        startActivity(intent);
+    }
+
+
+
 }
