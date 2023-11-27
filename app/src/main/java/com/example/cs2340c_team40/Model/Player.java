@@ -147,6 +147,9 @@ public class Player implements Subscriber {
         return pixelWidth;
     }
 
+    public void resetEnemyList() {
+        enemyList = new ArrayList<>();
+    }
     public List<Enemy> getEnemyList() {
         return enemyList;
     }
