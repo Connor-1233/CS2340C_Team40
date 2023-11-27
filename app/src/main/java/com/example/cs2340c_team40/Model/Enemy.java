@@ -11,15 +11,19 @@ public abstract class Enemy implements Subscriber {
     private boolean moving;
 
     private PlayerDirection enemyDirection;
+    private Player p;
     private ImageView sprite;
     private int pixelHeight;
     private int pixelWidth;
 
+    public Enemy() {
+        this.p = Player.getInstance();
+    }
+
     public void playerCollision() {
-        Player p = Player.getInstance();
-        boolean xCollision = p.getX() >= (getX() - 30) && p.getX() <= (getX() + 30);
+        boolean xCollision = p.getX() >= (x - 30) && p.getX() <= (x + 30);
         // Log.d("xCollision", String.valueOf(xCollision));
-        boolean yCollision = p.getY() >= (getY() - 30) && p.getY() <= (getY() + 30);
+        boolean yCollision = p.getY() >= (y - 30) && p.getY() <= (y + 30);
         // Log.d("yCollision", String.valueOf(yCollision));
         boolean hitPlayer = false;
         if (xCollision && yCollision) {

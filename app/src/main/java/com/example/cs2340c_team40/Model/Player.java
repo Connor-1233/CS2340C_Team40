@@ -24,11 +24,14 @@ public class Player implements Subscriber {
     private int arrayY;
     private List<Enemy> enemyList = new ArrayList<>();
     private static Player player;
+    private static Weapon weapon;
 
     private Player() {
         difficulty = 0;
         spriteChoice = 0;
         moving = false;
+        weapon = Weapon.getInstance();
+
     }
     public void notifyEnemies() {
         for (Enemy e : enemyList) {
@@ -76,14 +79,12 @@ public class Player implements Subscriber {
     public void setX(int x) {
         this.x = x;
         notifyEnemies();
-        Weapon weapon = Weapon.getInstance();
         weapon.setX(x);
         // Sets the x-value to that of the Player (make sure there is some offset)
     }
     public void setY(int y) {
         this.y = y;
         notifyEnemies();
-        Weapon weapon = Weapon.getInstance();
         weapon.setY(y);
         // Sets the y-value to that of the Player (make sure there is some offset so that the weapon shows)
     }

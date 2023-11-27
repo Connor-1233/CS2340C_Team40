@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Weapon implements Subscriber {
-    private Player player = Player.getInstance();
     private int x;
     private int y;
     private ImageView sprite;
@@ -16,13 +15,10 @@ public class Weapon implements Subscriber {
     // The Weapon class is a Singleton and follows the Observer Pattern with the Enemies
     // being the ones informed.
 
-    private Weapon() {
 
-
-    }
     public static Weapon getInstance() {
         if (weapon == null) {
-            synchronized (Player.class) {
+            synchronized (Weapon.class) {
                 if (weapon == null) {
                     weapon = new Weapon();
                 }
