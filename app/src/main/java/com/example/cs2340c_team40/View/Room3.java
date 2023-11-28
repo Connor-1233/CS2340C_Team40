@@ -151,19 +151,18 @@ public class Room3 extends Activity {
             }
         }
 
-        if (hitPowerUpArray[0]) { //we've hit the bottom power-up
+        if (hitPowerUpArray[0]) { //we've hit the bottom power-up - Damage
             ImageView damagePowerUp = findViewById(R.id.damage_powerup);
             damagePowerUp.setVisibility(View.INVISIBLE);
             PowerUp p = new DamagePowerUpDecorator(new PowerUpItem(), player);
             p.updatePowerUpEffect();
             hitPowerUpArray[0] = false;
-        } else if (hitPowerUpArray[1]) { //we've hit the top power-up
+        } else if (hitPowerUpArray[1]) { //we've hit the top power-up - Health
             ImageView healthPowerUp = findViewById(R.id.health_powerup);
             healthPowerUp.setVisibility(View.INVISIBLE);
             PowerUp p = new HealthPowerUpDecorator(new PowerUpItem(), player);
             p.updatePowerUpEffect();
             hitPowerUpArray[1] = false;
-            //probably implement the power-up functionality here
         }
 
         //Log.d("Room3 Position",  "x: " + player.getX() + " y: " + player.getY());

@@ -157,26 +157,24 @@ public class MapStartScreen extends Activity {
             }
         }
 
-        if (hitPowerUpArray[0]) { //we've hit the bottom power-up
+        if (hitPowerUpArray[0]) { //we've hit the bottom power-up - Score
             ImageView scorePowerUp = findViewById(R.id.score_powerup);
             scorePowerUp.setVisibility(View.INVISIBLE);
             PowerUp p = new ScorePowerUpDecorator(new PowerUpItem(), player);
             p.updatePowerUpEffect();
             hitPowerUpArray[0] = false;
-            //probably implement the power-up functionality here
-        } else if (hitPowerUpArray[1]) { //we've hit the top power-up
+        } else if (hitPowerUpArray[1]) { //we've hit the top power-up - Health
             ImageView healthPowerUp = findViewById(R.id.health_powerup);
             healthPowerUp.setVisibility(View.INVISIBLE);
             PowerUp p = new HealthPowerUpDecorator(new PowerUpItem(), player);
             p.updatePowerUpEffect();
             hitPowerUpArray[1] = false;
-            //probably implement the power-up functionality here
         }
 
         //Log.d("Room1 Position",  "x: " + player.getX() + " y: " + player.getY());
         if (shouldMove) {
             if (coords[0] == 530 && coords[1] == 605) {
-              GameScreenViewModel.launchRoom2(this, moveTimer);
+                GameScreenViewModel.launchRoom2(this, moveTimer);
             }
         }
         return true;
