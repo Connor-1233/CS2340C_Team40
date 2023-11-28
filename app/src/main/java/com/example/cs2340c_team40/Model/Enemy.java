@@ -32,16 +32,19 @@ public abstract class Enemy implements Subscriber {
         if (xCollision && yCollision) {
             double difficulty = p.getDifficulty();
             if (difficulty == 0.5) {
-                // Easy Difficulty, decrease hp by 10
+                // Easy Difficulty, decrease hp by 10, decrease score by 5
                 p.setHealth(p.getHealth() - 10);
+                p.setScore(p.getScore() - 5);
                 hitPlayer = true;
             } else if (difficulty == 0.75) {
-                // Medium Difficulty, decrease hp by 15
+                // Medium Difficulty, decrease hp by 15, decrease score by 10
                 p.setHealth(p.getHealth() - 15);
+                p.setScore(p.getScore() - 10);
                 hitPlayer = true;
             } else {
-                // Hard Difficulty, decrease hp by 20
+                // Hard Difficulty, decrease hp by 20, decrease score by 15
                 p.setHealth(p.getHealth() - 20);
+                p.setScore(p.getScore() - 15);
                 hitPlayer = true;
             }
         }

@@ -12,6 +12,7 @@ import com.example.cs2340c_team40.Model.Leaderboard;
 import com.example.cs2340c_team40.Model.Player;
 //import com.example.cs2340c_team40.Model.Score;
 import com.example.cs2340c_team40.R;
+import com.example.cs2340c_team40.ViewModel.EndingScreenViewModel;
 import com.example.cs2340c_team40.ViewModel.GameScreenViewModel;
 
 public class EndingScreen extends Activity {
@@ -23,15 +24,17 @@ public class EndingScreen extends Activity {
         //sets end screen to win or lose depending on whether health <= 0
         setVisibilityEndingScreen();
 
-        Button restartGameBtn = findViewById(R.id.restart_game_btn);
-        restartGameBtn.setOnClickListener(v -> restartGame());
-        TextView gameScore = findViewById(R.id.textView);
+        EndingScreenViewModel.handleRestartButtonClick(this);
 
         Player player = Player.getInstance();
         Leaderboard leaderboard = Leaderboard.getInstance();
-        gameScore.setText("Final score: " + player.getScore());
-        leaderboard.updateScore(player.getScore(), player.getName());
 
+        //Evaluates Score based on current score and a percentage of health
+        //Then calls the view model to render the score on the xml file
+        player.setScore(EndingScreenViewModel.setFinalScore(player.getScore(), player.getHealth()));
+        EndingScreenViewModel.mapScoreToScreen(this, player.getScore());
+
+        leaderboard.updateScore(player.getScore(), player.getName());
         // Leaderboard
         // Rank 1
         TextView scoreNameOne = findViewById(R.id.score_name_1);

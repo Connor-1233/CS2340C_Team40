@@ -45,6 +45,9 @@ public class MapStartScreen extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.room1);
+
+        GameScreenViewModel.resetGame();
+
         entities = new ArrayList<Subscriber>();
         entities.add(player);
         EnemyFactory enemyCreator = new EnemyFactory();
@@ -198,9 +201,9 @@ public class MapStartScreen extends Activity {
                     if (enemySprite != null) {
                         ((ViewGroup) enemySprite.getParent()).removeView(enemySprite);
                     }
-
                     iterator.remove();
                     player.getEnemyList().remove(enemy);
+                    player.setScore(player.getScore() + 10);
                 }
             }
         }

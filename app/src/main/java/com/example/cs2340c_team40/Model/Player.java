@@ -36,7 +36,6 @@ public class Player implements Subscriber {
     }
     public void notifyEnemies() {
         for (Enemy e : enemyList) {
-
             e.playerCollision();
         }
     }

@@ -188,9 +188,9 @@ public class Room2 extends Activity {
                     if (enemySprite != null) {
                         ((ViewGroup) enemySprite.getParent()).removeView(enemySprite);
                     }
-
                     iterator.remove();
                     player.getEnemyList().remove(enemy);
+                    player.setScore(player.getScore() + 10);
                 }
             }
         }

@@ -20,7 +20,7 @@ import com.example.cs2340c_team40.View.WelcomeScreen;
 
 public class GameScreenViewModel {
     private static Timer dotTimer = new Timer();
-    private static Player player = Player.getInstance();
+    private static final Player player = Player.getInstance();
     private static ArrayList<Subscriber> subscribers;
 
     private static boolean isFlagBottomRoom1 = false;
@@ -132,9 +132,6 @@ public class GameScreenViewModel {
         return shouldMove;
     }
 
-    public static void applyPowerUps() {
-
-    }
 
     /**
      * A method that will calculate whether a player's position overlaps or aligns with
@@ -195,6 +192,16 @@ public class GameScreenViewModel {
         powerUpArray[0] = hitPowerBottom;
         powerUpArray[1] = hitPowerTop;
         return powerUpArray; //if player has hit a powerup
+    }
+
+    public static void resetGame() {
+        isFlagBottomRoom1 = false;
+        isFlagTopRoom1 = false;
+        isFlagBottomRoom2 = false;
+        isFlagTopRoom2 = false;
+        isFlagBottomRoom3 = false;
+        isFlagTopRoom3 = false;
+        player.setScore(0);
     }
 
     /**

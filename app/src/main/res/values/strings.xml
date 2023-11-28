@@ -34,4 +34,5 @@
     <string name="Health_PowerUp" />
     <string name="Damage_PowerUp" />
     <string name="health">Health</string>
+    <string name="Score">Score</string>
 </resources>
