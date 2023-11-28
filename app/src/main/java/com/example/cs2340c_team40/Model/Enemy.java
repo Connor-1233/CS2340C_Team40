@@ -28,6 +28,7 @@ public abstract class Enemy implements Subscriber {
         }
         boolean xCollision = p.getX() >= (x - 50) && p.getX() <= (x + 50);
         boolean yCollision = p.getY() >= (y - 50) && p.getY() <= (y + 50);
+
         boolean hitPlayer = false;
         if (xCollision && yCollision) {
             double difficulty = p.getDifficulty();

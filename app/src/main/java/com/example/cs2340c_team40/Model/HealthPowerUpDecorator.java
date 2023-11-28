@@ -8,6 +8,6 @@ public class HealthPowerUpDecorator extends PowerUpDecorator {
 
     public void updatePowerUpEffect() {
         super.updatePowerUpEffect();
-        getPlayer().setHealth(getPlayer().getHealth() + 2);
+        getPlayer().setHealth(getPlayer().getHealth() + 20);
     }
 }

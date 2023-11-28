@@ -176,7 +176,7 @@ public class MapStartScreen extends Activity {
         //Log.d("Room1 Position",  "x: " + player.getX() + " y: " + player.getY());
         if (shouldMove) {
             if (coords[0] == 530 && coords[1] == 605) {
-                GameScreenViewModel.launchRoom2(this, moveTimer);
+              GameScreenViewModel.launchRoom2(this, moveTimer);
             }
         }
         return true;

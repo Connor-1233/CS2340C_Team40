@@ -74,6 +74,7 @@ public class Room2 extends Activity {
         //Log.d("Health", "Health of Player is: " + player.getHealth());
 
         GameScreenViewModel.initializePlayer(640, 1415, entities, Room2.class);
+
         player.getEnemyList().add(knight);
         player.getEnemyList().add(ghost);
 
