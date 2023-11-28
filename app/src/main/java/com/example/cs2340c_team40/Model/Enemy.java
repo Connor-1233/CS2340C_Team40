@@ -23,6 +23,9 @@ public abstract class Enemy implements Subscriber {
     }
 
     public void playerCollision() {
+        if (this.isEnemyDestroyed()) {
+            return;
+        }
         boolean xCollision = p.getX() >= (x - 30) && p.getX() <= (x + 30);
         // Log.d("xCollision", String.valueOf(xCollision));
         boolean yCollision = p.getY() >= (y - 30) && p.getY() <= (y + 30);

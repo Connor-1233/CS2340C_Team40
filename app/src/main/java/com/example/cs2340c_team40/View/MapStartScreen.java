@@ -3,8 +3,10 @@ package com.example.cs2340c_team40.View;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -29,6 +31,7 @@ import com.example.cs2340c_team40.R;
 import com.example.cs2340c_team40.ViewModel.GameScreenViewModel;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -228,18 +231,26 @@ public class MapStartScreen extends Activity {
         startActivity(intent);
     }
     public void updateEnemyList() {
-        ArrayList<Subscriber> removedEnemies = new ArrayList<>();
-        for (Subscriber e: entities){
-            if (e instanceof Enemy) {
-                Enemy enemy = (Enemy) e;
+        Log.d("UpdateEnemyList", "Size before update: " + entities.size());
+        Iterator<Subscriber> iterator = entities.iterator();
+        while (iterator.hasNext()) {
+            Subscriber subscriber = iterator.next();
+            if (subscriber instanceof Enemy) {
+                Enemy enemy = (Enemy) subscriber;
                 if (enemy.isEnemyDestroyed()) {
-                    removedEnemies.add((Subscriber) e);
+                    ImageView enemySprite = enemy.getSprite();
+                    if (enemySprite != null) {
+                        ((ViewGroup) enemySprite.getParent()).removeView(enemySprite);
+                    }
+
+                    iterator.remove();
+                    player.getEnemyList().remove(enemy);
                 }
             }
         }
-        for (Subscriber removed : removedEnemies) {
-            entities.remove(removed);
-        }
+
+        Log.d("UpdateEnemyList", "Size after update: " + entities.size());
+
     }
 
 
