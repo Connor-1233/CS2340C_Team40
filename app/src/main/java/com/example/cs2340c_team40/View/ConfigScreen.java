@@ -17,10 +17,7 @@ public class ConfigScreen extends Activity {
     protected double difficulty = -1.0;
     protected String username = null;
     protected int spriteChoice = -1;
-
     private Player player;
-
-
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
