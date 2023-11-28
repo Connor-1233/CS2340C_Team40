@@ -9,7 +9,7 @@ public class Player implements Subscriber {
 
     private String name;
     private int score; //power up
-    private int health; //power up
+    private static int health; //power up
     private int damage; //power up
     private int speed;
     private double difficulty;

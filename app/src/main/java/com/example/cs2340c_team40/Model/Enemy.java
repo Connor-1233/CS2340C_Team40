@@ -27,28 +27,23 @@ public abstract class Enemy implements Subscriber {
             return;
         }
         boolean xCollision = p.getX() >= (x - 30) && p.getX() <= (x + 30);
-        // Log.d("xCollision", String.valueOf(xCollision));
         boolean yCollision = p.getY() >= (y - 30) && p.getY() <= (y + 30);
-        // Log.d("yCollision", String.valueOf(yCollision));
         boolean hitPlayer = false;
         if (xCollision && yCollision) {
-            // Log.d("collision: ", String.valueOf(xCollision && yCollision));
             double difficulty = p.getDifficulty();
-            //Log.d("Before Health : ", String.valueOf(p.getHealth()));
             if (difficulty == 0.5) {
-                // Easy Difficulty, decrease hp by a fifteenth
+                // Easy Difficulty, decrease hp by 10
                 p.setHealth(p.getHealth() - 10);
                 hitPlayer = true;
             } else if (difficulty == 0.75) {
-                // Medium Difficulty, decrease hp by a tenth
+                // Medium Difficulty, decrease hp by 15
                 p.setHealth(p.getHealth() - 15);
                 hitPlayer = true;
             } else {
-                // Hard Difficulty, decrease hp by a fifth
+                // Hard Difficulty, decrease hp by 20
                 p.setHealth(p.getHealth() - 20);
                 hitPlayer = true;
             }
-            //Log.d("After Health: ", String.valueOf(p.getHealth()));
         }
         if (hitPlayer) {
             p.setY(p.getY() + 30);

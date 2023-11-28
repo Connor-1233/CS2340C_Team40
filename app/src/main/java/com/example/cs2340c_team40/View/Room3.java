@@ -207,7 +207,7 @@ public class Room3 extends Activity {
 
         //Log.d("Room3 Position",  "x: " + player.getX() + " y: " + player.getY());
         if (shouldMove) {
-            if (player.getX() == 925 && player.getY() <= 640 && player.getY() >= 595) {
+            if (coords[0] == 925 && coords[1] <= 640 && coords[1] >= 595) {
                 Intent intent = new Intent(this, EndingScreen.class);
                 moveTimer.cancel();
                 this.startActivity(intent);
