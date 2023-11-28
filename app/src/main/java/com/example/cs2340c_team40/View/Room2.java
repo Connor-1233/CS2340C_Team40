@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.app.Activity;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -83,6 +84,10 @@ public class Room2 extends Activity {
         //        skeleton.setMoveDirection(skeletonPattern);
         //        entities.add(skeleton);
 
+        EditText displayName = findViewById(R.id.display_player_name_text);
+        displayName.setText(player.getName());
+
+        //Log.d("Health", "Health of Player is: " + player.getHealth());
 
         GameScreenViewModel.initializePlayer(640, 1415, entities);
         player.getEnemyList().add(knight);
@@ -91,35 +96,23 @@ public class Room2 extends Activity {
         moveTimer.schedule(new TimerTask() {
             @Override
             public void run() {
+                for (Subscriber subscriber : entities) {
+                    checkHealth();
+                    subscriber.update();
+                }
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        for (Subscriber subscriber : entities) {
-                            checkHealth();
-                            subscriber.update();
-                            //EditText displayName = findViewById(R.id.display_player_name_text);
-                            //EditText displayHealth = findViewById(R.id.display_health_text);
-                            //displayName.setText(player.getName());
-                            //String displayHealthString = "Health: " + player.getHealth();
-                            //displayHealth.setText(displayHealthString);
-                            //ImageView spriteImageView = findViewById(R.id.spriteImageView);
-                        }
+                        EditText displayHealth = findViewById(R.id.display_health_text);
+                        String displayHealthString = "Health: " + player.getHealth();
+                        displayHealth.setText(displayHealthString);
                     }
                 });
             }
 
         }, 0, 50);
 
-        //        IterateView.checkA(room, player, this.getApplicationContext(), 2);
-        EditText displayName = findViewById(R.id.display_player_name_text);
-        //        EditText displayHealth = findViewById(R.id.display_health_text);
         TextView scoreTimerText = findViewById(R.id.score_text);
-        //
-        displayName.setText(player.getName());
-        //        String displayHealthString = "Health: " + player.getHealth();
-        //        displayHealth.setText(displayHealthString);
-        //        scoreTimerText.setText(String.valueOf(player.getScore()));
-
         counter = player.getScore();
         new CountDownTimer(30000, 1000) {
             public void onTick(long millisUntilFinished) {
@@ -129,11 +122,6 @@ public class Room2 extends Activity {
                     }
                     scoreTimerText.setText(String.valueOf(counter));
                     player.setScore(counter);
-                    //EditText displayName = findViewById(R.id.display_player_name_text);
-                    EditText displayHealth = findViewById(R.id.display_health_text);
-                    //displayName.setText(player.getName());
-                    String displayHealthString = "Health: " + player.getHealth();
-                    displayHealth.setText(displayHealthString);
                 }
 
             }
@@ -206,7 +194,7 @@ public class Room2 extends Activity {
 
         //Log.d("Room2 Position",  "x: " + player.getX() + " y: " + player.getY());
         if (shouldMove) {
-            if (player.getX() == 200 && player.getY() <= 715 && player.getY() >= 700) {
+            if (coords[0] == 200 && coords[1] <= 715 && coords[1] >= 700) {
                 Intent intent = new Intent(this, Room3.class);
                 moveTimer.cancel();
                 this.startActivity(intent);

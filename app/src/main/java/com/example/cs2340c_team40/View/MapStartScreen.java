@@ -90,6 +90,11 @@ public class MapStartScreen extends Activity {
                         for (Subscriber subscriber : entities) {
                             checkHealth();
                             subscriber.update();
+                            EditText displayName = findViewById(R.id.display_player_name_text);
+                            EditText displayHealth = findViewById(R.id.display_health_text);
+                            displayName.setText(player.getName());
+                            String displayHealthString = "Health: " + player.getHealth();
+                            displayHealth.setText(displayHealthString);
                         }
                     }
                 });
@@ -99,13 +104,8 @@ public class MapStartScreen extends Activity {
 
 
         player.setSprite((ImageView) findViewById(R.id.sprite));
-        EditText displayName = findViewById(R.id.display_player_name_text);
-        EditText displayHealth = findViewById(R.id.display_health_text);
-        displayName.setText(player.getName());
-        String displayHealthString = "Health: " + player.getHealth();
-        displayHealth.setText(displayHealthString);
-        ImageView spriteImageView = findViewById(R.id.spriteImageView);
 
+        ImageView spriteImageView = findViewById(R.id.spriteImageView);
         if (player.getSpriteChoice() == 1) {
             spriteImageView.setImageResource(R.drawable.sprite1);
             player.getSprite().setImageResource(R.drawable.sprite1);
@@ -130,11 +130,6 @@ public class MapStartScreen extends Activity {
                 scoreTimerText.setText(String.valueOf(counter));
                 counter--;
                 player.setScore(counter);
-                //EditText displayName = findViewById(R.id.display_player_name_text);
-                EditText displayHealth = findViewById(R.id.display_health_text);
-                //displayName.setText(player.getName());
-                String displayHealthString = "Health: " + player.getHealth();
-                displayHealth.setText(displayHealthString);
             }
             public void onFinish() {
                 scoreTimerText.setText(R.string.timerFinish);
@@ -199,7 +194,7 @@ public class MapStartScreen extends Activity {
 
         //Log.d("Room1 Position",  "x: " + player.getX() + " y: " + player.getY());
         if (shouldMove) {
-            if (player.getX() == 530 && player.getY() == 605) {
+            if (coords[0] == 530 && coords[1] == 605) {
                 Intent intent = new Intent(this, Room2.class);
                 moveTimer.cancel();
                 this.startActivity(intent);
