@@ -15,12 +15,17 @@ public abstract class Enemy implements Subscriber {
     private ImageView sprite;
     private int pixelHeight;
     private int pixelWidth;
+    private boolean enemyDestroyed;
 
     public Enemy() {
         this.p = Player.getInstance();
+        enemyDestroyed = false;
     }
 
     public void playerCollision() {
+        if (this.isEnemyDestroyed()) {
+            return;
+        }
         boolean xCollision = p.getX() >= (x - 30) && p.getX() <= (x + 30);
         // Log.d("xCollision", String.valueOf(xCollision));
         boolean yCollision = p.getY() >= (y - 30) && p.getY() <= (y + 30);
@@ -54,8 +59,12 @@ public abstract class Enemy implements Subscriber {
         }
     }
 
-    public void weaponCollision() {
-
+    public void weaponCollision(int weaponX, int weaponY) {
+        boolean xCollision = weaponX >= (x - 30) && weaponX <= (x + 30);
+        boolean yCollision = weaponY >= (y - 30) && weaponY <= (y + 30);
+        if (xCollision && yCollision) {
+            enemyDestroyed = true;
+        }
     }
 
 
@@ -63,6 +72,9 @@ public abstract class Enemy implements Subscriber {
         enemyDirection.movePlayer();
         sprite.setX(x);
         sprite.setY(y);
+    }
+    public boolean isEnemyDestroyed() {
+        return enemyDestroyed;
     }
 
     public abstract void createMovement();

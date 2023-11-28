@@ -8,15 +8,19 @@ public class MoveHorizontal implements PlayerDirection {
     public MoveHorizontal(int dir) {
         this.dir = dir;
     }
-    public void movePlayer() {
+    public char movePlayer() {
+        char direction = '.';
         result = player.getX();
         if (dir == 1) { //move right
             result += player.getSpeed();
+            direction = 'd';
         } else if (dir == -1) {
             result -= player.getSpeed();
+            direction = 'a';
         }
         player.setX(result);
         player.setMoving(true);
         dir = 0;
+        return direction;
     }
 }

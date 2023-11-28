@@ -3,8 +3,10 @@ package com.example.cs2340c_team40.View;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -24,10 +26,12 @@ import com.example.cs2340c_team40.Model.PowerUp;
 import com.example.cs2340c_team40.Model.PowerUpItem;
 import com.example.cs2340c_team40.Model.ScorePowerUpDecorator;
 import com.example.cs2340c_team40.Model.Subscriber;
+import com.example.cs2340c_team40.Model.Weapon;
 import com.example.cs2340c_team40.R;
 import com.example.cs2340c_team40.ViewModel.GameScreenViewModel;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -36,12 +40,14 @@ public class MapStartScreen extends Activity {
     private int counter;
     private Timer moveTimer;
     private final Player player = Player.getInstance();
+    private Weapon weapon = Weapon.getInstance();
+    private ArrayList<Subscriber> entities;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.room1);
+        entities = new ArrayList<Subscriber>();
 
-        ArrayList<Subscriber> entities = new ArrayList<Subscriber>();
         entities.add(player);
         EnemyFactory enemyCreator = new EnemyFactory();
         //Ghost Enemy
@@ -176,6 +182,10 @@ public class MapStartScreen extends Activity {
             case KeyEvent.KEYCODE_D:
                 player.setMoveDirection(new MoveHorizontal(1));
                 break;
+            case KeyEvent.KEYCODE_L:
+                weapon.notifyEnemies();
+                updateEnemyList();
+                break;
             default:
                 return super.onKeyDown(keyCode, event);
             }
@@ -219,6 +229,28 @@ public class MapStartScreen extends Activity {
         moveTimer.cancel();
         Intent intent = new Intent(this, EndingScreen.class);
         startActivity(intent);
+    }
+    public void updateEnemyList() {
+        Log.d("UpdateEnemyList", "Size before update: " + entities.size());
+        Iterator<Subscriber> iterator = entities.iterator();
+        while (iterator.hasNext()) {
+            Subscriber subscriber = iterator.next();
+            if (subscriber instanceof Enemy) {
+                Enemy enemy = (Enemy) subscriber;
+                if (enemy.isEnemyDestroyed()) {
+                    ImageView enemySprite = enemy.getSprite();
+                    if (enemySprite != null) {
+                        ((ViewGroup) enemySprite.getParent()).removeView(enemySprite);
+                    }
+
+                    iterator.remove();
+                    player.getEnemyList().remove(enemy);
+                }
+            }
+        }
+
+        Log.d("UpdateEnemyList", "Size after update: " + entities.size());
+
     }
 
 

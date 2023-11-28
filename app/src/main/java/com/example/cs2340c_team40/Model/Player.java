@@ -23,6 +23,7 @@ public class Player implements Subscriber {
     private int pixelWidth;
     private int arrayX;
     private int arrayY;
+    private char direction;
     private List<Enemy> enemyList = new ArrayList<>();
     private static Player player;
     private static Weapon weapon;
@@ -33,6 +34,7 @@ public class Player implements Subscriber {
         damage = 20;
         moving = false;
         weapon = Weapon.getInstance();
+        direction = '.';
         speed = 5;
         score = 0;
     }
@@ -55,7 +57,10 @@ public class Player implements Subscriber {
     }
 
     public void update() {
-        playerDirection.movePlayer();
+        char newDirection = playerDirection.movePlayer();
+        if (newDirection != '.') {
+            direction = newDirection;
+        }
         sprite.setX(x);
         sprite.setY(y);
     }
@@ -112,6 +117,9 @@ public class Player implements Subscriber {
 
     public int getScore() {
         return score;
+    }
+    public char getDirection() {
+        return direction;
     }
     public String getName() {
         return name;
