@@ -11,7 +11,7 @@ public abstract class Enemy implements Subscriber {
     private boolean moving;
 
     private PlayerDirection enemyDirection;
-    private Player p;
+    private final Player p;
     private ImageView sprite;
     private int pixelHeight;
     private int pixelWidth;
@@ -26,22 +26,26 @@ public abstract class Enemy implements Subscriber {
         if (this.isEnemyDestroyed()) {
             return;
         }
-        boolean xCollision = p.getX() >= (x - 30) && p.getX() <= (x + 30);
-        boolean yCollision = p.getY() >= (y - 30) && p.getY() <= (y + 30);
+        boolean xCollision = p.getX() >= (x - 50) && p.getX() <= (x + 50);
+        boolean yCollision = p.getY() >= (y - 50) && p.getY() <= (y + 50);
+
         boolean hitPlayer = false;
         if (xCollision && yCollision) {
             double difficulty = p.getDifficulty();
             if (difficulty == 0.5) {
-                // Easy Difficulty, decrease hp by 10
+                // Easy Difficulty, decrease hp by 10, decrease score by 5
                 p.setHealth(p.getHealth() - 10);
+                p.setScore(p.getScore() - 5);
                 hitPlayer = true;
             } else if (difficulty == 0.75) {
-                // Medium Difficulty, decrease hp by 15
+                // Medium Difficulty, decrease hp by 15, decrease score by 10
                 p.setHealth(p.getHealth() - 15);
+                p.setScore(p.getScore() - 10);
                 hitPlayer = true;
             } else {
-                // Hard Difficulty, decrease hp by 20
+                // Hard Difficulty, decrease hp by 20, decrease score by 15
                 p.setHealth(p.getHealth() - 20);
+                p.setScore(p.getScore() - 15);
                 hitPlayer = true;
             }
         }

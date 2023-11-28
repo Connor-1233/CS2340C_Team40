@@ -13,7 +13,7 @@ public class PrimeThread extends Thread {
     public void run() {
         for (Subscriber subscriber : entities) {
             subscriber.update();
-            Log.d("position",  "x: " + subscriber.getX() + " y: " + subscriber.getY());
+            //Log.d("position",  "x: " + subscriber.getX() + " y: " + subscriber.getY());
         }
     }
 }

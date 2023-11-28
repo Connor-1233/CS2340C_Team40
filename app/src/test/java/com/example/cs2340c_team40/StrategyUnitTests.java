@@ -16,7 +16,7 @@ public class StrategyUnitTests {
     @Test
     public void StrategyTest() {
         Player p = Player.getInstance();
-        GameScreenViewModel.initializePlayer(5,0, new ArrayList<Subscriber>());
+        GameScreenViewModel.initializePlayer(5,0, new ArrayList<Subscriber>(), StrategyUnitTests.class);
         PlayerDirection dir = new MoveHorizontal(-1);
         p.setMoveDirection(dir);
         dir.movePlayer();

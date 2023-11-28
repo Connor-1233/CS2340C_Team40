@@ -52,38 +52,32 @@ public class Room3 extends Activity {
         Enemy ghost = enemyCreator.createEnemy("Ghost");
         ghost.setX(300);
         ghost.setY(865);
-
         int[] ghostArray = {215, 230, 215, 230};
-
         ghost.setSprite((ImageView) findViewById(R.id.ghost));
         ghost.getSprite().setImageResource(R.drawable.skull_v1_2);
-
-
         PlayerDirection ghostPattern = new MovePattern(ghost, ghostArray, 'w');
         ghost.setMoveDirection(ghostPattern);
         entities.add(ghost);
-
-
 
         //Knight Enemy
         Enemy knight = enemyCreator.createEnemy("Knight");
         knight.setX(600);
         knight.setY(870);
-
         int[] knightArray = {480, 100, 480, 100};
-
         knight.setSprite((ImageView) findViewById(R.id.knight));
         knight.getSprite().setImageResource(R.drawable.vampire_v2_2);
-
-
         PlayerDirection knightPattern = new MovePattern(knight, knightArray, 'a');
         knight.setMoveDirection(knightPattern);
         entities.add(knight);
 
         //have to change x and y to where door is in each map
-        GameScreenViewModel.initializePlayer(460, 1550, entities);
+        GameScreenViewModel.initializePlayer(460, 1550, entities, Room3.class);
         player.getEnemyList().add(ghost);
         player.getEnemyList().add(knight);
+
+
+        EditText displayName = findViewById(R.id.display_player_name_text);
+        displayName.setText(player.getName());
         moveTimer = new Timer();
         moveTimer.schedule(new TimerTask() {
             @Override
@@ -94,12 +88,16 @@ public class Room3 extends Activity {
                         for (Subscriber subscriber : entities) {
                             checkHealth();
                             subscriber.update();
-                            //EditText displayName = findViewById(R.id.display_player_name_text);
-                            //EditText displayHealth = findViewById(R.id.display_health_text);
-                            //displayName.setText(player.getName());
-                            //String displayHealthString = "Health: " + player.getHealth();
-                            //displayHealth.setText(displayHealthString);
-                            //ImageView spriteImageView = findViewById(R.id.spriteImageView);
+
+                            //This is in the thread to constantly update health when player is moved
+                            TextView healthText = findViewById(R.id.health_text);
+                            player.setHealth(player.getHealth());
+                            healthText.setText(String.valueOf(player.getHealth()));
+
+                            //This is in the thread to constantly update score when player attacks
+                            TextView scoreTimerText = findViewById(R.id.score_text);
+                            player.setScore(player.getScore());
+                            scoreTimerText.setText(String.valueOf(player.getScore()));
 
                         }
                     }
@@ -108,39 +106,8 @@ public class Room3 extends Activity {
 
         }, 0, 50);
 
-        //        EditText displayName = findViewById(R.id.display_player_name_text);
-        //        EditText displayHealth = findViewById(R.id.display_health_text);
-        //displayName.setText(player.getName());
-        //String displayHealthString = "Health: " + player.getHealth();
-        //displayHealth.setText(displayHealthString);
-        //.setText(String.valueOf(player.getScore()));
-
-        TextView scoreTimerText = findViewById(R.id.score_text);
         player.setSprite((ImageView) findViewById(R.id.sprite));
-
-        counter = player.getScore();
-        new CountDownTimer(30000, 1000) {
-            public void onTick(long millisUntilFinished) {
-                if (counter >= 0) {
-                    if (counter != 0) {
-                        counter--;
-                    }
-                    scoreTimerText.setText(String.valueOf(counter));
-                    player.setScore(counter);
-                    EditText displayName = findViewById(R.id.display_player_name_text);
-                    EditText displayHealth = findViewById(R.id.display_health_text);
-                    displayName.setText(player.getName());
-                    String displayHealthString = "Health: " + player.getHealth();
-                    displayHealth.setText(displayHealthString);
-                }
-            }
-            public void onFinish() {
-                scoreTimerText.setText(R.string.timerFinish);
-            }
-        }.start();
-
         ImageView spriteImageView = findViewById(R.id.spriteImageView);
-
         if (player.getSpriteChoice() == 1) {
             spriteImageView.setImageResource(R.drawable.sprite1);
             player.getSprite().setImageResource(R.drawable.sprite1);
@@ -152,13 +119,7 @@ public class Room3 extends Activity {
             player.getSprite().setImageResource(R.drawable.sprite3);
         }
 
-        Button restart = findViewById(R.id.NextRoom3);
-        restart.setOnClickListener(v -> {
-            moveTimer.cancel();
-            Intent endGame = new Intent(this, WelcomeScreen.class);
-            startActivity(endGame);
-        });
-
+        GameScreenViewModel.handleRestartButtonClick(this, moveTimer, Room3.class);
     }
 
     @Override
@@ -218,7 +179,7 @@ public class Room3 extends Activity {
 
     public void checkHealth() {
         if (GameScreenViewModel.isPlayerDead()) {
-            launchGameLoseScreen();
+            GameScreenViewModel.launchGameLoseScreen(this, moveTimer);
         }
     }
     public void updateEnemyList() {
@@ -233,20 +194,15 @@ public class Room3 extends Activity {
                     if (enemySprite != null) {
                         ((ViewGroup) enemySprite.getParent()).removeView(enemySprite);
                     }
-
                     iterator.remove();
                     player.getEnemyList().remove(enemy);
+                    player.setScore(player.getScore() + 10);
                 }
             }
         }
 
         Log.d("UpdateEnemyList", "Size after update: " + entities.size());
 
-    }
-    public void launchGameLoseScreen() {
-        moveTimer.cancel();
-        Intent intent = new Intent(this, EndingScreen.class);
-        startActivity(intent);
     }
 
 }

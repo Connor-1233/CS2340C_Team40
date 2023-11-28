@@ -39,18 +39,18 @@
             android:inputType="text"
             android:textColor="#FFFFFF"
             android:focusable="false"
-            app:layout_constraintBottom_toTopOf="@id/display_health_text"
+            app:layout_constraintBottom_toTopOf="@id/health_text_word"
             tools:ignore="MissingConstraints" />
 
         <EditText
-            android:id="@+id/display_health_text"
-            android:layout_width="204dp"
+            android:id="@+id/health_text_word"
+            android:layout_width="60dp"
             android:layout_height="wrap_content"
             android:autofillHints="health"
             android:ems="10"
             android:hint="@string/health_display"
             android:inputType="text"
-            android:text="@string/health_display"
+            android:text="@string/health"
             android:textColor="#FFFFFF"
             android:focusable="false"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -58,9 +58,22 @@
             />
 
         <EditText
+            android:id="@+id/health_text"
+            android:layout_width="57dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:focusable="false"
+            android:inputType="text"
+            android:text="@string/score_display"
+            android:textColor="#FFFFFF"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/health_text_word"
+            tools:ignore="MissingConstraints" />
+
+        <EditText
             android:id="@+id/score_text"
             android:layout_width="57dp"
-            android:layout_height="51dp"
+            android:layout_height="wrap_content"
             android:ems="10"
             android:focusable="false"
             android:inputType="text"
