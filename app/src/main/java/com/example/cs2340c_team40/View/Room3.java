@@ -71,7 +71,7 @@ public class Room3 extends Activity {
         entities.add(knight);
 
         //have to change x and y to where door is in each map
-        GameScreenViewModel.initializePlayer(460, 1550, entities);
+        GameScreenViewModel.initializePlayer(460, 1550, entities, Room3.class);
         player.getEnemyList().add(ghost);
         player.getEnemyList().add(knight);
 
@@ -90,9 +90,9 @@ public class Room3 extends Activity {
                             subscriber.update();
 
                             //This is in the thread to constantly update health when player is moved
-                            EditText displayHealth = findViewById(R.id.display_health_text);
-                            String displayHealthString = "Health: " + player.getHealth();
-                            displayHealth.setText(displayHealthString);
+                            TextView healthText = findViewById(R.id.health_text);
+                            player.setHealth(player.getHealth());
+                            healthText.setText(String.valueOf(player.getHealth()));
 
                             //This is in the thread to constantly update score when player attacks
                             TextView scoreTimerText = findViewById(R.id.score_text);

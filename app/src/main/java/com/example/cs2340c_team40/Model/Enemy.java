@@ -11,7 +11,7 @@ public abstract class Enemy implements Subscriber {
     private boolean moving;
 
     private PlayerDirection enemyDirection;
-    private Player p;
+    private final Player p;
     private ImageView sprite;
     private int pixelHeight;
     private int pixelWidth;

@@ -72,7 +72,7 @@ public class MapStartScreen extends Activity {
         entities.add(knight);
 
         // i update start location to top door
-        GameScreenViewModel.initializePlayer(530, 1000, entities);
+        GameScreenViewModel.initializePlayer(530, 1000, entities, Room1.class);
         player.getEnemyList().add(knight);
         player.getEnemyList().add(ghost);
 
@@ -90,9 +90,9 @@ public class MapStartScreen extends Activity {
                         subscriber.update();
 
                         //This is in the thread to constantly update health when player is moved
-                        EditText displayHealth = findViewById(R.id.display_health_text);
-                        String displayHealthString = "Health: " + player.getHealth();
-                        displayHealth.setText(displayHealthString);
+                        TextView healthText = findViewById(R.id.health_text);
+                        player.setHealth(player.getHealth());
+                        healthText.setText(String.valueOf(player.getHealth()));
 
                         //This is in the thread to constantly update score when player attacks
                         TextView scoreTimerText = findViewById(R.id.score_text);

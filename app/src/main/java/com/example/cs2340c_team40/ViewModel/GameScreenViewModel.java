@@ -30,8 +30,12 @@ public class GameScreenViewModel {
     private static boolean isFlagBottomRoom3 = false;
     private static boolean isFlagTopRoom3 = false;
     public static void initializePlayer(int x, int y,
-                                        ArrayList<Subscriber> entities) {
-        player.setHealth(calculateHealth(player.getDifficulty()));
+                                        ArrayList<Subscriber> entities, Class<?> clazz) {
+        if (clazz.equals(Room1.class)) {
+            player.setHealth(calculateHealth(player.getDifficulty()));
+        } else {
+            player.setHealth(player.getHealth());
+        }
         player.setX(x);
         player.setY(y);
         player.resetEnemyList();

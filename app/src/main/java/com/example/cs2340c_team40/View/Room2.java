@@ -73,7 +73,7 @@ public class Room2 extends Activity {
         entities.add(knight);
         //Log.d("Health", "Health of Player is: " + player.getHealth());
 
-        GameScreenViewModel.initializePlayer(640, 1415, entities);
+        GameScreenViewModel.initializePlayer(640, 1415, entities, Room2.class);
         player.getEnemyList().add(knight);
         player.getEnemyList().add(ghost);
 
@@ -88,9 +88,9 @@ public class Room2 extends Activity {
                         checkHealth();
                         subscriber.update();
                     }
-                    EditText displayHealth = findViewById(R.id.display_health_text);
-                    String displayHealthString = "Health: " + player.getHealth();
-                    displayHealth.setText(displayHealthString);
+                    TextView healthText = findViewById(R.id.health_text);
+                    player.setHealth(player.getHealth());
+                    healthText.setText(String.valueOf(player.getHealth()));
 
                     TextView scoreTimerText = findViewById(R.id.score_text);
                     player.setScore(player.getScore());
