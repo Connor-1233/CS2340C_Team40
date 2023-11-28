@@ -2,7 +2,6 @@ package com.example.cs2340c_team40.View;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -47,45 +46,40 @@ public class MapStartScreen extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.room1);
         entities = new ArrayList<Subscriber>();
-
         entities.add(player);
         EnemyFactory enemyCreator = new EnemyFactory();
+
         //Ghost Enemy
         Enemy ghost = enemyCreator.createEnemy("Ghost");
         ghost.setX(660);
         ghost.setY(860);
-
         int[] ghostArray = {0, 230, 0, 230};
-
-
         ghost.setSprite((ImageView) findViewById(R.id.ghost));
         ghost.getSprite().setImageResource(R.drawable.skull_v1_2);
-
         PlayerDirection ghostPattern = new MovePattern(ghost, ghostArray, 'a');
         ghost.setMoveDirection(ghostPattern);
         entities.add(ghost);
-
 
         //Knight Enemy
         Enemy knight = enemyCreator.createEnemy("Knight");
         knight.setX(430);
         knight.setY(730);
-
         int[] knightArray = {0, 230, 0, 230};
-
-
         knight.setSprite((ImageView) findViewById(R.id.knight));
         knight.getSprite().setImageResource(R.drawable.vampire_v2_2);
-      
         PlayerDirection knightPattern = new MovePattern(knight, knightArray, 'd');
         knight.setMoveDirection(knightPattern);
         entities.add(knight);
-
 
         // i update start location to top door
         GameScreenViewModel.initializePlayer(530, 1000, entities);
         player.getEnemyList().add(knight);
         player.getEnemyList().add(ghost);
+
+        //Prints Name to the Screen
+        EditText displayName = findViewById(R.id.display_player_name_text);
+        displayName.setText(player.getName());
+
         moveTimer = new Timer();
         moveTimer.schedule(new TimerTask() {
             @Override
@@ -96,11 +90,16 @@ public class MapStartScreen extends Activity {
                         for (Subscriber subscriber : entities) {
                             checkHealth();
                             subscriber.update();
-                            EditText displayName = findViewById(R.id.display_player_name_text);
+
+                            //This is in the thread to constantly update health when player is moved
                             EditText displayHealth = findViewById(R.id.display_health_text);
-                            displayName.setText(player.getName());
                             String displayHealthString = "Health: " + player.getHealth();
                             displayHealth.setText(displayHealthString);
+
+                            //This is in the thread to constantly update score when player attacks
+                            TextView scoreTimerText = findViewById(R.id.score_text);
+                            player.setScore(player.getScore());
+                            scoreTimerText.setText(String.valueOf(player.getScore()));
                         }
                     }
                 });
@@ -129,39 +128,17 @@ public class MapStartScreen extends Activity {
             player.setPixelWidth(spriteImageView.getWidth());
         }
 
-        TextView scoreTimerText = findViewById(R.id.score_text);
-        counter = 30;
-        new CountDownTimer(30000, 1000) {
-            public void onTick(long millisUntilFinished) {
-                scoreTimerText.setText(String.valueOf(counter));
-                counter--;
-                player.setScore(counter);
-            }
-            public void onFinish() {
-                scoreTimerText.setText(R.string.timerFinish);
-            }
-        }.start();
-
-        Button endGameBtn = findViewById(R.id.go_end_screen_button);
-        endGameBtn.setOnClickListener(v -> {
-            moveTimer.cancel();
-            Intent goEndScreen = new Intent(this, EndingScreen.class);
-            startActivity(goEndScreen);
-        });
-
-        Button restart = findViewById(R.id.NextRoom1);
-        restart.setOnClickListener(v -> {
-            moveTimer.cancel();
-            Intent goRoom2 = new Intent(this, WelcomeScreen.class);
-            startActivity(goRoom2);
-        });
+        GameScreenViewModel.handleEndButtonClick(this, moveTimer);
+        GameScreenViewModel.handleRestartButtonClick(this, moveTimer, Room1.class);
     }
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         int[] coords = GameScreenViewModel.getNewCoordinates(keyCode, player.getX(), player.getY());
-        boolean shouldMove = GameScreenViewModel.shouldPlayerMove(Room1.class, coords[0], coords[1]);
-        boolean[] hitPowerUpArray = GameScreenViewModel.hasHitPowerUp(Room1.class, coords[0], coords[1]);
+        boolean shouldMove =
+                GameScreenViewModel.shouldPlayerMove(Room1.class, coords[0], coords[1]);
+        boolean[] hitPowerUpArray =
+                GameScreenViewModel.hasHitPowerUp(Room1.class, coords[0], coords[1]);
 
         if (shouldMove) {
             switch (keyCode) {
@@ -205,9 +182,7 @@ public class MapStartScreen extends Activity {
         //Log.d("Room1 Position",  "x: " + player.getX() + " y: " + player.getY());
         if (shouldMove) {
             if (coords[0] == 530 && coords[1] == 605) {
-                Intent intent = new Intent(this, Room2.class);
-                moveTimer.cancel();
-                this.startActivity(intent);
+                GameScreenViewModel.launchRoom2(this, moveTimer);
             }
         }
         return true;
@@ -216,17 +191,12 @@ public class MapStartScreen extends Activity {
 
     public void checkHealth() {
         if (GameScreenViewModel.isPlayerDead()) {
-            launchGameLoseScreen();
+            GameScreenViewModel.launchGameLoseScreen(this, moveTimer);
         }
     }
 
-    public void launchGameLoseScreen() {
-        moveTimer.cancel();
-        Intent intent = new Intent(this, EndingScreen.class);
-        startActivity(intent);
-    }
     public void updateEnemyList() {
-        Log.d("UpdateEnemyList", "Size before update: " + entities.size());
+        //Log.d("UpdateEnemyList", "Size before update: " + entities.size());
         Iterator<Subscriber> iterator = entities.iterator();
         while (iterator.hasNext()) {
             Subscriber subscriber = iterator.next();
@@ -244,7 +214,7 @@ public class MapStartScreen extends Activity {
             }
         }
 
-        Log.d("UpdateEnemyList", "Size after update: " + entities.size());
+        //Log.d("UpdateEnemyList", "Size after update: " + entities.size());
 
     }
 

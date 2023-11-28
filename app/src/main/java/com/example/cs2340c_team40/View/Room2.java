@@ -113,29 +113,16 @@ public class Room2 extends Activity {
                         EditText displayHealth = findViewById(R.id.display_health_text);
                         String displayHealthString = "Health: " + player.getHealth();
                         displayHealth.setText(displayHealthString);
+
+                        TextView scoreTimerText = findViewById(R.id.score_text);
+                        player.setScore(player.getScore());
+                        scoreTimerText.setText(String.valueOf(player.getScore()));
                     }
                 });
             }
 
         }, 0, 50);
 
-        TextView scoreTimerText = findViewById(R.id.score_text);
-        counter = player.getScore();
-        new CountDownTimer(30000, 1000) {
-            public void onTick(long millisUntilFinished) {
-                if (counter >= 0) {
-                    if (counter != 0) {
-                        counter--;
-                    }
-                    scoreTimerText.setText(String.valueOf(counter));
-                    player.setScore(counter);
-                }
-
-            }
-            public void onFinish() {
-                scoreTimerText.setText(R.string.timerFinish);
-            }
-        }.start();
 
         ImageView spriteImageView = findViewById(R.id.spriteImageView);
         player.setSprite((ImageView) findViewById(R.id.sprite));
@@ -151,12 +138,7 @@ public class Room2 extends Activity {
             player.getSprite().setImageResource(R.drawable.sprite3);
         }
 
-        Button restart = findViewById(R.id.NextRoom2);
-        restart.setOnClickListener(v -> {
-            Intent goRoom3 = new Intent(this, WelcomeScreen.class);
-            moveTimer.cancel();
-            startActivity(goRoom3);
-        });
+        GameScreenViewModel.handleRestartButtonClick(this, moveTimer, Room2.class);
     }
 
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -206,9 +188,7 @@ public class Room2 extends Activity {
         //Log.d("Room2 Position",  "x: " + player.getX() + " y: " + player.getY());
         if (shouldMove) {
             if (coords[0] == 200 && coords[1] <= 715 && coords[1] >= 700) {
-                Intent intent = new Intent(this, Room3.class);
-                moveTimer.cancel();
-                this.startActivity(intent);
+                GameScreenViewModel.launchRoom3(this, moveTimer);
             }
         }
         return true;
@@ -216,7 +196,7 @@ public class Room2 extends Activity {
 
     public void checkHealth() {
         if (GameScreenViewModel.isPlayerDead()) {
-            launchGameLoseScreen();
+            GameScreenViewModel.launchGameLoseScreen(this, moveTimer);
         }
     }
     public void updateEnemyList() {
@@ -240,10 +220,5 @@ public class Room2 extends Activity {
 
         Log.d("UpdateEnemyList", "Size after update: " + entities.size());
 
-    }
-    public void launchGameLoseScreen() {
-        moveTimer.cancel();
-        Intent intent = new Intent(this, EndingScreen.class);
-        startActivity(intent);
     }
 }

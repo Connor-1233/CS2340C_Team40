@@ -1,22 +1,34 @@
 package com.example.cs2340c_team40.ViewModel;
 
 
+import android.app.Activity;
+import android.content.Intent;
 import android.view.KeyEvent;
+import android.widget.Button;
 
 import java.util.ArrayList;
 import java.util.Timer;
 
 import com.example.cs2340c_team40.Model.Player;
 import com.example.cs2340c_team40.Model.Subscriber;
+import com.example.cs2340c_team40.R;
+import com.example.cs2340c_team40.View.EndingScreen;
 import com.example.cs2340c_team40.View.Room1;
 import com.example.cs2340c_team40.View.Room2;
 import com.example.cs2340c_team40.View.Room3;
+import com.example.cs2340c_team40.View.WelcomeScreen;
 
 public class GameScreenViewModel {
     private static Timer dotTimer = new Timer();
     private static Player player = Player.getInstance();
     private static ArrayList<Subscriber> subscribers;
 
+    private static boolean isFlagBottomRoom1 = false;
+    private static boolean isFlagTopRoom1 = false;
+    private static boolean isFlagBottomRoom2 = false;
+    private static boolean isFlagTopRoom2 = false;
+    private static boolean isFlagBottomRoom3 = false;
+    private static boolean isFlagTopRoom3 = false;
     public static void initializePlayer(int x, int y,
                                         ArrayList<Subscriber> entities) {
         player.setHealth(calculateHealth(player.getDifficulty()));
@@ -140,21 +152,39 @@ public class GameScreenViewModel {
 
         if (clazz.equals(Room1.class)) {
             if (newX <= 410 && newY >= 955) {
-                hitPowerBottom = true;
+                if (!isFlagBottomRoom1) {
+                    hitPowerBottom = true;
+                    isFlagBottomRoom1 = true;
+                }
             } else if (newX >= 585 && newX <= 660 && newY >= 605 && newY <= 650) {
-                hitPowerTop = true;
+                if (!isFlagTopRoom1) {
+                    hitPowerTop = true;
+                    isFlagTopRoom1 = true;
+                }
             }
         } else if (clazz.equals(Room2.class)) {
             if (newX >= 615 && newX <= 680 && newY >= 1085 && newY <= 1170) {
-                hitPowerBottom = true;
+                if (!isFlagBottomRoom2) {
+                    hitPowerBottom = true;
+                    isFlagBottomRoom2 = true;
+                }
             } else if (newX >= 645 && newX <= 685 && newY >= 795 && newY <= 865) {
-                hitPowerTop = true;
+                if (!isFlagTopRoom2) {
+                    hitPowerTop = true;
+                    isFlagTopRoom2 = true;
+                }
             }
         } else if (clazz.equals(Room3.class)) {
             if (newX >= 430 && newX <= 490 && newY >= 1340 && newY <= 1425) {
-                hitPowerBottom = true;
+                if (!isFlagBottomRoom3) {
+                    hitPowerBottom = true;
+                    isFlagBottomRoom3 = true;
+                }
             } else if (newX >= 435 && newX <= 500 && newY >= 1090 && newY <= 1170) {
-                hitPowerTop = true;
+                if (!isFlagTopRoom3) {
+                    hitPowerTop = true;
+                    isFlagTopRoom3 = true;
+                }
             }
         }
 
@@ -170,6 +200,54 @@ public class GameScreenViewModel {
      */
     public static boolean isPlayerDead() {
         return player.getHealth() <= 0;
+    }
+
+    public static void handleRestartButtonClick(Activity activity, Timer moveTimer, Class<?> clazz) {
+        Button restart = getButton(activity, clazz);
+        restart.setOnClickListener(v -> {
+            Intent goRoom3 = new Intent(activity, WelcomeScreen.class);
+            moveTimer.cancel();
+            activity.startActivity(goRoom3);
+        });
+    }
+
+    public static Button getButton(Activity activity, Class<?> clazz) {
+        Button restart;
+        if (clazz.equals(Room1.class)) {
+            restart = activity.findViewById(R.id.NextRoom1);
+        } else if (clazz.equals(Room2.class)) {
+            restart = activity.findViewById(R.id.NextRoom2);
+        } else {
+            restart = activity.findViewById(R.id.NextRoom3);
+        }
+        return restart;
+    }
+
+    public static void handleEndButtonClick(Activity activity, Timer moveTimer) {
+        Button restart = activity.findViewById(R.id.go_end_screen_button);
+        restart.setOnClickListener(v -> {
+            Intent goRoom3 = new Intent(activity, EndingScreen.class);
+            moveTimer.cancel();
+            activity.startActivity(goRoom3);
+        });
+    }
+
+    public static void launchGameLoseScreen(Activity activity, Timer moveTimer) {
+        moveTimer.cancel();
+        Intent intent = new Intent(activity, EndingScreen.class);
+        activity.startActivity(intent);
+    }
+
+    public static void launchRoom2(Activity activity, Timer moveTimer) {
+        moveTimer.cancel();
+        Intent intent = new Intent(activity, Room2.class);
+        activity.startActivity(intent);
+    }
+
+    public static void launchRoom3(Activity activity, Timer moveTimer) {
+        moveTimer.cancel();
+        Intent intent = new Intent(activity, Room3.class);
+        activity.startActivity(intent);
     }
 
     public static int collisionCheck(int playerX, int playerY) {
