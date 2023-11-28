@@ -22,7 +22,7 @@ public class WeaponUnitTests {
     }
 
     @Test
-    public void testNotifyEnemiesLogic() {
+    public void testWeaponDirectionLogic() {
         Player player = Player.getInstance();
         char direction = player.getDirection();
         Log.d("Weapon direction", String.valueOf(direction));
