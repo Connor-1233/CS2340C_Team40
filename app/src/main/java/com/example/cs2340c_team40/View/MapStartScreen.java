@@ -84,23 +84,20 @@ public class MapStartScreen extends Activity {
         moveTimer.schedule(new TimerTask() {
             @Override
             public void run() {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        for (Subscriber subscriber : entities) {
-                            checkHealth();
-                            subscriber.update();
+                runOnUiThread(() -> {
+                    for (Subscriber subscriber : entities) {
+                        checkHealth();
+                        subscriber.update();
 
-                            //This is in the thread to constantly update health when player is moved
-                            EditText displayHealth = findViewById(R.id.display_health_text);
-                            String displayHealthString = "Health: " + player.getHealth();
-                            displayHealth.setText(displayHealthString);
+                        //This is in the thread to constantly update health when player is moved
+                        EditText displayHealth = findViewById(R.id.display_health_text);
+                        String displayHealthString = "Health: " + player.getHealth();
+                        displayHealth.setText(displayHealthString);
 
-                            //This is in the thread to constantly update score when player attacks
-                            TextView scoreTimerText = findViewById(R.id.score_text);
-                            player.setScore(player.getScore());
-                            scoreTimerText.setText(String.valueOf(player.getScore()));
-                        }
+                        //This is in the thread to constantly update score when player attacks
+                        TextView scoreTimerText = findViewById(R.id.score_text);
+                        player.setScore(player.getScore());
+                        scoreTimerText.setText(String.valueOf(player.getScore()));
                     }
                 });
             }
@@ -114,18 +111,12 @@ public class MapStartScreen extends Activity {
         if (player.getSpriteChoice() == 1) {
             spriteImageView.setImageResource(R.drawable.sprite1);
             player.getSprite().setImageResource(R.drawable.sprite1);
-            player.setPixelHeight(spriteImageView.getHeight());
-            player.setPixelWidth(spriteImageView.getWidth());
         } else if (player.getSpriteChoice() == 2) {
             spriteImageView.setImageResource(R.drawable.sprite2);
             player.getSprite().setImageResource(R.drawable.sprite2);
-            player.setPixelHeight(spriteImageView.getHeight());
-            player.setPixelWidth(spriteImageView.getWidth());
         } else {
             spriteImageView.setImageResource(R.drawable.sprite3);
             player.getSprite().setImageResource(R.drawable.sprite3);
-            player.setPixelHeight(spriteImageView.getHeight());
-            player.setPixelWidth(spriteImageView.getWidth());
         }
 
         GameScreenViewModel.handleEndButtonClick(this, moveTimer);

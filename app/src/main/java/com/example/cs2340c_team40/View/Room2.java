@@ -49,75 +49,52 @@ public class Room2 extends Activity {
         entities = new ArrayList<Subscriber>();
         entities.add(player);
         EnemyFactory enemyCreator = new EnemyFactory();
+
         //Ghost Enemy
         Enemy ghost = enemyCreator.createEnemy("Ghost");
         ghost.setX(460);
         ghost.setY(820);
         int[] ghostArray = {0, 190, 0, 190};
-
         ghost.setSprite((ImageView) findViewById(R.id.ghost));
         ghost.getSprite().setImageResource(R.drawable.skull_v1_2);
-
         PlayerDirection ghostPattern = new MovePattern(ghost, ghostArray, 'd');
         ghost.setMoveDirection(ghostPattern);
         entities.add(ghost);
-
-
 
         //Knight Enemy
         Enemy knight = enemyCreator.createEnemy("Knight");
         knight.setX(260);
         knight.setY(830);
         int[] knightArray = {220, 0, 220, 0};
-
         knight.setSprite((ImageView) findViewById(R.id.knight));
         knight.getSprite().setImageResource(R.drawable.vampire_v2_2);
-
         PlayerDirection knightPattern = new MovePattern(knight, knightArray, 'w');
         knight.setMoveDirection(knightPattern);
         entities.add(knight);
-
-        //Skeleton Enemy
-        //        Enemy skeleton = enemyCreator.createEnemy("Skeleton");
-        //        skeleton.setX(400);
-        //        skeleton.setY(620);
-        //
-        //        int[] skeletonArray = {100, 200, 100, 200};
-        //
-        //        skeleton.setSprite((ImageView) findViewById(R.id.knight));
-        //        skeleton.getSprite().setImageResource(R.drawable.skeleton_v1_1);
-        //
-        //        PlayerDirection skeletonPattern = new MovePattern(skeleton, skeletonArray, 'd');
-        //        skeleton.setMoveDirection(skeletonPattern);
-        //        entities.add(skeleton);
-
-        EditText displayName = findViewById(R.id.display_player_name_text);
-        displayName.setText(player.getName());
-
         //Log.d("Health", "Health of Player is: " + player.getHealth());
 
         GameScreenViewModel.initializePlayer(640, 1415, entities);
         player.getEnemyList().add(knight);
         player.getEnemyList().add(ghost);
+
+        EditText displayName = findViewById(R.id.display_player_name_text);
+        displayName.setText(player.getName());
         moveTimer = new Timer();
         moveTimer.schedule(new TimerTask() {
             @Override
             public void run() {
-                for (Subscriber subscriber : entities) {
-                    checkHealth();
-                    subscriber.update();
-                }
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        EditText displayHealth = findViewById(R.id.display_health_text);
-                        String displayHealthString = "Health: " + player.getHealth();
-                        displayHealth.setText(displayHealthString);
-
-                        TextView scoreTimerText = findViewById(R.id.score_text);
-                        player.setScore(player.getScore());
-                        scoreTimerText.setText(String.valueOf(player.getScore()));
+                runOnUiThread(() -> {
+                    for (Subscriber subscriber : entities) {
+                        checkHealth();
+                        subscriber.update();
                     }
+                    EditText displayHealth = findViewById(R.id.display_health_text);
+                    String displayHealthString = "Health: " + player.getHealth();
+                    displayHealth.setText(displayHealthString);
+
+                    TextView scoreTimerText = findViewById(R.id.score_text);
+                    player.setScore(player.getScore());
+                    scoreTimerText.setText(String.valueOf(player.getScore()));
                 });
             }
 

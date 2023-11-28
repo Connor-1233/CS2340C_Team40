@@ -19,10 +19,6 @@ public class Player implements Subscriber {
     private boolean moving;
     private PlayerDirection playerDirection;
     private ImageView sprite;
-    private int pixelHeight;
-    private int pixelWidth;
-    private int arrayX;
-    private int arrayY;
     private char direction;
     private List<Enemy> enemyList = new ArrayList<>();
     private static Player player;
@@ -76,7 +72,7 @@ public class Player implements Subscriber {
         this.score = score;
     }
     public void setHealth(int health) {
-        this.health = health;
+        Player.health = health;
     }
     public void setDifficulty(double difficulty) {
         this.difficulty = difficulty;
@@ -101,18 +97,6 @@ public class Player implements Subscriber {
     }
     public void setMoving(boolean moving) {
         this.moving = moving;
-    }
-    public void setPixelHeight(int pixelHeight) {
-        this.pixelHeight = pixelHeight;
-    }
-    public void setPixelWidth(int pixelWidth) {
-        this.pixelWidth = pixelWidth;
-    }
-    public void setArrayX(int arrayX) {
-        this.arrayX = arrayX;
-    }
-    public void setArrayY(int arrayY) {
-        this.arrayY = arrayY;
     }
 
     public int getScore() {
@@ -142,21 +126,6 @@ public class Player implements Subscriber {
     public ImageView getSprite() {
         return sprite;
     }
-    public int getArrayX() {
-        return arrayX;
-    }
-    public int getArrayY() {
-        return arrayY;
-    }
-
-    public int getPixelHeight() {
-        return pixelHeight;
-    }
-
-    public int getPixelWidth() {
-        return pixelWidth;
-    }
-
     public void resetEnemyList() {
         enemyList = new ArrayList<>();
     }
