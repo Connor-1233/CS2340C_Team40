@@ -8,8 +8,6 @@ import android.widget.TextView;
 import com.example.cs2340c_team40.R;
 import com.example.cs2340c_team40.View.WelcomeScreen;
 
-import java.util.Timer;
-
 public class EndingScreenViewModel {
     public static void handleRestartButtonClick(Activity activity) {
         Button restart = activity.findViewById(R.id.restart_game_btn);

@@ -99,7 +99,8 @@ public class Player implements Subscriber {
         this.y = y;
         notifyEnemies();
         weapon.setY(y);
-        // Sets the y-value to that of the Player (make sure there is some offset so that the weapon shows)
+        // Sets the y-value to that of the Player
+        // (make sure there is some offset so that the weapon shows)
     }
     public void setSprite(ImageView sprite) {
         this.sprite = sprite;
