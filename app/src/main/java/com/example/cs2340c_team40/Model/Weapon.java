@@ -35,7 +35,7 @@ public class Weapon implements Subscriber {
     public void notifyEnemies() {
         Player player = Player.getInstance();
         char direction = player.getDirection();
-        Log.d("Weapon direction", String.valueOf(direction));
+        //Log.d("Weapon direction", String.valueOf(direction));
         enemyList = player.getEnemyList();
         int weaponX = player.getX();
         int weaponY = player.getY();
