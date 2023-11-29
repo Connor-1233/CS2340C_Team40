@@ -117,8 +117,10 @@ public class Room2 extends Activity {
 
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         int[] coords = GameScreenViewModel.getNewCoordinates(keyCode, player.getX(), player.getY());
-        boolean shouldMove = GameScreenViewModel.shouldPlayerMove(Room2.class, coords[0], coords[1]);
-        boolean[] hitPowerUpArray = GameScreenViewModel.hasHitPowerUp(Room2.class, coords[0], coords[1]);
+        boolean shouldMove = GameScreenViewModel.shouldPlayerMove(Room2.class,
+                coords[0], coords[1]);
+        boolean[] hitPowerUpArray = GameScreenViewModel.hasHitPowerUp(Room2.class,
+                coords[0], coords[1]);
 
         if (shouldMove) {
             switch (keyCode) {

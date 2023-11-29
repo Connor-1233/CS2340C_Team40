@@ -20,9 +20,8 @@ import com.example.cs2340c_team40.View.WelcomeScreen;
 
 public class GameScreenViewModel {
     private static Timer dotTimer = new Timer();
-    private static final Player player = Player.getInstance();
+    private static final Player PLAYER = Player.getInstance();
     private static ArrayList<Subscriber> subscribers;
-
     private static boolean isFlagBottomRoom1 = false;
     private static boolean isFlagTopRoom1 = false;
     private static boolean isFlagBottomRoom2 = false;
@@ -32,15 +31,15 @@ public class GameScreenViewModel {
     public static void initializePlayer(int x, int y,
                                         ArrayList<Subscriber> entities, Class<?> clazz) {
         if (clazz.equals(Room1.class)) {
-            player.setHealth(calculateHealth(player.getDifficulty()));
+            PLAYER.setHealth(calculateHealth(PLAYER.getDifficulty()));
         } else {
-            player.setHealth(player.getHealth());
+            PLAYER.setHealth(PLAYER.getHealth());
         }
-        player.setX(x);
-        player.setY(y);
-        player.resetEnemyList();
+        PLAYER.setX(x);
+        PLAYER.setY(y);
+        PLAYER.resetEnemyList();
         subscribers = entities;
-        //Timer to call updateLocations to move the player
+        //Timer to call updateLocations to move the PLAYER
         //PrimeThread pThread = new PrimeThread(entities);
         //pThread.start();
     }
@@ -59,8 +58,8 @@ public class GameScreenViewModel {
     /**
      * A method that calculates the new x and y coordinates based on the key input.
      * @param keyCode an int that represents W, S, A or D (do nothing with anything else)
-     * @param x current x position of the player
-     * @param y current y position of the player
+     * @param x current x position of the PLAYER
+     * @param y current y position of the PLAYER
      * @return an integer array of the new X and new Y variables
      *         the 0th index holds the newX
      *         the 1st index holds the newY
@@ -72,16 +71,16 @@ public class GameScreenViewModel {
 
         switch (keyCode) {
         case KeyEvent.KEYCODE_W:
-            newY = newY - player.getSpeed();
+            newY = newY - PLAYER.getSpeed();
             break;
         case KeyEvent.KEYCODE_S:
-            newY = newY + player.getSpeed();
+            newY = newY + PLAYER.getSpeed();
             break;
         case KeyEvent.KEYCODE_A:
-            newX = newX - player.getSpeed();
+            newX = newX - PLAYER.getSpeed();
             break;
         case KeyEvent.KEYCODE_D:
-            newX = newX + player.getSpeed();
+            newX = newX + PLAYER.getSpeed();
             break;
         default:
             break;
@@ -93,12 +92,12 @@ public class GameScreenViewModel {
     }
 
     /**
-     * A method that checks whether a player can move. It performs collision detection
+     * A method that checks whether a PLAYER can move. It performs collision detection
      * with walls.
-     * @param clazz class the player is in for the specific collision detection
+     * @param clazz class the PLAYER is in for the specific collision detection
      * @param newX the calculated new X variable from a key input
      * @param newY the calculated new Y variable from a key input
-     * @return true if the player should move, false if a player will collide into a wall
+     * @return true if the PLAYER should move, false if a PLAYER will collide into a wall
      */
     public static boolean shouldPlayerMove(Class<?> clazz, int newX, int newY) {
 
@@ -111,7 +110,8 @@ public class GameScreenViewModel {
                 shouldMove = true;
             } else if (newY >= 1210 && newY <= 1320 && newX == 640) { //hallway
                 shouldMove = true;
-            } else if (newX >= 590 && newX <= 680 && newY <= 1210 && newY >= 975) { //room after hallway
+            } else if (newX >= 590 && newX <= 680 && newY <= 1210 && newY >= 975) {
+                //room after hallway
                 shouldMove = true;
             } else if (newX >= 650 && newX <= 680 && newY <= 975 && newY >= 860) { //passing door
                 shouldMove = true;
@@ -134,15 +134,15 @@ public class GameScreenViewModel {
 
 
     /**
-     * A method that will calculate whether a player's position overlaps or aligns with
+     * A method that will calculate whether a PLAYER's position overlaps or aligns with
      * a power-ups' position. It returns a boolean array because there are two power-ups
      * in each room, thus the first index (index 0) holds whether the power-up closest to the
      * bottom of the screen has been hit. The second index (index 1) holds the boolean of
-     * whether the power-up closest to the top of the screen has collided with the player.
-     * @param clazz class the player is in for the specific collision detection
+     * whether the power-up closest to the top of the screen has collided with the PLAYER.
+     * @param clazz class the PLAYER is in for the specific collision detection
      * @param newX the calculated new X variable from a key input
      * @param newY the calculated new Y variable from a key input
-     * @return boolean array of whether a player has gained a power-up
+     * @return boolean array of whether a PLAYER has gained a power-up
      */
     public static boolean[] hasHitPowerUp(Class<?> clazz, int newX, int newY) {
         boolean[] powerUpArray = new boolean[2];
@@ -191,7 +191,7 @@ public class GameScreenViewModel {
 
         powerUpArray[0] = hitPowerBottom;
         powerUpArray[1] = hitPowerTop;
-        return powerUpArray; //if player has hit a powerup
+        return powerUpArray; //if PLAYER has hit a powerup
     }
 
     public static void resetGame() {
@@ -201,19 +201,20 @@ public class GameScreenViewModel {
         isFlagTopRoom2 = false;
         isFlagBottomRoom3 = false;
         isFlagTopRoom3 = false;
-        player.resetPlayer();
+        PLAYER.resetPlayer();
     }
 
     /**
-     * Public method that gives information on whether the player is dead.
-     * A player is dead when there health is less than or equal to 0.
+     * Public method that gives information on whether the PLAYER is dead.
+     * A PLAYER is dead when there health is less than or equal to 0.
      * @return boolean whether health is dead
      */
     public static boolean isPlayerDead() {
-        return player.getHealth() <= 0;
+        return PLAYER.getHealth() <= 0;
     }
 
-    public static void handleRestartButtonClick(Activity activity, Timer moveTimer, Class<?> clazz) {
+    public static void handleRestartButtonClick(Activity activity, Timer moveTimer,
+                                                Class<?> clazz) {
         Button restart = getButton(activity, clazz);
         restart.setOnClickListener(v -> {
             Intent goRoom3 = new Intent(activity, WelcomeScreen.class);
@@ -259,9 +260,5 @@ public class GameScreenViewModel {
         moveTimer.cancel();
         Intent intent = new Intent(activity, Room3.class);
         activity.startActivity(intent);
-    }
-
-    public static int collisionCheck(int playerX, int playerY) {
-        return 0;
     }
 }

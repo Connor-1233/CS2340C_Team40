@@ -1,6 +1,5 @@
 package com.example.cs2340c_team40.Model;
 
-import android.util.Log;
 import android.widget.ImageView;
 
 public abstract class Enemy implements Subscriber {

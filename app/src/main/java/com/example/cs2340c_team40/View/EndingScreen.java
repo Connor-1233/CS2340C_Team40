@@ -4,13 +4,11 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.example.cs2340c_team40.Model.Leaderboard;
 import com.example.cs2340c_team40.Model.Player;
-//import com.example.cs2340c_team40.Model.Score;
 import com.example.cs2340c_team40.R;
 import com.example.cs2340c_team40.ViewModel.EndingScreenViewModel;
 import com.example.cs2340c_team40.ViewModel.GameScreenViewModel;

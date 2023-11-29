@@ -49,7 +49,7 @@ public class Weapon implements Subscriber {
             weaponX += 60;
         }
         for (Enemy e : enemyList) {
-            e.weaponCollision(weaponX,weaponY);
+            e.weaponCollision(weaponX, weaponY);
         }
     }
 

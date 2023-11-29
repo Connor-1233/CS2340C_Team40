@@ -2,16 +2,20 @@ package com.example.cs2340c_team40;
 
 import static org.junit.Assert.assertEquals;
 
-import android.util.Log;
 
-import com.example.cs2340c_team40.Model.Enemy;
 import com.example.cs2340c_team40.Model.Player;
 import com.example.cs2340c_team40.Model.Weapon;
 
+import org.junit.Before;
 import org.junit.Test;
 
 public class WeaponUnitTests {
 
+    @Before
+    public void setUp() {
+        Player player = Player.getInstance();
+        player.resetPlayerForTesting();
+    }
     @Test
     public void isWeaponSingleton() {
         Weapon w1 = Weapon.getInstance();
@@ -25,7 +29,6 @@ public class WeaponUnitTests {
     public void testWeaponDirectionLogic() {
         Player player = Player.getInstance();
         char direction = player.getDirection();
-        Log.d("Weapon direction", String.valueOf(direction));
         // enemyList = player.getEnemyList();
         int weaponX = player.getX();
         int weaponY = player.getY();
