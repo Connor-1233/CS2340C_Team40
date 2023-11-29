@@ -18,7 +18,7 @@ public class DecoratorPatternUnitTest {
         player.resetPlayerForTesting();
     }
     @Test
-    public void testDamagePowerUpDecorator() {
+    public void testSpeedPowerUpDecorator() {
         Player player = Player.getInstance();
 
         PowerUp p = new SpeedPowerUpDecorator(new PowerUpItem(), player);
