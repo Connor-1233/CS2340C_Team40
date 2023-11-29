@@ -10,6 +10,7 @@ import com.example.cs2340c_team40.Model.Player;
 import com.example.cs2340c_team40.Model.PlayerDirection;
 import com.example.cs2340c_team40.Model.Subscriber;
 
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -66,4 +67,34 @@ public class EnemyUnitTests {
 
         assertEquals(null, e);
     }
+
+    @Test
+    public void testPlayerCollisionWithEnemy() {
+        Player player = Player.getInstance();
+        EnemyFactory enemyCreator = new EnemyFactory();
+        Enemy ghost = enemyCreator.createEnemy("Ghost");
+
+        int initialHealth = 100;
+        player.setHealth(initialHealth);
+
+        ghost.setX(player.getX());
+        ghost.setY(player.getY());
+
+        ghost.playerCollision();
+        assertEquals(true, player.getHealth() < initialHealth);
+    }
+
+    @Test
+    public void testEnemyKnight() {
+        EnemyFactory factory = new EnemyFactory();
+        Enemy e = factory.createEnemy("Knight");
+
+        assertEquals(80, e.getHealth());
+        assertEquals(10, e.getSpriteSize());
+    }
+
+
+
+
+
 }
