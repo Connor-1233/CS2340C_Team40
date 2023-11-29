@@ -9,7 +9,6 @@ import android.widget.Button;
 import java.util.ArrayList;
 import java.util.Timer;
 
-import com.example.cs2340c_team40.Model.PLAYER;
 import com.example.cs2340c_team40.Model.Player;
 import com.example.cs2340c_team40.Model.Subscriber;
 import com.example.cs2340c_team40.R;
