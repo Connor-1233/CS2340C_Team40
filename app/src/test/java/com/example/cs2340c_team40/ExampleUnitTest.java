@@ -1,5 +1,6 @@
 package com.example.cs2340c_team40;
 
+import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import com.example.cs2340c_team40.Model.Leaderboard;
@@ -16,6 +17,12 @@ import com.example.cs2340c_team40.ViewModel.GameScreenViewModel;
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 public class ExampleUnitTest {
+
+        @Before
+        public void setUp() {
+            Player player = Player.getInstance();
+            player.resetPlayerForTesting();
+        }
 
         @Test
         public void testLeaderboardInitialization() {

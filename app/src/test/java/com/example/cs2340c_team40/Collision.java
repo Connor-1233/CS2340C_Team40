@@ -1,5 +1,6 @@
 package com.example.cs2340c_team40;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -15,6 +16,11 @@ import com.example.cs2340c_team40.Model.Player;
 import com.example.cs2340c_team40.View.ConfigScreen;
 import com.example.cs2340c_team40.ViewModel.ConfigScreenViewModel;
 public class Collision {
+    @Before
+    public void setUp() {
+        Player player = Player.getInstance();
+        player.resetPlayerForTesting();
+    }
     @Test
     public void testHPDifficulty() {
         Player p = Player.getInstance();

@@ -1,5 +1,6 @@
 package com.example.cs2340c_team40;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -16,7 +17,11 @@ import com.example.cs2340c_team40.Model.Subscriber;
 import java.util.ArrayList;
 
 public class ObserverUnitTests {
-
+    @Before
+    public void setUp() {
+        Player player = Player.getInstance();
+        player.resetPlayerForTesting();
+    }
     @Test
     public void testFollowsObserverPattern() {
         Player p = Player.getInstance();
@@ -37,6 +42,7 @@ public class ObserverUnitTests {
         Player player = Player.getInstance();
         player.setX(0);
         player.setY(0);
+        player.resetPlayerForTesting();
         MoveHorizontal dir = new MoveHorizontal(1);
         player.setMoveDirection(dir);
         dir.movePlayer();

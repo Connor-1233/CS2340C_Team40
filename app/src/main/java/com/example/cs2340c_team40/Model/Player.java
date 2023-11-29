@@ -54,6 +54,13 @@ public class Player implements Subscriber {
         score = 0;
     }
 
+    public void resetPlayerForTesting() {
+        x = 0;
+        y = 0;
+        speed = 5;
+        score = 0;
+    }
+
     public void update() {
         char newDirection = playerDirection.movePlayer();
         if (newDirection != '.') {
