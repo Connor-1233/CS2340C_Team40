@@ -1,12 +1,9 @@
 package com.example.cs2340c_team40.View;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -171,7 +168,6 @@ public class MapStartScreen extends Activity {
             hitPowerUpArray[1] = false;
         }
 
-        //Log.d("Room1 Position",  "x: " + player.getX() + " y: " + player.getY());
         if (shouldMove) {
             if (coords[0] == 530 && coords[1] == 605) {
                 GameScreenViewModel.launchRoom2(this, moveTimer);
@@ -188,7 +184,6 @@ public class MapStartScreen extends Activity {
     }
 
     public void updateEnemyList() {
-        //Log.d("UpdateEnemyList", "Size before update: " + entities.size());
         Iterator<Subscriber> iterator = entities.iterator();
         while (iterator.hasNext()) {
             Subscriber subscriber = iterator.next();
@@ -205,9 +200,6 @@ public class MapStartScreen extends Activity {
                 }
             }
         }
-
-        //Log.d("UpdateEnemyList", "Size after update: " + entities.size());
-
     }
 
 

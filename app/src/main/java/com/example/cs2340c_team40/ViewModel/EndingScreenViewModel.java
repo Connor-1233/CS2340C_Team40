@@ -20,6 +20,9 @@ public class EndingScreenViewModel {
     }
 
     public static int setFinalScore(int score, int health) {
+        if (score < 0) {
+            return 0;
+        }
         return score + (health / 2);
     }
     public static void mapScoreToScreen(Activity activity, int score) {

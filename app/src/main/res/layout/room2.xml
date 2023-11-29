@@ -147,22 +147,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:srcCompat="@drawable/vampire_v2_2" />
 
-<!--        <ImageView-->
-<!--            android:id="@+id/skeleton"-->
-<!--            android:layout_width="20dp"-->
-<!--            android:layout_height="20dp"-->
-<!--            android:layout_marginBottom="408dp"-->
-<!--            android:contentDescription="@string/sprite"-->
-<!--            android:focusable="true"-->
-<!--            android:focusableInTouchMode="true"-->
-<!--            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintHorizontal_bias="0.329"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:srcCompat="@drawable/skeleton_v1_1" />-->
-
         <ImageView
-            android:id="@+id/damage_powerup"
+            android:id="@+id/speed_powerup"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginBottom="388dp"
