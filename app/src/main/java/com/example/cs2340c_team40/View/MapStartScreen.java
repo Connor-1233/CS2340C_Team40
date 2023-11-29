@@ -1,12 +1,9 @@
 package com.example.cs2340c_team40.View;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -157,26 +154,23 @@ public class MapStartScreen extends Activity {
             }
         }
 
-        if (hitPowerUpArray[0]) { //we've hit the bottom power-up
+        if (hitPowerUpArray[0]) { //we've hit the bottom power-up - Score
             ImageView scorePowerUp = findViewById(R.id.score_powerup);
             scorePowerUp.setVisibility(View.INVISIBLE);
             PowerUp p = new ScorePowerUpDecorator(new PowerUpItem(), player);
             p.updatePowerUpEffect();
             hitPowerUpArray[0] = false;
-            //probably implement the power-up functionality here
-        } else if (hitPowerUpArray[1]) { //we've hit the top power-up
+        } else if (hitPowerUpArray[1]) { //we've hit the top power-up - Health
             ImageView healthPowerUp = findViewById(R.id.health_powerup);
             healthPowerUp.setVisibility(View.INVISIBLE);
             PowerUp p = new HealthPowerUpDecorator(new PowerUpItem(), player);
             p.updatePowerUpEffect();
             hitPowerUpArray[1] = false;
-            //probably implement the power-up functionality here
         }
 
-        //Log.d("Room1 Position",  "x: " + player.getX() + " y: " + player.getY());
         if (shouldMove) {
             if (coords[0] == 530 && coords[1] == 605) {
-              GameScreenViewModel.launchRoom2(this, moveTimer);
+                GameScreenViewModel.launchRoom2(this, moveTimer);
             }
         }
         return true;
@@ -190,7 +184,6 @@ public class MapStartScreen extends Activity {
     }
 
     public void updateEnemyList() {
-        //Log.d("UpdateEnemyList", "Size before update: " + entities.size());
         Iterator<Subscriber> iterator = entities.iterator();
         while (iterator.hasNext()) {
             Subscriber subscriber = iterator.next();
@@ -207,9 +200,6 @@ public class MapStartScreen extends Activity {
                 }
             }
         }
-
-        //Log.d("UpdateEnemyList", "Size after update: " + entities.size());
-
     }
 
 

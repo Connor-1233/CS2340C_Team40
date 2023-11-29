@@ -201,7 +201,7 @@ public class GameScreenViewModel {
         isFlagTopRoom2 = false;
         isFlagBottomRoom3 = false;
         isFlagTopRoom3 = false;
-        player.setScore(0);
+        player.resetPlayer();
     }
 
     /**
