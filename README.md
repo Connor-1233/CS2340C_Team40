@@ -1,4 +1,4 @@
-# Dungeon Crawler Game
+# Shadow's Labyrinth
 
 Welcome to the Dungeon Crawler Game, an exciting adventure set in a mysterious and perilous labyrinth. Embark on a quest, navigate through treacherous dungeons, face menacing foes, and uncover hidden treasures. Are you ready for the challenge?
 
